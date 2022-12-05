@@ -49,9 +49,59 @@ return(
                     title="Projects"
                     className="mb-4 mb-lg-5"
                 />
-                <p>
-                    { faker.lorem.paragraph() }
-                </p>
+               <Card className="mb-3">
+                    <CardBody>
+                        <CardTitle tag="h6" className="mb-3">
+                            Enter Keyword to Perform Operation
+                        </CardTitle>
+                
+                        <Row className="mt-3">
+                        <Col sm={ 8 } md={ 8 }>
+                            <Input placeholder="Enter  Keyword..." />
+                            </Col>
+
+                            <Col sm={ 4 } md={ 4 }>
+
+                        <Dropdown isOpen={dropdownOpen} toggle={toggle} style={{width:'100%'}} >
+                            <DropdownToggle 
+                            style={{width:'100%'}}
+                            caret> Select Operation</DropdownToggle>
+                            <DropdownMenu >
+                            {/* <DropdownItem header>Header</DropdownItem> */}
+                            <DropdownItem>Trend Analysis</DropdownItem>
+                            <DropdownItem>Trend Quality</DropdownItem>
+                            <DropdownItem>Bot Account Recognition</DropdownItem>
+                            <DropdownItem>Account Analysis</DropdownItem>
+
+                            {/* <DropdownItem text>Dropdown Item Text</DropdownItem>
+                            <DropdownItem disabled>Action (disabled)</DropdownItem>
+                            <DropdownItem divider />
+                            <DropdownItem>Foo Action</DropdownItem>
+                            <DropdownItem>Bar Action</DropdownItem>
+                            <DropdownItem>Quo Action</DropdownItem> */}
+                            </DropdownMenu>
+                        </Dropdown>
+                        </Col>
+                            </Row>
+                            <Row className="mt-0">
+                            <Col sm={ 4 } md={ 4 } className="pl-20" color='yellow'>
+                         </Col>
+                         <Col sm={ 8 } md={ 8 } className="pl-20" color='yellow'>
+                        <button type="button" class=" ml-20 mt-4 btn btn-primary"   onClick={ Link } to="/dashboards/analytics">Search</button>
+                                 </Col>
+                               </Row>
+
+                        {/* <Button class="btn btn-primary" type="button" tag={ Link } to="/dashboards/analytics">
+
+                                </Button>
+                           */}
+
+                        {/* </InputGroup> */}
+                    </CardBody>
+                    {/* <DraggableProjects /> */}
+                    
+                </Card>
+
             </Col>
            
           
@@ -112,21 +162,7 @@ return(
                                     <i className="fa fa-search"></i>
                                 </Button>
                             </InputGroupAddon> */}
- <div >
-      <Dropdown isOpen={dropdownOpen} toggle={toggle} >
-        <DropdownToggle caret>Dropdown</DropdownToggle>
-        <DropdownMenu >
-          <DropdownItem header>Header</DropdownItem>
-          <DropdownItem>Some Action</DropdownItem>
-          <DropdownItem text>Dropdown Item Text</DropdownItem>
-          <DropdownItem disabled>Action (disabled)</DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>Foo Action</DropdownItem>
-          <DropdownItem>Bar Action</DropdownItem>
-          <DropdownItem>Quo Action</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-    </div>
+
                 <div style={{color:'red'}}>
 
                 <button type="button" class=" ml-200 mt-5 btn btn-primary" onClick={ Link } to="/dashboards/analytics">Search</button>

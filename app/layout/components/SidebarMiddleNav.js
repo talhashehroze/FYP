@@ -17,11 +17,11 @@ export const SidebarMiddleNav = () => (
             <SidebarMenu.Item title="Reports" to='/dashboards/reports' exact />
         </SidebarMenu.Item>
         
-        {/* <SidebarMenu.Item
+        <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-th"></i>}
             title="Widgets"
             to='/widgets'
-        /> */}
+        />
         { /* -------- Cards ---------*/ }
         {/* <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-clone"></i>}
@@ -172,6 +172,16 @@ export const SidebarMiddleNav = () => (
             icon={<i className="fa fa-fw fa-star-o"></i>}
             title="Icons"
             to='/icons'
+        />
+          <SidebarMenu.Item
+            icon={<i className="fa fa-fw fa-star-o"></i>}
+            title="Profile Analysis"
+            to='/ProfileAnalysis/ProfileAnalysis'
+        />
+         <SidebarMenu.Item
+            icon={<i className="fa fa-fw fa-star-o"></i>}
+            title="Trend Analysis"
+            to='/TrendAnalysis/TrendAnalysis'
         />
         <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-bookmark-o"></i>}

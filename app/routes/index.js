@@ -108,7 +108,8 @@ import { DefaultSidebar } from './../layout/components/DefaultSidebar';
 
 import { SidebarANavbar } from './../layout/components/SidebarANavbar';
 import { SidebarASidebar } from './../layout/components/SidebarASidebar';
-
+import ProfileAnalysis from './ProfileAnalysis/ProfileAnalysis';
+import TrendAnalysis from './TrendAnalysis/TrendAnalysis';
 //------ Route Definitions --------
 // eslint-disable-next-line no-unused-vars
 export const RoutedContent = () => {
@@ -220,6 +221,9 @@ export const RoutedContent = () => {
             <Route component={ Timeline } path="/pages/timeline" />
 
             <Route path='/icons' exact component={Icons} />
+            <Route path='/ProfileAnalysis/ProfileAnalysis' exact component={ProfileAnalysis} />
+            <Route path='/TrendAnalysis/TrendAnalysis' exact component={TrendAnalysis} />
+
 
             { /*    404    */ }
             <Redirect to="/pages/error-404" />
