@@ -70,14 +70,14 @@ export const SidebarMiddleNav = () => (
             <SidebarMenu.Item title="Calendar" to='/interface/calendar' />
         </SidebarMenu.Item> */}
         { /* -------- Graphs ---------*/ }
-        {/* <SidebarMenu.Item
+        <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-pie-chart"></i>}
             title="Graphs"
         >
             <SidebarMenu.Item title="ReCharts" to='/graphs/re-charts' />
-        </SidebarMenu.Item> */}
+        </SidebarMenu.Item>
         { /* -------- Forms ---------*/ }
-        {/* <SidebarMenu.Item
+        <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-check-square-o"></i>}
             title="Forms"
         >
@@ -92,18 +92,18 @@ export const SidebarMiddleNav = () => (
             <SidebarMenu.Item title="Date Picker" to='/forms/date-picker' />
             <SidebarMenu.Item title="Dropzone" to='/forms/dropzone' />
             <SidebarMenu.Item title="Sliders" to='/forms/sliders' />
-        </SidebarMenu.Item> */}
+        </SidebarMenu.Item>
         { /* -------- Tables ---------*/ }
-        {/* <SidebarMenu.Item
+        <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-trello"></i>}
             title="Tables"
         >
             <SidebarMenu.Item title="Tables" to='/tables/tables' />
             <SidebarMenu.Item title="Extended Tables" to='/tables/extended-table' />
             <SidebarMenu.Item title="AgGrid" to='/tables/ag-grid' />
-        </SidebarMenu.Item> */}
+        </SidebarMenu.Item>
         { /* -------- Apps ---------*/ }
-        {/* <SidebarMenu.Item
+        <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-mouse-pointer"></i>}
             title="Apps"
         >
@@ -150,7 +150,7 @@ export const SidebarMiddleNav = () => (
             </SidebarMenu.Item>
             <SidebarMenu.Item title="Clients" to="/apps/clients" exact />
             <SidebarMenu.Item title="Chat" to="/apps/chat" exact />
-        </SidebarMenu.Item> */}
+        </SidebarMenu.Item>
         { /* -------- Pages ---------*/ }
         {/* <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-copy"></i>}

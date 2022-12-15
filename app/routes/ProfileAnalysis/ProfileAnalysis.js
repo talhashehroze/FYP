@@ -35,8 +35,9 @@ import { ChatRight } from "../components/Chat/ChatRight";
 import { ChatCardFooter } from "../components/Chat/ChatCardFooter";
 import { TrTableMessages } from '../Apps/ProfileDetails/components/TrTableMessages'; 
 import { TimelineDefault } from "../components/Timeline/TimelineDefault";
-
-
+import { PieChartWithCustomizedLabel } from '../Graphs/ReCharts/components/PieChartWithCustomizedLabel';
+import { SimpleAreaChart } from '../Graphs/ReCharts/components/SimpleAreaChart';
+import { Progress } from '../../components';
 const ProfileAnalysis = () => (
     <React.Fragment>
         <Container>
@@ -54,16 +55,13 @@ const ProfileAnalysis = () => (
                                 <ul className="list-inline">
                                     <li className="list-inline-item text-center">
                                         <h2 className="mb-1">23</h2>
-                                        <span>Contracts</span>
+                                        <span>Following</span>
                                     </li>
                                     <li className="list-inline-item text-center">
                                         <h2 className="mb-1">13</h2>
-                                        <span>Tasks</span>
+                                        <span>Follower</span>
                                     </li>
-                                    <li className="list-inline-item text-center">
-                                        <h2 className="mb-1">5</h2>
-                                        <span>Relases</span>
-                                    </li>
+                                   
                                 </ul>
                             </div>                                
                             {/* <Row className="mt-3">
@@ -88,38 +86,51 @@ const ProfileAnalysis = () => (
                                 Dicta sapiente earum, necessitatibus commodi eius pariatur 
                                 repudiandae cum sunt officiis ex!
                             </p>
-                            <div className="mt-4 mb-2">
-                                <span className="small">
-                                    Labels
-                                </span>
-                            </div>
-                            <div className="text-left mb-4">
-                                <Badge pill color="secondary" className="mr-1">
-                                    { faker.commerce.department() }
-                                </Badge>
-                                <Badge pill color="secondary" className="mr-1">
-                                    { faker.commerce.department() }
-                                </Badge>
-                                <Badge pill color="secondary" className="mr-1">
-                                    { faker.commerce.department() }
-                                </Badge>
-                            </div>
-                            <div className="mt-4 mb-2">
-                                <span className="small">Contact</span>
-                            </div>
-                            <DlRowContacts
-                                leftSideClassName="text-lg-left"
-                                rightSideClassName="text-lg-right text-inverse"
-                            />
-                            <div className="mt-4 mb-2">
-                                <span className="small">Address</span>
-                            </div>
-                            <DlRowAddress 
-                                leftSideClassName="text-lg-left"
-                                rightSideClassName="text-lg-right text-inverse"
-                            />
+                           
+                            
                         </CardBody>
                     </Card>
+
+                    <Card className="mt-3">
+                <CardBody>
+                    <div className="d-flex">
+                        <div>
+                            <h6 className="card-title mb-1">
+                                PieChartWithCustomizedLabel
+                                <span className="small ml-1 text-muted">
+                                    #4.05
+                                </span>
+                            </h6>
+                            <p>Pie Charts</p>
+                        </div>
+                        
+                    </div>
+                    <div className="pt-3 mb-3">
+                    <PieChartWithCustomizedLabel />
+                    </div>
+                </CardBody>
+            </Card>
+
+            <Card className="mt-3">
+                <CardBody>
+                <div className="mb-4">
+                            <div>
+                                <h6 className="mb-1">CPU</h6>
+                                <p>Intel Celeron G1610 @2.60Ghz</p>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <span className="d-flex align-items-center mr-2">Core 0</span>
+                                <Progress value="44" className="mt-2 w-50" style={{height: "5px"}} />
+                                <span className="ml-2 text-inverse">86%</span>
+                            </div>
+                            <div className="d-flex justify-content-between">
+                                <span className="d-flex align-items-center mr-2">Core 1</span>
+                                <Progress value="74" className="mt-2 w-50" style={{height: "5px"}} />
+                                <span className="ml-2 text-inverse">40%</span>
+                            </div>
+                        </div>
+                </CardBody>
+            </Card>
                 </Col>
                 <Col lg={ 8 }>
                     <UncontrolledTabs initialActiveTabId="overview">
@@ -169,45 +180,42 @@ const ProfileAnalysis = () => (
                                         />
                                     </Card>
                                 </CardGroup>
-                                <TimelineDefault 
-                                    showPillDate
-                                        pillDate="Today"
-                                    smallIconColor="danger"
-                                    iconCircleColor="danger"
-                                        iconCircle="exclamation"
-                                />
-                                <TimelineDefault
-                                    showPillDate
-                                        pillDate="Yesterday"
-                                    smallIconColor="info"
-                                    iconCircleColor="info"
-                                        iconCircle="comment"
-                                />
-                                <TimelineDefault
-                                    showPillDate
-                                        pillDate="2 Days ago"
-                                    smallIconColor="primary"
-                                    iconCircleColor="primary"
-                                        iconCircle="envelope"
-                                />
-                                <TimelineDefault 
-                                    showPillDate
-                                        pillDate="3 Months ago"
-                                    smallIconColor="warning"
-                                    iconCircleColor="warning"
-                                        iconCircle="clock-o"
-                                />
-                                <TimelineDefault 
-                                    showPillDate
-                                        pillDate="Year ago"
-                                    smallIconColor="success"
-                                    iconCircleColor="success"
-                                        iconCircle="check"
-                                />
-                                <TimelineDefault 
-                                    iconCircle="close"
-                                />
-                            </TabPane>
+                              
+
+            <Card className="mb-3">
+                <CardBody>
+                    <div className="d-flex">
+                        <div>
+                            <h6 className="card-title mb-1">
+                                Tweets in Last 7 Days
+                               
+                            </h6>
+                            <p>Area Charts</p>
+                        </div>
+                        
+                    </div>
+                    <SimpleAreaChart />
+                </CardBody>
+            </Card>
+
+            
+            <Card className="mb-3">
+                <CardBody>
+                    <div className="d-flex">
+                        <div>
+                            <h6 className="card-title mb-1">
+                                Tweets in Last 30 Days
+                               
+                            </h6>
+                            <p>Area Charts</p>
+                        </div>
+                        
+                    </div>
+                    <SimpleAreaChart />
+                </CardBody>
+            </Card>
+                               
+                                                          </TabPane>
                                       
                         </UncontrolledTabs.TabContent>
                     </UncontrolledTabs>
