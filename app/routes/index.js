@@ -110,6 +110,7 @@ import { SidebarANavbar } from './../layout/components/SidebarANavbar';
 import { SidebarASidebar } from './../layout/components/SidebarASidebar';
 import ProfileAnalysis from './ProfileAnalysis/ProfileAnalysis';
 import TrendAnalysis from './TrendAnalysis/TrendAnalysis';
+import TrendQuality from './TrendQuality';
 //------ Route Definitions --------
 // eslint-disable-next-line no-unused-vars
 export const RoutedContent = () => {
@@ -223,6 +224,7 @@ export const RoutedContent = () => {
             <Route path='/icons' exact component={Icons} />
             <Route path='/ProfileAnalysis/ProfileAnalysis' exact component={ProfileAnalysis} />
             <Route path='/TrendAnalysis/TrendAnalysis' exact component={TrendAnalysis} />
+            <Route path='/TrendQuality/TrendQuality' exact component={TrendQuality} />
 
 
             { /*    404    */ }

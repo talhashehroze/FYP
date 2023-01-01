@@ -37,10 +37,10 @@ import {
 } from "../components/Profile/ProfileOverviewCard";
 import { StackedAreaChart } from '../components/Financial/StackedAreaChart';
 import { TrTableRecentFundings } from '../components/Financial/TrTableRecentFundings';
-export const TrendAnalysis = () => (
+export const TrendQuality = () => (
     <Container>
           <HeaderMain 
-            title="Trend Analysis"
+            title="Trend Quality"
             className="mb-5 mt-4"
         />
       
@@ -49,7 +49,7 @@ export const TrendAnalysis = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Total Tweets"
+                        title="unique Account"
                         badgeTitle="Monthly"
                         badgeColor="primary"
                         value="6.200"
@@ -66,7 +66,7 @@ export const TrendAnalysis = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Total Tweets"
+                        title="Unique Tweet"
                         badgeTitle="Annual"
                         badgeColor="info"
                         value="75.938"
@@ -83,7 +83,7 @@ export const TrendAnalysis = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Total Tweets"
+                        title="Tweet by Bot Account"
                         badgeTitle="Daily"
                         badgeColor="secondary"
                         value="456"
@@ -100,7 +100,7 @@ export const TrendAnalysis = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Total Tweets"
+                        title="Starter Accounts"
                         badgeTitle="Reatime"
                         badgeColor="warning"
                         value="91"
@@ -118,30 +118,23 @@ export const TrendAnalysis = () => (
         
         <Row>
            <Col lg={6} >
-            
+           
            <Card className="mb-3">
-                        <CardBody>
-                            <CardTitle className="mb-1 d-flex">
-                                <h6>Popular  Tweets</h6>
-                                <Button color="link" size="sm" className="pt-0 ml-auto">
-                                    View All <i className="fa fa-angle-right"></i>
-                                </Button>
-                            </CardTitle>
-                        </CardBody>
-                        <Table responsive striped className="mb-0">
-                            <thead>
-                                <tr>
-                                    <th className="bt-0">User Id</th>
-                                    <th className="bt-0">No of likes</th>
-                                    <th className="bt-0">Tweet</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <TrTableRecentFundings />
-                            </tbody>
-                        </Table>
-                    </Card>
-                <Card className="mb-3">
+                                <CardTitle className="bb-0 pt-3 pl-3 pb-0 bg-none" tag="h6">
+                                    Human to Bot Account Ratio
+                                </CardTitle>
+                                <CardBody className="d-flex flex-column">
+                                    <div >
+                                   <h6> Real </h6>
+                                    </div>
+                                    <Progress multi   style={{height: "5px"}}>
+                                        <Progress bar color="purple" value="50" style={{height: "5px"}} />
+                                        <Progress bar color="primary" value="50" style={{height: "5px"}} />
+                                        {/* <Progress bar color="success" value="45" style={{height: "5px"}} /> */}
+                                    </Progress>
+                                </CardBody>
+                          </Card>
+                               <Card className="mb-3">
                     <CardBody>
                         <CardTitle className="mb-4 d-flex">
                             <h6>Trend Timeline</h6>
@@ -181,4 +174,4 @@ export const TrendAnalysis = () => (
            </Container>
 );
 
-export default TrendAnalysis;
+export default TrendQuality;

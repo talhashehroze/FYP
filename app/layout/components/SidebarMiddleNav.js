@@ -183,6 +183,11 @@ export const SidebarMiddleNav = () => (
             title="Trend Analysis"
             to='/TrendAnalysis/TrendAnalysis'
         />
+         <SidebarMenu.Item
+            icon={<i className="fa fa-fw fa-star-o"></i>}
+            title="Trend Quality"
+            to='/TrendQuality/TrendQuality'
+        />
         <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-bookmark-o"></i>}
             title="Docs"
