@@ -1,3 +1,3 @@
-import AgGrid from './AgGrid';
+import AgGrid from "./AgGrid";
 
 export default AgGrid;

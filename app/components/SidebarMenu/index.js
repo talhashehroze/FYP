@@ -1,5 +1,5 @@
-import { SidebarMenu } from './SidebarMenu';
-import { SidebarMenuItem } from './SidebarMenuItem';
+import { SidebarMenu } from "./SidebarMenu";
+import { SidebarMenuItem } from "./SidebarMenuItem";
 
 SidebarMenu.Item = SidebarMenuItem;
 

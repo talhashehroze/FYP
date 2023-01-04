@@ -1,3 +1,3 @@
-import Navbars from './Navbars';
+import Navbars from "./Navbars";
 
-export default Navbars; 
+export default Navbars;

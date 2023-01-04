@@ -1,3 +1,3 @@
-import Success from './Success';
+import Success from "./Success";
 
 export default Success;

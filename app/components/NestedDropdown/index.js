@@ -1,5 +1,5 @@
-import { NestedDropdown } from './NestedDropdown';
-import { NestedDropdownSubmenu } from './NestedDropdownSubmenu';
+import { NestedDropdown } from "./NestedDropdown";
+import { NestedDropdownSubmenu } from "./NestedDropdownSubmenu";
 
 NestedDropdown.Submenu = NestedDropdownSubmenu;
 

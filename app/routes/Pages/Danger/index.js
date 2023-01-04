@@ -1,3 +1,3 @@
-import Danger from './Danger';
+import Danger from "./Danger";
 
 export default Danger;
