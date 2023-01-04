@@ -2,16 +2,17 @@ import datetime
 import json
 import math
 import pprint
+
 import numpy as np
-import snscrape.modules.twitter as sntwitter
 import pandas as pd
+import snscrape.modules.twitter as sntwitter
 
 
 def profileAnalyis(username, justOneYear):
     user_tweets_list = []
     list1 = []
-    scrapper = sntwitter.TwitterProfileScraper(username)
-    # print(scrapper.is_valid_username())
+    scrapper = sntwitter.TwitterProfileScraper(username) # Username Validity T/F
+    print(scrapper.is_valid_username(username))
     try:
         user = scrapper.entity
         list1.append([user.username, user.id, user.displayname,
@@ -105,7 +106,7 @@ def profileAnalyis(username, justOneYear):
     return userDict
 
 
-dict = profileAnalyis('zyn___10', False)
+dict = profileAnalyis('ctalhaahmad', False)
 pp = pprint.PrettyPrinter(depth=6)
 
 pp.pprint(dict)
