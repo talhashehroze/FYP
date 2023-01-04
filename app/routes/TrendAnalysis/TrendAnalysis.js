@@ -15,28 +15,16 @@ import {
     CardFooter,
     CardColumns,
     CardTitle,
-    InputGroup,
-    Input,
-    InputGroupAddon,
-    UncontrolledButtonDropdown,
-    DropdownMenu,
-    DropdownToggle,
-    DropdownItem,
     Button,
-    Table
+    Table,
 } from '../../components'
 import { HeaderMain } from '../components/HeaderMain';
-import {
-    HeaderDemo
-} from "../components/HeaderDemo";
-import {
-    TasksCardGrid
-} from "../components/Tasks/TasksCardGrid";
 import {
     ProfileOverviewCard
 } from "../components/Profile/ProfileOverviewCard";
 import { StackedAreaChart } from '../components/Financial/StackedAreaChart';
 import { TrTableRecentFundings } from '../components/Financial/TrTableRecentFundings';
+import { SimpleBarChart } from '../Graphs/ReCharts/components/SimpleBarChart';
 export const TrendAnalysis = () => (
     <Container>
           <HeaderMain 
@@ -49,15 +37,15 @@ export const TrendAnalysis = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Total Tweets"
-                        badgeTitle="Monthly"
-                        badgeColor="primary"
+                        title="Trend Name"
+                        // badgeTitle="Monthly"
+                        // badgeColor="primary"
                         value="6.200"
-                        valueTitle="vs 4.891 prev."
-                        footerTitle="Prev"
-                        footerTitleClassName="text-success"
-                        footerValue="23%"
-                        footerIcon="caret-up"
+                        // valueTitle="vs 4.891 prev."
+                        // footerTitle="Prev"
+                        // footerTitleClassName="text-success"
+                        // footerValue="23%"
+                        // footerIcon="caret-up"
                     />
                 </CardBody>
             </Card>
@@ -66,15 +54,9 @@ export const TrendAnalysis = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Total Tweets"
-                        badgeTitle="Annual"
-                        badgeColor="info"
+                        title="Trend Country"
                         value="75.938"
-                        valueTitle="vs 55.002 prev."
-                        footerTitle="Prev"
-                        footerTitleClassName="text-danger"
-                        footerValue="12%"
-                        footerIcon="caret-down"
+                       
                     />
                 </CardBody>
             </Card>
@@ -83,15 +65,8 @@ export const TrendAnalysis = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Total Tweets"
-                        badgeTitle="Daily"
-                        badgeColor="secondary"
+                        title="Trend Start date"
                         value="456"
-                        valueTitle="vs 231 prev."
-                        footerTitle="Prev"
-                        footerTitleClassName="text-success"
-                        footerValue="67%"
-                        footerIcon="caret-up"
                     />
                 </CardBody>
             </Card>
@@ -100,15 +75,50 @@ export const TrendAnalysis = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Total Tweets"
-                        badgeTitle="Reatime"
-                        badgeColor="warning"
+                        title="Analyze Tweets"
                         value="91"
-                        valueTitle="vs 87 prev."
-                        footerTitle="Prev"
-                        footerTitleClassName="text-success"
-                        footerValue="8%"
-                        footerIcon="caret-up"
+                    />
+                </CardBody>
+            </Card>
+            { /* START Card Widget */}
+        </CardDeck>
+        <CardDeck>
+            { /* START Card Widget */}
+            <Card className="mb-3">
+                <CardBody>
+                    <ProfileOverviewCard 
+                        title="Total Tweets"
+                        value="6.200"
+                    />
+                </CardBody>
+            </Card>
+            { /* START Card Widget */}
+            { /* START Card Widget */}
+            <Card className="mb-3">
+                <CardBody>
+                    <ProfileOverviewCard 
+                        title="No of participant"
+                        value="75.938"
+                    />
+                </CardBody>
+            </Card>
+            { /* START Card Widget */}
+            { /* START Card Widget */}
+            <Card className="mb-3">
+                <CardBody>
+                    <ProfileOverviewCard 
+                        title="Text Based Tweets"
+                        value="456"
+                    />
+                </CardBody>
+            </Card>
+            { /* START Card Widget */}
+            { /* START Card Widget */}
+            <Card className="mb-3">
+                <CardBody>
+                    <ProfileOverviewCard 
+                        title="Image/Link Tweets"
+                        value="91"
                     />
                 </CardBody>
             </Card>
@@ -122,7 +132,7 @@ export const TrendAnalysis = () => (
            <Card className="mb-3">
                         <CardBody>
                             <CardTitle className="mb-1 d-flex">
-                                <h6>Popular  Tweets</h6>
+                                <h6>Most Liked Tweets</h6>
                                 <Button color="link" size="sm" className="pt-0 ml-auto">
                                     View All <i className="fa fa-angle-right"></i>
                                 </Button>
@@ -153,11 +163,12 @@ export const TrendAnalysis = () => (
                 </Card>
             
                 </Col>
-            <Col>
+            <Col lg={6}>
+
              <Card className="mb-3">
                         <CardBody>
                             <CardTitle className="mb-1 d-flex">
-                                <h6>Popular  ReTweets</h6>
+                                <h6>Popular  ReTweeted Tweet</h6>
                                 <Button color="link" size="sm" className="pt-0 ml-auto">
                                     View All <i className="fa fa-angle-right"></i>
                                 </Button>
@@ -176,6 +187,24 @@ export const TrendAnalysis = () => (
                             </tbody>
                         </Table>
                     </Card>
+                    <Card className="mb-3">
+                <CardBody>
+                    <div className="d-flex">
+                        <div>
+                            <h6 className="card-title mb-1">
+                                Participant Age
+                               
+                            </h6>
+                            <p> Gender Wise</p>
+                        </div>
+                       
+                    </div>
+                    <SimpleBarChart />
+                </CardBody>
+            </Card>
+           
+                
+                
           </Col>
                     </Row>    
            </Container>

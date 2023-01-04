@@ -188,6 +188,11 @@ export const SidebarMiddleNav = () => (
             title="Trend Quality"
             to='/TrendQuality/TrendQuality'
         />
+         <SidebarMenu.Item
+            icon={<i className="fa fa-fw fa-star-o"></i>}
+            title="Bot Account Recognition"
+            to='/BotAccountRecognition'
+        />
         <SidebarMenu.Item
             icon={<i className="fa fa-fw fa-bookmark-o"></i>}
             title="Docs"

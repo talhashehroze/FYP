@@ -96,7 +96,7 @@ const ProfileAnalysis = () => (
                     <div className="d-flex">
                         <div>
                             <h6 className="card-title mb-1">
-                                PieChartWithCustomizedLabel
+                                    Tweet in last 7,14,21,28 days
                                 <span className="small ml-1 text-muted">
                                     #4.05
                                 </span>
@@ -115,16 +115,15 @@ const ProfileAnalysis = () => (
                 <CardBody>
                 <div className="mb-4">
                             <div>
-                                <h6 className="mb-1">CPU</h6>
-                                <p>Intel Celeron G1610 @2.60Ghz</p>
+                                <h6 className="mb-1">Following Follower Ratio</h6>
                             </div>
                             <div className="d-flex justify-content-between">
-                                <span className="d-flex align-items-center mr-2">Core 0</span>
+                                <span className="d-flex align-items-center mr-2">Follower</span>
                                 <Progress value="44" className="mt-2 w-50" style={{height: "5px"}} />
                                 <span className="ml-2 text-inverse">86%</span>
                             </div>
                             <div className="d-flex justify-content-between">
-                                <span className="d-flex align-items-center mr-2">Core 1</span>
+                                <span className="d-flex align-items-center mr-2">Following</span>
                                 <Progress value="74" className="mt-2 w-50" style={{height: "5px"}} />
                                 <span className="ml-2 text-inverse">40%</span>
                             </div>
@@ -142,41 +141,26 @@ const ProfileAnalysis = () => (
                                 <CardGroup className="mb-5">
                                     <Card body>
                                         <ProfileOverviewCard 
-                                            title="Views"
-                                            badgeColor="primary"
-                                                badgeTitle="Monthly"
+                                            title="Total Tweets"
+                                          
                                             value="6.200"
-                                                valueTitle="Total Views"
-                                            footerTitle="Last Month"
-                                            footerTitleClassName="text-success"
-                                                footerIcon="caret-up"
-                                                footerValue="23%"
+                                               
                                         />
                                     </Card>
                                     <Card body>
                                         <ProfileOverviewCard 
-                                            title="Tweets"
-                                            badgeColor="info"
-                                                badgeTitle="Annual"
+                                            title="Likes made"
+                                           
                                             value="75.938"
-                                                valueTitle="New Tweets"
-                                            footerTitle="Last Annual"
-                                            footerTitleClassName="text-danger"
-                                                footerIcon="caret-down"
-                                                footerValue="96%"
+                                            
                                         />
                                     </Card>
                                     <Card body>
                                         <ProfileOverviewCard 
-                                            title="Visits"
-                                            badgeColor="secondary"
-                                                badgeTitle="Today"
+                                            title="Retweet Made"
+                                           
                                             value="75.938"
-                                                valueTitle="Total Visits"
-                                            footerTitle="Yesterday"
-                                            footerTitleClassName="text-success"
-                                                footerIcon="caret-up"
-                                                footerValue="40%"
+                                         
                                         />
                                     </Card>
                                 </CardGroup>
@@ -190,7 +174,7 @@ const ProfileAnalysis = () => (
                                 Tweets in Last 7 Days
                                
                             </h6>
-                            <p>Area Charts</p>
+                            
                         </div>
                         
                     </div>

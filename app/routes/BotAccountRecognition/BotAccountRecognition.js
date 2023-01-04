@@ -8,39 +8,23 @@ import {
     Col,
     Card,
     CardBody,
-    ListGroup,
-    ListGroupItem,
     CardDeck, 
     Progress,
-    CardFooter,
-    CardColumns,
     CardTitle,
-    InputGroup,
-    Input,
-    InputGroupAddon,
-    UncontrolledButtonDropdown,
-    DropdownMenu,
-    DropdownToggle,
-    DropdownItem,
     Button,
     Table
 } from '../../components'
 import { HeaderMain } from '../components/HeaderMain';
-import {
-    HeaderDemo
-} from "../components/HeaderDemo";
-import {
-    TasksCardGrid
-} from "../components/Tasks/TasksCardGrid";
+
 import {
     ProfileOverviewCard
 } from "../components/Profile/ProfileOverviewCard";
 import { StackedAreaChart } from '../components/Financial/StackedAreaChart';
 import { TrTableRecentFundings } from '../components/Financial/TrTableRecentFundings';
-export const TrendQuality = () => (
+export const BotAccountRecognition = () => (
     <Container>
           <HeaderMain 
-            title="Trend Quality"
+            title="Bot Account Recognition"
             className="mb-5 mt-4"
         />
       <CardDeck>
@@ -48,7 +32,7 @@ export const TrendQuality = () => (
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Trend Name"
+                        title="User Name"
                         // badgeTitle="Monthly"
                         // badgeColor="primary"
                         value="6.200"
@@ -60,161 +44,46 @@ export const TrendQuality = () => (
                     />
                 </CardBody>
             </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
+          
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Trend Country"
+                        title="Verification Status"
                         value="75.938"
                        
                     />
                 </CardBody>
             </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
+       
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
-                        title="Trend Start date"
+                        title="Age of Account"
                         value="456"
                     />
                 </CardBody>
             </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Analyze Tweets"
-                        value="91"
-                    />
-                </CardBody>
-            </Card>
+          
             <Card className="mb-3">
                 <CardBody>
                     <ProfileOverviewCard 
                         title="Total Tweets"
-                        value="6.200"
-                    />
-                </CardBody>
-            </Card>
-            { /* START Card Widget */}
-        </CardDeck>
-        
-        <CardDeck>
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Total Participant"
-                       
-                        value="6.200"
-                        
-                    />
-                </CardBody>
-            </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Real Account"
-                       
-                        value="75.938"
-                       
-                    />
-                </CardBody>
-            </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Bot Account"
-                      
-                        value="456"
-                       
-                    />
-                </CardBody>
-            </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Text Based Tweets"
-                        value="456"
-                    />
-                </CardBody>
-            </Card>
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Image/Link Tweets"
                         value="91"
                     />
                 </CardBody>
             </Card>
-            { /* START Card Widget */}
+            <Card className="mb-3">
+                <CardBody>
+                    <ProfileOverviewCard 
+                        title="Account Status"
+                        value="6.200"
+                    />
+                </CardBody>
+            </Card>
         </CardDeck>
 
-        <CardDeck>
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Unique Tweet"
-                       
-                        value="6.200"
-                        
-                    />
-                </CardBody>
-            </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Tweet By Real Acc"
-                       
-                        value="75.938"
-                       
-                    />
-                </CardBody>
-            </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Tweet by Bot Account"
-                      
-                        value="456"
-                       
-                    />
-                </CardBody>
-            </Card>
-            { /* START Card Widget */}
-            { /* START Card Widget */}
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Text Based Tweets"
-                        value="456"
-                    />
-                </CardBody>
-            </Card>
-            <Card className="mb-3">
-                <CardBody>
-                    <ProfileOverviewCard 
-                        title="Image/Link Tweets"
-                        value="91"
-                    />
-                </CardBody>
-            </Card>
-            { /* START Card Widget */}
-        </CardDeck>
+        { /* START Card deck Widget */}
+
         
         <Row>
            <Col lg={6} >
@@ -250,7 +119,7 @@ export const TrendQuality = () => (
              <Card className="mb-3">
                         <CardBody>
                             <CardTitle className="mb-1 d-flex">
-                                <h6>Popular  ReTweets</h6>
+                                <h6>Recent Tweets</h6>
                                 <Button color="link" size="sm" className="pt-0 ml-auto">
                                     View All <i className="fa fa-angle-right"></i>
                                 </Button>
@@ -274,4 +143,4 @@ export const TrendQuality = () => (
            </Container>
 );
 
-export default TrendQuality;
+export default BotAccountRecognition;
