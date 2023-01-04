@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { ThemeConsumer } from '../../../components/Theme';
-
+import logo from './logo.png'
 const logos = {
     'white': require('./../../../images/logos/logo-white.svg'),
     'primary': require('./../../../images/logos/logo-primary.svg'),
@@ -33,15 +33,14 @@ const LogoThemed = ({ checkBackground, className, ...otherProps }) => (
     <ThemeConsumer>
     {
         ({ style, color }) => (
+           
             <img
-                src={
-                    checkBackground ?
-                        getLogoUrlBackground(style, color) :
-                        getLogoUrl(style, color)
-                }
-                className={ classNames('d-block', className) }
+                src={logo }
                 alt="Whatstrending Logo"
-                { ...otherProps }
+                height={150}
+                width={200}
+                
+                
             />
         )
     }

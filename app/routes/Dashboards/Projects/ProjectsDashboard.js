@@ -186,5 +186,5 @@ return(
                         }                     
 
 export default setupPage({
-    pageTitle: 'Projects Dashboard'
+    pageTitle: ' '
 })(ProjectsDashboard);

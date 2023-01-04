@@ -30,7 +30,7 @@ const SidebarBottomA = () => (
             <Sidebar.Section className="text-center">
                 { /* Slim Version Selector */ }
                 <VersionSelector
-                    dashboard="Airframe"
+                    dashboard="WhatsTrending"
                     sidebar
                     compact
                     render={() => (

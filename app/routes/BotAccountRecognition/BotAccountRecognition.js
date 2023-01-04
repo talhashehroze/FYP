@@ -90,11 +90,20 @@ export const BotAccountRecognition = () => (
            
            <Card className="mb-3">
                                 <CardTitle className="bb-0 pt-3 pl-3 pb-0 bg-none" tag="h6">
-                                    Human to Bot Account Ratio
+                                    Follower to Following Ratio
                                 </CardTitle>
                                 <CardBody className="d-flex flex-column">
                                     <div >
-                                   <h6> Real </h6>
+                                    <Row>
+                                    <Col lg={6}>
+                                   <h6> Follower  </h6>
+                                   </Col>
+                                   <Col lg={6}>
+                                   <h6> Following  </h6>
+                                   </Col>
+                                
+                                   </Row>
+
                                     </div>
                                     <Progress multi   style={{height: "5px"}}>
                                         <Progress bar color="purple" value="50" style={{height: "5px"}} />

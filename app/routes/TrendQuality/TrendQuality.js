@@ -224,8 +224,17 @@ export const TrendQuality = () => (
                                     Human to Bot Account Ratio
                                 </CardTitle>
                                 <CardBody className="d-flex flex-column">
-                                    <div >
-                                   <h6> Real </h6>
+                                <div >
+                                    <Row>
+                                    <Col lg={6}>
+                                   <h6> Human  </h6>
+                                   </Col>
+                                   <Col lg={6}>
+                                   <h6> Bot  </h6>
+                                   </Col>
+                                
+                                   </Row>
+
                                     </div>
                                     <Progress multi   style={{height: "5px"}}>
                                         <Progress bar color="purple" value="50" style={{height: "5px"}} />
