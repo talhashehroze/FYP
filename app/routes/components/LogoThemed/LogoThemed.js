@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import { ThemeConsumer } from '../../../components/Theme';
 
 const logos = {
@@ -41,7 +40,7 @@ const LogoThemed = ({ checkBackground, className, ...otherProps }) => (
                         getLogoUrl(style, color)
                 }
                 className={ classNames('d-block', className) }
-                alt="Airframe Logo"
+                alt="Whatstrending Logo"
                 { ...otherProps }
             />
         )
