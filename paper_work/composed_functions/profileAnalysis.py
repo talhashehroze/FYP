@@ -121,7 +121,7 @@ pp = pprint.PrettyPrinter(depth=6)
 
 # pp.pprint(dict)
 
-jsonobj = json.dumps(str(dict))
+jsonobj = json.dumps(dict, default=str)
 # print(jsonobj)
 
 # Writing to json
