@@ -1,3 +1,3 @@
-import ReCharts from './ReCharts';
+import ReCharts from "./ReCharts";
 
 export default ReCharts;

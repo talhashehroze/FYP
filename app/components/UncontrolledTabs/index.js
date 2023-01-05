@@ -1,6 +1,6 @@
-import { UncontrolledTabs } from './UncontrolledTabs';
-import { UncontrolledTabsNavLink } from './UncontrolledTabsNavLink';
-import { UncontrolledTabsTabContent } from './UncontrolledTabsTabContent';
+import { UncontrolledTabs } from "./UncontrolledTabs";
+import { UncontrolledTabsNavLink } from "./UncontrolledTabsNavLink";
+import { UncontrolledTabsTabContent } from "./UncontrolledTabsTabContent";
 
 UncontrolledTabs.NavLink = UncontrolledTabsNavLink;
 UncontrolledTabs.TabContent = UncontrolledTabsTabContent;

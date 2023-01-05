@@ -1,3 +1,3 @@
-import { ExtendedTable } from './ExtendedTable';
+import { ExtendedTable } from "./ExtendedTable";
 
 export default ExtendedTable;

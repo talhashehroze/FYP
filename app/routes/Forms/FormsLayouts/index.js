@@ -1,3 +1,3 @@
-import FormsLayouts from './FormsLayouts';
+import FormsLayouts from "./FormsLayouts";
 
-export default FormsLayouts; 
+export default FormsLayouts;
