@@ -116,7 +116,7 @@ def profileAnalyis(username, justOneYear):
     return userDict
 
 
-dict = profileAnalyis('ctalhaahmad', False)
+dict = profileAnalyis('elonMusk', True) # pass data here
 pp = pprint.PrettyPrinter(depth=6)
 
 # pp.pprint(dict)
@@ -125,6 +125,6 @@ jsonobj = json.dumps(dict, default=str)
 # print(jsonobj)
 
 # Writing to json
-file = open("paper_work\composed_functions\json_obj\jsonobj.json", "w")
+file = open("jsonobj.json", "w")
 file.write(jsonobj)
 file.close()

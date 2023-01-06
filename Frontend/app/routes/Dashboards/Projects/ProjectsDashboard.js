@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { faker } from "@faker-js/faker";
 import { Link } from "react-router-dom";
 import {
@@ -40,6 +41,21 @@ const ProjectsDashboard = () => {
     console.log(value);
 
     console.log("hyyyy");
+  };
+  const onsubmit = (e) => {
+    axios
+      .get("http://localhost:3001/user/get-user")
+      .then(function (response) {
+        // handle success
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
   };
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -98,7 +114,7 @@ const ProjectsDashboard = () => {
                   <button
                     type="button"
                     class=" ml-20 mt-4 btn btn-primary"
-                    onClick={Link}
+                    onClick={onsubmit}
                     to="/dashboards/analytics"
                   >
                     Search
