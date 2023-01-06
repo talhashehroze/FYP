@@ -38,7 +38,30 @@ import { TimelineDefault } from "../components/Timeline/TimelineDefault";
 import { PieChartWithCustomizedLabel } from "../Graphs/ReCharts/components/PieChartWithCustomizedLabel";
 import { SimpleAreaChart } from "../Graphs/ReCharts/components/SimpleAreaChart";
 import { Progress } from "../../components";
-const ProfileAnalysis = () => (
+import { useState, useEffect } from "react";
+import axios from "axios";
+
+const ProfileAnalysis = () => {
+const [data,setdata]=useState('')
+  useEffect(() => {
+    
+   axios
+      .get("http://localhost:3001/user/get-user")
+      .then(function (response) {
+        // handle success
+        setdata(response.data)
+        console.log('work ',data.username);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function () {
+        // always executed
+      });
+    
+},[]);
+  return(
   <React.Fragment>
     <Container>
       <HeaderMain title="Profile Analysis" className="mb-5 mt-4" />
@@ -47,15 +70,15 @@ const ProfileAnalysis = () => (
         <Col lg={4}>
           <Card>
             <CardBody>
-              <Profile />
+                <Profile data={data} />
               <div className="text-center pb-1">
                 <ul className="list-inline">
                   <li className="list-inline-item text-center">
-                    <h2 className="mb-1">23</h2>
+                    <h2 className="mb-1">{data.friendsCount}</h2>
                     <span>Following</span>
                   </li>
                   <li className="list-inline-item text-center">
-                    <h2 className="mb-1">13</h2>
+                    <h2 className="mb-1">{data.followersCount}</h2>
                     <span>Follower</span>
                   </li>
                 </ul>
@@ -141,13 +164,13 @@ const ProfileAnalysis = () => (
               <TabPane tabId="overview">
                 <CardGroup className="mb-5">
                   <Card body>
-                    <ProfileOverviewCard title="Total Tweets" value="6.200" />
+                    <ProfileOverviewCard title="Total Tweets/Retweets" value={data.statusesCount} />
                   </Card>
                   <Card body>
-                    <ProfileOverviewCard title="Likes made" value="75.938" />
+                    <ProfileOverviewCard title="Tweets Liked made" value={data.favouritesCount} />
                   </Card>
                   <Card body>
-                    <ProfileOverviewCard title="Retweet Made" value="75.938" />
+                    <ProfileOverviewCard title="Verification Status" value={data.verified} />
                   </Card>
                 </CardGroup>
 
@@ -184,7 +207,8 @@ const ProfileAnalysis = () => (
       </Row>
       {/* END Content */}
     </Container>
-  </React.Fragment>
-);
+    </React.Fragment>
+  )
+}
 
 export default ProfileAnalysis;

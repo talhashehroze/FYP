@@ -5,7 +5,7 @@ import { Avatar, AvatarAddOn } from "./../../components";
 
 import { randomArray, randomAvatar } from "./../../utilities";
 
-const Profile = () => {
+const Profile = (props) => {
   const avatar = [
     [
       <AvatarAddOn.Icon
@@ -78,7 +78,7 @@ const Profile = () => {
       <div className="d-flex justify-content-center my-3">
         <Avatar.Image
           size="lg"
-          src={randomAvatar()}
+          src={ props.data.profileImageUrl}
           addOns={[
             <AvatarAddOn.Icon
               className="fa fa-circle"
@@ -91,12 +91,12 @@ const Profile = () => {
       </div>
       <div className="mb-4 text-center">
         <a className="h6 text-decoration-none" href="#">
-          {faker.name.firstName()} {faker.name.lastName()}
+          {props.data.displayname} 
         </a>
-        <div className="text-center mt-2">{faker.name.jobTitle()}</div>
+        <div className="text-center mt-2">{props.data.renderedDescription}</div>
         <div className="text-center">
           <i className="fa fa-map-marker mr-1"></i>
-          {faker.address.city()}
+          {props.data.location}
         </div>
       </div>
     </React.Fragment>

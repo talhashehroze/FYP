@@ -35,6 +35,7 @@ import {
 } from "reactstrap";
 
 const ProjectsDashboard = () => {
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [value, setValue] = useState("Select operation");
   const handleSelect = (e) => {
@@ -47,7 +48,7 @@ const ProjectsDashboard = () => {
       .get("http://localhost:3001/user/get-user")
       .then(function (response) {
         // handle success
-        console.log(response.data);
+        console.log(response.data.username);
       })
       .catch(function (error) {
         // handle error
@@ -122,10 +123,10 @@ const ProjectsDashboard = () => {
                 </Col>
               </Row>
 
-              {/* <Button class="btn btn-primary" type="button" tag={ Link } to="/dashboards/analytics">
+              <Button class="btn btn-primary" type="button" tag={ Link } to="/dashboards/analytics">
 
                                 </Button>
-                           */}
+                          
 
               {/* </InputGroup> */}
             </CardBody>
@@ -187,10 +188,10 @@ const ProjectsDashboard = () => {
                 <button
                   type="button"
                   class=" ml-200 mt-5 btn btn-primary"
-                  onClick={Link}
+                  onClick={onsubmit}
                   to="/dashboards/analytics"
                 >
-                  Search
+                  Search yar
                 </button>
               </div>
 
