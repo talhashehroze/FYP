@@ -1,3 +1,4 @@
+from pathlib import Path
 import datetime
 import json
 import math
@@ -64,7 +65,7 @@ def profileAnalyis(username, justOneYear):
     user_tweets_df['Year'] = user_tweets_df['DateTime'].dt.year
 
     user_tweets_df['Month'] = user_tweets_df['DateTime'].dt.month
-
+  
     user_tweets_df['MonthName'] = user_tweets_df['DateTime'].dt.month_name()
 
     user_tweets_df['MonthDay'] = user_tweets_df['DateTime'].dt.day
@@ -125,6 +126,14 @@ jsonobj = json.dumps(dict, default=str)
 # print(jsonobj)
 
 # Writing to json
-file = open("jsonobj.json", "w")
+data_folder = Path("backend/paper_work/composed_functions/json_obj/")
+file_to_open = data_folder / "jsonobj.json"
+file = open(file_to_open, "w")
 file.write(jsonobj)
 file.close()
+
+# import os
+
+# cwd = os.getcwd()  # Get the current working directory (cwd)
+# files = os.listdir(cwd)  # Get all the files in that directory
+# print("Files in %r: %s" % (cwd, files))
