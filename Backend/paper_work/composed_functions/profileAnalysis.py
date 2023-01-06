@@ -125,6 +125,6 @@ jsonobj = json.dumps(dict, default=str)
 # print(jsonobj)
 
 # Writing to json
-file = open("paper_work\composed_functions\json_obj\jsonobj.json", "a")
+file = open("paper_work\composed_functions\json_obj\jsonobj.json", "w")
 file.write(jsonobj)
 file.close()
