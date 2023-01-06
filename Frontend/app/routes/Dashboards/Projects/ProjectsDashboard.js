@@ -35,12 +35,12 @@ import {
 
 const ProjectsDashboard = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [value, setValue] = useState('Select operation');
-const handleSelect=(e)=>{
+  const [value, setValue] = useState("Select operation");
+  const handleSelect = (e) => {
     console.log(value);
-   
-    console.log('hyyyy')
-  }
+
+    console.log("hyyyy");
+  };
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
@@ -66,17 +66,28 @@ const handleSelect=(e)=>{
                     style={{ width: "100%" }}
                     onClick={handleSelect}
                   >
-
-                  <DropdownToggle  style={{ width: "100%" }} caret>
+                    <DropdownToggle style={{ width: "100%" }} caret>
                       {" "}
-                   {value}
+                      {value}
                     </DropdownToggle>
-                    <DropdownMenu > 
+                    <DropdownMenu>
                       {/* <DropdownItem header>Header</DropdownItem> */}
-                      <DropdownItem  onClick={() => setValue('Trend Analysis')}>Trend Analysis</DropdownItem>
-                      <DropdownItem onClick={() => setValue('Trend Quality')}>Trend Quality</DropdownItem>
-                      <DropdownItem onClick={() => setValue('Bot Account Recognition')}>Bot Account Recognition</DropdownItem>
-                      <DropdownItem onClick={() => setValue('Account Analysis')}>Account Analysis</DropdownItem>
+                      <DropdownItem onClick={() => setValue("Trend Analysis")}>
+                        Trend Analysis
+                      </DropdownItem>
+                      <DropdownItem onClick={() => setValue("Trend Quality")}>
+                        Trend Quality
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => setValue("Bot Account Recognition")}
+                      >
+                        Bot Account Recognition
+                      </DropdownItem>
+                      <DropdownItem
+                        onClick={() => setValue("Account Analysis")}
+                      >
+                        Account Analysis
+                      </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
                 </Col>
