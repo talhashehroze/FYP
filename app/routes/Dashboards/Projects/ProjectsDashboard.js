@@ -35,6 +35,12 @@ import {
 
 const ProjectsDashboard = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [value, setValue] = useState('Select operation');
+const handleSelect=(e)=>{
+    console.log(value);
+   
+    console.log('hyyyy')
+  }
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
   return (
@@ -58,24 +64,19 @@ const ProjectsDashboard = () => {
                     isOpen={dropdownOpen}
                     toggle={toggle}
                     style={{ width: "100%" }}
+                    onClick={handleSelect}
                   >
-                    <DropdownToggle style={{ width: "100%" }} caret>
-                      {" "}
-                      Select Operation
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      {/* <DropdownItem header>Header</DropdownItem> */}
-                      <DropdownItem>Trend Analysis</DropdownItem>
-                      <DropdownItem>Trend Quality</DropdownItem>
-                      <DropdownItem>Bot Account Recognition</DropdownItem>
-                      <DropdownItem>Account Analysis</DropdownItem>
 
-                      {/* <DropdownItem text>Dropdown Item Text</DropdownItem>
-                            <DropdownItem disabled>Action (disabled)</DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>Foo Action</DropdownItem>
-                            <DropdownItem>Bar Action</DropdownItem>
-                            <DropdownItem>Quo Action</DropdownItem> */}
+                  <DropdownToggle  style={{ width: "100%" }} caret>
+                      {" "}
+                   {value}
+                    </DropdownToggle>
+                    <DropdownMenu > 
+                      {/* <DropdownItem header>Header</DropdownItem> */}
+                      <DropdownItem  onClick={() => setValue('Trend Analysis')}>Trend Analysis</DropdownItem>
+                      <DropdownItem onClick={() => setValue('Trend Quality')}>Trend Quality</DropdownItem>
+                      <DropdownItem onClick={() => setValue('Bot Account Recognition')}>Bot Account Recognition</DropdownItem>
+                      <DropdownItem onClick={() => setValue('Account Analysis')}>Account Analysis</DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
                 </Col>
@@ -148,7 +149,7 @@ const ProjectsDashboard = () => {
                 Enter Keyword to Perform Operation
               </CardTitle>
               {/* <InputGroup> */}
-              <Input placeholder="Enter  Keyword..." />
+              <Input placeholder="Enter Keyword..." />
               {/* <InputGroupAddon addonType="append">
                                 <Button color="secondary" outline tag={ Link } to="/apps/projects/list">
                                     <i className="fa fa-search"></i>
