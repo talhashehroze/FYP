@@ -69,7 +69,7 @@ console.log("Today's Date", datetimetoday);
 // var count_tt = Object.keys(count).length;
 // console.log(count_tt);
 let output = [];
-let weekName = ["Fri", "Thu", "Wed", "Tue", "Mon"];
+let weekName = ["Sun", "Sat", "Fri", "Thu", "Wed", "Tue", "Mon"];
 console.log(weekName.length);
 for (let i = 0; i < weekName.length; i++) {
   let count = 0;
