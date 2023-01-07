@@ -39,7 +39,10 @@ for (let i = 0; i < count_tt; i++) {
 
 const SimpleAreaChart = () => (
   <ResponsiveContainer width="100%" aspect={6.0 / 3.0}>
-    <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+    <AreaChart
+      data={tweetdaydatacount}
+      margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+    >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />

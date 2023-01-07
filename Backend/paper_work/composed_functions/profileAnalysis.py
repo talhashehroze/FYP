@@ -117,7 +117,7 @@ def profileAnalyis(username, justOneYear):
     return userDict
 
 
-dict = profileAnalyis('elonMusk', True) # pass data here
+dict = profileAnalyis('ToniKroos', True) # pass data here map keyword here
 pp = pprint.PrettyPrinter(depth=6)
 
 # pp.pprint(dict)
@@ -126,7 +126,14 @@ jsonobj = json.dumps(dict, default=str)
 # print(jsonobj)
 
 # Writing to json
-data_folder = Path("backend/paper_work/composed_functions/json_obj/")
+# data_folder = Path("backend/paper_work/composed_functions/json_obj/")
+# file_to_open = data_folder / "jsonobj.json"
+# file = open(file_to_open, "w")
+# file.write(jsonobj)
+# file.close()
+
+# Writing to json
+data_folder = Path("backend/Data/")
 file_to_open = data_folder / "jsonobj.json"
 file = open(file_to_open, "w")
 file.write(jsonobj)

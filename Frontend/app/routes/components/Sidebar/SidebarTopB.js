@@ -26,7 +26,7 @@ const SidebarTopB = () => (
           <VersionSelector
             down
             sidebar
-            dashboard="WhatsTrending"
+            dashboard="What'sTrending?"
             render={(currentVersion) => (
               <React.Fragment>
                 <div className="h4 fw-600 sidebar-logo mb-1 text-left">

@@ -30,7 +30,7 @@ const SidebarBottomA = () => (
       <Sidebar.Section className="text-center">
         {/* Slim Version Selector */}
         <VersionSelector
-          dashboard="WhatsTrending"
+          dashboard="What'sTrending?"
           sidebar
           compact
           render={() => <i className="fa fa-fw fa-toggle-on"></i>}

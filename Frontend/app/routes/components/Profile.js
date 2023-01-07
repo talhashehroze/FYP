@@ -10,63 +10,11 @@ const Profile = (props) => {
     [
       <AvatarAddOn.Icon
         className="fa fa-circle"
-        color="facebook"
-        key="avatar-icon-bg"
-      />,
-      <AvatarAddOn.Icon
-        className="fa fa-facebook"
-        color="white"
-        key="avatar-icon-fg"
-        small
-      />,
-    ],
-    [
-      <AvatarAddOn.Icon
-        className="fa fa-circle"
         color="twitter"
         key="avatar-icon-bg"
       />,
       <AvatarAddOn.Icon
         className="fa fa-twitter"
-        color="white"
-        key="avatar-icon-fg"
-        small
-      />,
-    ],
-    [
-      <AvatarAddOn.Icon
-        className="fa fa-circle"
-        color="linkedin"
-        key="avatar-icon-bg"
-      />,
-      <AvatarAddOn.Icon
-        className="fa fa-linkedin"
-        color="white"
-        key="avatar-icon-fg"
-        small
-      />,
-    ],
-    [
-      <AvatarAddOn.Icon
-        className="fa fa-circle"
-        color="foursquare"
-        key="avatar-icon-bg"
-      />,
-      <AvatarAddOn.Icon
-        className="fa fa-foursquare"
-        color="white"
-        key="avatar-icon-fg"
-        small
-      />,
-    ],
-    [
-      <AvatarAddOn.Icon
-        className="fa fa-circle"
-        color="paypal"
-        key="avatar-icon-bg"
-      />,
-      <AvatarAddOn.Icon
-        className="fa fa-paypal"
         color="white"
         key="avatar-icon-fg"
         small
@@ -78,7 +26,7 @@ const Profile = (props) => {
       <div className="d-flex justify-content-center my-3">
         <Avatar.Image
           size="lg"
-          src={ props.data.profileImageUrl}
+          src={props.data.profileImageUrl}
           addOns={[
             <AvatarAddOn.Icon
               className="fa fa-circle"
@@ -91,7 +39,7 @@ const Profile = (props) => {
       </div>
       <div className="mb-4 text-center">
         <a className="h6 text-decoration-none" href="#">
-          {props.data.displayname} 
+          {props.data.displayname}
         </a>
         <div className="text-center mt-2">{props.data.renderedDescription}</div>
         <div className="text-center">

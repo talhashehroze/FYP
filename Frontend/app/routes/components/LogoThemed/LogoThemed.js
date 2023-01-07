@@ -32,7 +32,7 @@ const getLogoUrlBackground = (style, color) => {
 const LogoThemed = ({ checkBackground, className, ...otherProps }) => (
   <ThemeConsumer>
     {({ style, color }) => (
-      <img src={logo} alt="Whatstrending Logo" height={150} width={200} />
+      <img src={logo} alt="What'sTrending? Logo" height={150} width={200} />
     )}
   </ThemeConsumer>
 );
