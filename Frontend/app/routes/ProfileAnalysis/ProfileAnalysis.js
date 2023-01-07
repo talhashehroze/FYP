@@ -96,13 +96,11 @@ const [data,setdata]=useState('')
                                 </Col>
                             </Row> */}
               <div className="mt-4 mb-2">
-                <span className="small">Profile</span>
+                <span className="small">Description</span>
               </div>
-              <p className="text-left">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta
-                sapiente earum, necessitatibus commodi eius pariatur repudiandae
-                cum sunt officiis ex!
-              </p>
+                <p className="text-left">
+                  {data.renderedDescription}
+                </p>
             </CardBody>
           </Card>
 

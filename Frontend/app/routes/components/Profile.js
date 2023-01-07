@@ -41,7 +41,7 @@ const Profile = (props) => {
         <a className="h6 text-decoration-none" href="#">
           {props.data.displayname}
         </a>
-        <div className="text-center mt-2">{props.data.renderedDescription}</div>
+        {/* <div className="text-center mt-2">{props.data.renderedDescription}</div> */}
         <div className="text-center">
           <i className="fa fa-map-marker mr-1"></i>
           {props.data.location}

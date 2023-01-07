@@ -107,19 +107,15 @@ const ProjectsDashboard = () => {
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
+                  
                 </Col>
               </Row>
               <Row className="mt-0">
-                <Col sm={4} md={4} className="pl-20" color="yellow"></Col>
-                <Col sm={8} md={8} className="pl-20" color="yellow">
-                  <button
-                    type="button"
-                    class=" ml-20 mt-4 btn btn-primary"
-                    onClick={onsubmit}
-                    to="/dashboards/analytics"
-                  >
-                    Search
-                  </button>
+                <Col sm={5} md={5} className="pl-20" color="yellow"></Col>
+                <Col sm={7} md={7} className="pl-20" color="yellow">
+                     <Button style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } to="/profileanalysis/profileanalysis">
+                                 Search
+                  </Button>
                 </Col>
               </Row>
 
