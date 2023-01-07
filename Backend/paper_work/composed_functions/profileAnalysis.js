@@ -68,8 +68,25 @@ arr_dname.forEach(function (i) {
 
 // var count_tt = Object.keys(count).length;
 // console.log(count_tt);
+let output = [];
 
-const json_dnamecount = JSON.stringify(count);
+for(let i=0;i<7;i++)
+{
+    let count=0;
+    for(let j=0;j<arr_dname.length;j++)
+    {
+        
+        if(arr_dname[i]==arr_dname[j])
+        {
+         count++;   
+        }
+    }
+    tmp = { "name": arr_dname[i], "nooftweets": count };
+  output.push(tmp);
+}
+
+
+const json_dnamecount = JSON.stringify(output);
 fs.writeFile(
   "./json_obj/json_dnamecount.json",
   json_dnamecount,
