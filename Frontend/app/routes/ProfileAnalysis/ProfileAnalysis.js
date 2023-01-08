@@ -1,8 +1,16 @@
 import React from "react";
 
-const tweetdaydatacount = require("../../../../Backend/Data/json_dnamecount.json");
-const tweetweekdatacount = require("../../../../Backend/Data/json_wnamecount.json");
-const hourtweetdatacount = require("../../../../Backend/Data/json_hcount.json");
+// const tweetdaydatacount = require("../../../../Backend/Data/json_dnamecount.json");
+// const tweetweekdatacount = require("../../../../Backend/Data/json_wnamecount.json");
+// const hourtweetdatacount = require("../../../../Backend/Data/json_hcount.json");
+
+const tweetdaydatacount = require("../../../../Backend/Data/final_json.json");
+const tweetweekdatacount = require("../../../../Backend/Data/final_json.json");
+const hourtweetdatacount = require("../../../../Backend/Data/final_json.json");
+// tweetdaydatacount.tweets_times_tweetsperdaylastweek;
+// tweetweekdatacount.tweets_times_tweetsperdaylastmonth;
+// hourtweetdatacount.tweets_times_per_hour;
+
 import {
   Container,
   Row,
@@ -225,7 +233,9 @@ const ProfileAnalysis = () => {
                       </div>
                     </div>
                     <div className="pt-3 mb-3">
-                      <PieChartWithCustomizedLabel data={hourtweetdatacount} />
+                      <PieChartWithCustomizedLabel
+                        data={hourtweetdatacount.tweets_times_per_hour}
+                      />
                     </div>
                     <h6 className="card-title mb-1">
                       Red:- 00:00-05:59 Indigo:- 06:00-11:59 Green:- 12:00-17:59
@@ -282,7 +292,9 @@ const ProfileAnalysis = () => {
                         </h6>
                       </div>
                     </div>
-                    <SimpleAreaChart data={tweetdaydatacount} />
+                    <SimpleAreaChart
+                      data={tweetdaydatacount.tweets_times_tweetsperdaylastweek}
+                    />
                   </CardBody>
                 </Card>
               </Col>
@@ -296,7 +308,11 @@ const ProfileAnalysis = () => {
                         </h6>
                       </div>
                     </div>
-                    <SimpleAreaChart data={tweetweekdatacount} />
+                    <SimpleAreaChart
+                      data={
+                        tweetweekdatacount.tweets_times_tweetsperdaylastmonth
+                      }
+                    />
                   </CardBody>
                 </Card>
               </Col>
