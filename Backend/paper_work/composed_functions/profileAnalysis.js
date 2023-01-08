@@ -13,7 +13,7 @@ for (let i = 0; i < count_tt; i++) {
   arr_dt.push(now); // adds that into an array
 }
 for (let i = 0; i < arr_dt.length; i++) {
-  console.log(arr_dt[i]);
+  // console.log(arr_dt[i]);
 }
 
 var arr_d = [];
@@ -28,7 +28,7 @@ for (let i = 0; i < count_tt; i++) {
   arr_dname.push(dayName); // adds that into an array
 }
 for (let i = 0; i < arr_dt.length; i++) {
-  console.log(arr_d[i]);
+  // console.log(arr_d[i]);
 }
 
 const fs = require("fs");
@@ -58,7 +58,7 @@ fs.writeFile("../../Data/json_dname.json", json_dname, "utf8", function (err) {
 });
 
 var datetimetoday = new Date().toLocaleDateString();
-console.log("Today's Date", datetimetoday);
+// console.log("Today's Date", datetimetoday);
 
 // var count = {};
 // arr_dname.forEach(function (i) {
@@ -70,7 +70,7 @@ console.log("Today's Date", datetimetoday);
 // console.log(count_tt);
 let output = [];
 let weekName = ["Sun", "Sat", "Fri", "Thu", "Wed", "Tue", "Mon"];
-console.log(weekName.length);
+// console.log(weekName.length);
 for (let i = 0; i < weekName.length; i++) {
   let count = 0;
   for (let j = 0; j < arr_dname.length; j++) {
@@ -97,6 +97,30 @@ fs.writeFile(
   }
 );
 
+weekNumData = chart_data.fourweeklistcount;
+let output2 = [];
+let weekNum = ["Week 1", "Week 2", "Week 3", "Week 4"];
+console.log(weekNum.length);
+for (let i = 0; i < weekNum.length; i++) {
+  tmp = { name: weekNum[i], nooftweets: weekNumData[i] };
+  output2.push(tmp);
+}
+console.log(output2);
+
+const json_wnamecount = JSON.stringify(output2);
+fs.writeFile(
+  "../../Data/json_wnamecount.json",
+  json_wnamecount,
+  "utf8",
+  function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log("The file was saved!");
+  }
+);
+
 /////
 ///
+//
 //

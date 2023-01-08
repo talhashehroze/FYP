@@ -12,10 +12,10 @@ import pandas as pd
 import snscrape.modules.twitter as sntwitter
 
 day_of_year = datetime.datetime.now().timetuple().tm_yday
-print(day_of_year)
+# print(day_of_year)
 
 week_of_year = datetime.datetime.now().isocalendar().week
-print(week_of_year)
+# print(week_of_year)
 
 # data_to_send_back = 'Sending Backward This String.'
 
@@ -30,20 +30,21 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
     user_tweets_list = []
     list1 = []
     scrapper = sntwitter.TwitterProfileScraper(username)
-    print(scrapper.is_valid_username(username)) # Username Validity T/F
+    # print(scrapper.is_valid_username(username)) # Username Validity T/F
     try:
         user = scrapper.entity
 
         def human_format(num):
-            magnitude = 0
-            while abs(num) >= 1000:
-                magnitude += 1
-                num /= 1000.0
-            # add more suffixes if you need them
-            return '%.2f%s' % (num, ['', 'K', 'M', 'G', 'T', 'P'][magnitude])
+            if(num):
+                magnitude = 0
+                while abs(num) >= 1000:
+                    magnitude += 1
+                    num /= 1000.0
+                # add more suffixes if you need them
+                return '%.2f%s' % (num, ['', 'K', 'M', 'G', 'T', 'P'][magnitude])
 
         user.followersCount= human_format(user.followersCount)
-        # user.friendsCount= human_format(user.friendsCount)
+        user.friendsCount= human_format(user.friendsCount)
 
         
         list1.append([user.username, user.id, user.displayname,
@@ -75,12 +76,14 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
                 print('month end')
                 break
         
-        print(tweet.date.day)
+        # print(tweet.date.day)
 
         today = datetime.datetime.today()
         days7ago = datetime.datetime.today() - datetime.timedelta(days=7)
-        print(days7ago)
+        # print(days7ago)
         
+        #################################################################################
+        #################################################################################
         if (justOneWeek == True):            
             if ():
                 print('week end')
@@ -109,11 +112,14 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
     user_tweets_df['MonthDay'] = user_tweets_df['DateTime'].dt.day
 
     user_tweets_df['DayName'] = user_tweets_df['DateTime'].dt.day_name()
+    
     user_tweets_df['InteractionRating'] = (user_tweets_df['LikeCount'])+(
         user_tweets_df['RetweetCount']*2)+(user_tweets_df['ReplyCount']*3)
 
     user_tweets_df['Week'] = user_tweets_df['DateTime'].dt.day_of_year/7
+    
     user_tweets_df['Week'] = user_tweets_df['Week'].apply(np.ceil)
+    
     user_tweets_df['Week'] = user_tweets_df['Week'].astype(int)
 
     user_tweets_df['Date'] = [d.date() for d in user_tweets_df['DateTime']]
@@ -143,7 +149,7 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
     # print(user_tweets_df['DaysSince'])
 
     user_tweets_df['DaysSince']=user_tweets_df['DaysSince'].map(lambda x: x.days)
-    print(user_tweets_df['DaysSince'])
+    # print(user_tweets_df['DaysSince'])
 
     user_tweets_df['WeeksSince']=(user_tweets_df['DaysSince']/7)
     user_tweets_df['WeeksSince'] = user_tweets_df['WeeksSince'].apply(np.ceil)
@@ -159,19 +165,23 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
     
     week = unqweeklist[0]
     
-    for i in range(4):               
+    for i in range(4):
         vvr = user_tweets_df[user_tweets_df['WeeksSince']==week]
         fourweeklistcount.append(len(vvr))
         week = week-1
-    # print(fourweeklistcount)
+    print(fourweeklistcount)
+
+    # weekcountdic = dict(weekse[1]=fourweeklistcount[1])    
 
     scrapper = sntwitter.TwitterProfileScraper(username)
 
     SourceList = user_tweets_df['Source'].unique().tolist()
 
     user_df['sources'] = [SourceList]
+    
     userDict = user_df.to_dict('records')[0]
-    user_tweets_df1=user_tweets_df[['DayName','Month','Week','MonthName','Year']]
+    
+    # user_tweets_df1=user_tweets_df[['DayName','Month','Week','MonthName','Year']]
     # userTWDict = user_tweets_df1.to_dict('records')
     LastYearDict = mostInteractedLastYear.to_dict('records')[0]
     LastWeekDict = mostInteractedLastWeek.to_dict('records')[0]
@@ -187,7 +197,7 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
 
 
 # first T/F for year, second T/F for month, third T/F for week.
-dict = profileAnalyis('ctalhaahmad', False, False, False) # pass data here map keyword here 
+dict = profileAnalyis('ctalhaahmad', True, False, False) # pass data here map keyword here.
 
 pp = pprint.PrettyPrinter(depth=6)
 
