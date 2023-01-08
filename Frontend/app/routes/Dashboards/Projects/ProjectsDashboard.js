@@ -33,11 +33,22 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
+import { useHistory } from "react-router-dom";
 
 const ProjectsDashboard = () => {
-
+  let history = useHistory();
+ 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [value, setValue] = useState("Select operation");
+  const [Keyword, setkeyword] = useState('')
+  const handleKeywordChange = event => {
+    setkeyword(event.target.value);
+
+    console.log('value is:', event.target.value);
+  };
+  function handleClick() {
+    history.replace("/profileanalysis/profileanalysis");
+  }
   const handleSelect = (e) => {
     console.log(value);
 
@@ -73,7 +84,11 @@ const ProjectsDashboard = () => {
 
               <Row className="mt-3">
                 <Col sm={8} md={8}>
-                  <Input placeholder="Enter  Keyword..." />
+                  <Input  type="text"
+                      id="Keyword"
+                      name="Keyword"
+                      onChange={handleKeywordChange}
+        value={Keyword} placeholder="Enter  Keyword..." />
                 </Col>
 
                 <Col sm={4} md={4}>
@@ -113,8 +128,11 @@ const ProjectsDashboard = () => {
               <Row className="mt-0">
                 <Col sm={5} md={5} className="pl-20" color="yellow"></Col>
                 <Col sm={7} md={7} className="pl-20" color="yellow">
-                     <Button style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } to="/profileanalysis/profileanalysis">
+                     {/* <Button style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } to="/profileanalysis/profileanalysis">
                                  Search
+                  </Button> */}
+                <Button onClick={handleClick} style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } >
+                      Search
                   </Button>
                 </Col>
               </Row>

@@ -42,7 +42,7 @@ export const TrendQuality = () => (
             title="Trend Name"
             // badgeTitle="Monthly"
             // badgeColor="primary"
-            value="6.200"
+            value="world cup"
             // valueTitle="vs 4.891 prev."
             // footerTitle="Prev"
             // footerTitleClassName="text-success"
@@ -55,62 +55,26 @@ export const TrendQuality = () => (
       {/* START Card Widget */}
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Trend Country" value="75.938" />
+          <ProfileOverviewCard title="Trend Country" value="Pakistan" />
         </CardBody>
       </Card>
       {/* START Card Widget */}
       {/* START Card Widget */}
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Trend Start date" value="456" />
+          <ProfileOverviewCard title="Trend Start date" value="5 Dec" />
         </CardBody>
       </Card>
       {/* START Card Widget */}
       {/* START Card Widget */}
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Analyze Tweets" value="91" />
+          <ProfileOverviewCard title="Analyze Tweets" value="150" />
         </CardBody>
       </Card>
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Total Tweets" value="6.200" />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-    </CardDeck>
-
-    <CardDeck>
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard title="Total Participant" value="6.200" />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard title="Real Account" value="75.938" />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard title="Bot Account" value="456" />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard title="Text Based Tweets" value="456" />
-        </CardBody>
-      </Card>
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard title="Image/Link Tweets" value="91" />
+          <ProfileOverviewCard title="Total Tweets" value="6200" />
         </CardBody>
       </Card>
       {/* START Card Widget */}
@@ -120,21 +84,57 @@ export const TrendQuality = () => (
       {/* START Card Widget */}
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Unique Tweet" value="6.200" />
+          <ProfileOverviewCard title="Total Participant" value="1020" />
         </CardBody>
       </Card>
       {/* START Card Widget */}
       {/* START Card Widget */}
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Tweet By Real Acc" value="75.938" />
+          <ProfileOverviewCard title="Real Account" value="900" />
         </CardBody>
       </Card>
       {/* START Card Widget */}
       {/* START Card Widget */}
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Tweet by Bot Account" value="456" />
+          <ProfileOverviewCard title="Bot Account" value="120" />
+        </CardBody>
+      </Card>
+      {/* START Card Widget */}
+      {/* START Card Widget */}
+      <Card className="mb-3">
+        <CardBody>
+          <ProfileOverviewCard title="Text Based Tweets" value="3000" />
+        </CardBody>
+      </Card>
+      <Card className="mb-3">
+        <CardBody>
+          <ProfileOverviewCard title="Image/Link Tweets" value="3200" />
+        </CardBody>
+      </Card>
+      {/* START Card Widget */}
+    </CardDeck>
+
+    <CardDeck>
+      {/* START Card Widget */}
+      <Card className="mb-3">
+        <CardBody>
+          <ProfileOverviewCard title="Unique Tweet" value="120" />
+        </CardBody>
+      </Card>
+      {/* START Card Widget */}
+      {/* START Card Widget */}
+      <Card className="mb-3">
+        <CardBody>
+          <ProfileOverviewCard title="Tweet By Real Acc" value="2000" />
+        </CardBody>
+      </Card>
+      {/* START Card Widget */}
+      {/* START Card Widget */}
+      <Card className="mb-3">
+        <CardBody>
+          <ProfileOverviewCard title="Tweet by Bot Account" value="4200" />
         </CardBody>
       </Card>
       {/* START Card Widget */}

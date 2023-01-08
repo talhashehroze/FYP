@@ -30,7 +30,7 @@ export const BotAccountRecognition = () => (
             title="User Name"
             // badgeTitle="Monthly"
             // badgeColor="primary"
-            value="6.200"
+            value="Elon "
             // valueTitle="vs 4.891 prev."
             // footerTitle="Prev"
             // footerTitleClassName="text-success"
@@ -42,13 +42,13 @@ export const BotAccountRecognition = () => (
 
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Verification Status" value="75.938" />
+          <ProfileOverviewCard title="Verification Status" value="True" />
         </CardBody>
       </Card>
 
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Age of Account" value="456" />
+          <ProfileOverviewCard title="Age of Account" value="4 years" />
         </CardBody>
       </Card>
 
@@ -59,7 +59,7 @@ export const BotAccountRecognition = () => (
       </Card>
       <Card className="mb-3">
         <CardBody>
-          <ProfileOverviewCard title="Account Status" value="6.200" />
+          <ProfileOverviewCard title="Account Status" value="Real" />
         </CardBody>
       </Card>
     </CardDeck>

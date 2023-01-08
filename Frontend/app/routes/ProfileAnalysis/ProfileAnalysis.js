@@ -16,6 +16,7 @@ import {
   Button,
   CardBody,
   CardFooter,
+  CardTitle,
   CardGroup,
   Table,
   TabPane,
@@ -28,39 +29,49 @@ import {
 import { HeaderMain } from "../components/HeaderMain";
 import { Profile } from "../components/Profile";
 import { ProfileOverviewCard } from "../components/Profile/ProfileOverviewCard";
-import { DlRowContacts } from "../components/Profile/DlRowContacts";
-import { DlRowAddress } from "../components/Profile/DlRowAddress";
-import { ChatLeft } from "../components/Chat/ChatLeft";
-import { ChatRight } from "../components/Chat/ChatRight";
-import { ChatCardFooter } from "../components/Chat/ChatCardFooter";
-import { TrTableMessages } from "../Apps/ProfileDetails/components/TrTableMessages";
-import { TimelineDefault } from "../components/Timeline/TimelineDefault";
+
 import { PieChartWithCustomizedLabel } from "../Graphs/ReCharts/components/PieChartWithCustomizedLabel";
 import { SimpleAreaChart } from "../Graphs/ReCharts/components/SimpleAreaChart";
 import { Progress } from "../../components";
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import { useHistory } from "react-router-dom";
+import { TrTableRecentFundings } from "../components/Financial/TrTableRecentFundings";
 const ProfileAnalysis = () => {
-const [data,setdata]=useState('')
+
+   let history = useHistory();
+  function handleClick() {
+    history.replace("/dashboards/projects");
+  }
+
+const [Twitterdata,setdata]=useState('')
   useEffect(() => {
     
    axios
       .get("http://localhost:3001/user/get-user")
       .then(function (response) {
         // handle success
+        let abc  =  setdata(response.data);
+
         setdata(response.data)
-        console.log('work ',data.username);
+        console.log('first',Twitterdata.mostInteractedLastWeek.Text)
+
       })
       .catch(function (error) {
         // handle error
         console.log(error);
       })
-      .finally(function () {
+      .finally(function (response) {
         // always executed
+        setdata(response.data)
+
       });
-    
-},[]);
+
+  }, []);
+          console.log('second',Twitterdata.mostInteractedLastWeek)
+
+                console.log('worknnnnnnnnnnnnnn ',Twitterdata.mostInteractedLastWeek);
+
   return(
   <React.Fragment>
     <Container>
@@ -70,15 +81,15 @@ const [data,setdata]=useState('')
         <Col lg={4}>
           <Card>
             <CardBody>
-                <Profile data={data} />
+                <Profile data={Twitterdata} />
               <div className="text-center pb-1">
                 <ul className="list-inline">
                   <li className="list-inline-item text-center">
-                    <h2 className="mb-1">{data.friendsCount}</h2>
+                    <h2 className="mb-1">{Twitterdata.friendsCount}</h2>
                     <span>Following</span>
                   </li>
                   <li className="list-inline-item text-center">
-                    <h2 className="mb-1">{data.followersCount}</h2>
+                    <h2 className="mb-1">{Twitterdata.followersCount}</h2>
                     <span>Follower</span>
                   </li>
                 </ul>
@@ -99,7 +110,7 @@ const [data,setdata]=useState('')
                 <span className="small">Description</span>
               </div>
                 <p className="text-left">
-                  {data.renderedDescription}
+                  {Twitterdata.renderedDescription}
                 </p>
             </CardBody>
           </Card>
@@ -121,7 +132,7 @@ const [data,setdata]=useState('')
             </CardBody>
           </Card>
 
-          <Card className="mt-3">
+          {/* <Card className="mt-3">
             <CardBody>
               <div className="mb-4">
                 <div>
@@ -151,7 +162,7 @@ const [data,setdata]=useState('')
                 </div>
               </div>
             </CardBody>
-          </Card>
+          </Card> */}
         </Col>
         <Col lg={8}>
           <UncontrolledTabs initialActiveTabId="overview">
@@ -162,13 +173,13 @@ const [data,setdata]=useState('')
               <TabPane tabId="overview">
                 <CardGroup className="mb-5">
                   <Card body>
-                    <ProfileOverviewCard title="Total Tweets/Retweets" value={data.statusesCount} />
+                    <ProfileOverviewCard title="Total Tweets/Retweets" value={Twitterdata.statusesCount} />
                   </Card>
                   <Card body>
-                    <ProfileOverviewCard title="Tweets Liked made" value={data.favouritesCount} />
+                    <ProfileOverviewCard title="Tweets Liked made" value={Twitterdata.favouritesCount} />
                   </Card>
                   <Card body>
-                    <ProfileOverviewCard title="Verification Status" value={data.verified} />
+                    <ProfileOverviewCard title="Verification Status" value={Twitterdata.verified} />
                   </Card>
                 </CardGroup>
 
@@ -188,7 +199,10 @@ const [data,setdata]=useState('')
                 <Card className="mb-3">
                   <CardBody>
                     <div className="d-flex">
-                      <div>
+                        <div>
+                  <Button onClick={handleClick} style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link }>
+                                 return back
+                  </Button>
                         <h6 className="card-title mb-1">
                           Tweets in Last 30 Days
                         </h6>
@@ -202,7 +216,39 @@ const [data,setdata]=useState('')
             </UncontrolledTabs.TabContent>
           </UncontrolledTabs>
         </Col>
-      </Row>
+        </Row>
+        <Row>
+          <Col lg={6}>
+<Card className="mb-3">
+          <CardBody>
+            <CardTitle className="mb-1 d-flex">
+              <h6>Most Interacted Tweet of Last Week</h6>
+              
+            </CardTitle>
+          </CardBody>
+          <Table responsive striped className="mb-0">
+            <tbody>
+              <TrTableRecentFundings data={Twitterdata.mostInteractedLastWeek} />
+            </tbody>
+          </Table>
+        </Card>
+          </Col>
+          <Col lg={6}>
+            <Card className="mb-3">
+          <CardBody>
+            <CardTitle className="mb-1 d-flex">
+              <h6>Most Liked Tweets</h6>
+              
+            </CardTitle>
+          </CardBody>
+          <Table responsive striped className="mb-0">
+            <tbody>
+              <TrTableRecentFundings data={Twitterdata.mostInteractedLastWeek} />
+            </tbody>
+          </Table>
+        </Card>
+          </Col>
+        </Row>
       {/* END Content */}
     </Container>
     </React.Fragment>
