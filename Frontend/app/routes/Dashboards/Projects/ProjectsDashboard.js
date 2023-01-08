@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 import { Link } from "react-router-dom";
@@ -39,20 +39,18 @@ const ProjectsDashboard = () => {
   let history = useHistory();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [value, setValue] = useState("Select operation");
-  const [Keyword, setkeyword] = useState('')
-  const handleKeywordChange = event => {
+  const [Keyword, setkeyword] = useState("");
+  const handleKeywordChange = (event) => {
     setkeyword(event.target.value);
 
-    console.log('value is:', event.target.value);
+    console.log("value is:", event.target.value);
   };
   function handleClick() {
     history.replace("/profileanalysis/profileanalysis");
   }
   const handleSelect = (e) => {
     console.log(value);
-
   };
-     
 
   const onsubmit = (e) => {
     axios
@@ -79,19 +77,21 @@ const ProjectsDashboard = () => {
           <Card className="mb-3">
             <CardBody>
               <CardTitle tag="h6" className="mb-3">
-                <p style={{ fontSize: 20, fontWeight: 'bold' }}>
+                <p style={{ fontSize: 20, fontWeight: "bold" }}>
                   Enter Keyword to Perform Operation
-                     </p>
-
+                </p>
               </CardTitle>
 
               <Row className="mt-3">
                 <Col sm={8} md={8}>
-                  <Input  type="text"
-                      id="Keyword"
-                      name="Keyword"
-                      onChange={handleKeywordChange}
-        value={Keyword} placeholder="Enter  Keyword..." />
+                  <Input
+                    type="text"
+                    id="Keyword"
+                    name="Keyword"
+                    onChange={handleKeywordChange}
+                    value={Keyword}
+                    placeholder="Enter  Keyword..."
+                  />
                 </Col>
 
                 <Col sm={4} md={4}>
@@ -125,26 +125,30 @@ const ProjectsDashboard = () => {
                       </DropdownItem>
                     </DropdownMenu>
                   </Dropdown>
-                  
                 </Col>
               </Row>
               <Row className="mt-0">
                 <Col sm={5} md={5} className="pl-20" color="yellow"></Col>
                 <Col sm={7} md={7} className="pl-20" color="yellow">
-                     {/* <Button style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } to="/profileanalysis/profileanalysis">
+                  {/* <Button style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } to="/profileanalysis/profileanalysis">
                                  Search
                   </Button> */}
-                <Button onClick={handleClick} style={{ backgroundColor: "#006A6D", height: 40, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } >
-                      Search
+                  <Button
+                    onClick={handleClick}
+                    style={{
+                      backgroundColor: "#006A6D",
+                      height: 40,
+                      width: 100,
+                      marginTop: 20,
+                    }}
+                    class="btn btn-primary"
+                    type="button"
+                    tag={Link}
+                  >
+                    Search
                   </Button>
-                  
-                
-
                 </Col>
               </Row>
-
-          
-                          
 
               {/* </InputGroup> */}
             </CardBody>
@@ -157,13 +161,16 @@ const ProjectsDashboard = () => {
           <Card className="mb-3">
             <CardBody>
               <CardTitle tag="h6" className="mb-0">
-               <p style={{fontSize:20,fontWeight:'bold'}}> Trending Keywords on Twitter </p>
+                <p style={{ fontSize: 20, fontWeight: "bold" }}>
+                  {" "}
+                  Trending Keywords on Twitter{" "}
+                </p>
               </CardTitle>
             </CardBody>
             <Col lg={12}>
               <ListGroup flush>
                 <ListGroupItem action>
-                  <TasksMedia  />
+                  <TasksMedia />
                 </ListGroupItem>
                 <ListGroupItem action>
                   <TasksMedia iconColor="danger" id="2" />
@@ -174,7 +181,6 @@ const ProjectsDashboard = () => {
                 <ListGroupItem action>
                   <TasksMedia id="4" />
                 </ListGroupItem>
-               
               </ListGroup>
             </Col>
           </Card>
@@ -201,7 +207,7 @@ const ProjectsDashboard = () => {
                   onClick={onsubmit}
                   to="/dashboards/analytics"
                 >
-                  Search yar
+                  Search here
                 </button>
               </div>
 

@@ -4,10 +4,8 @@ const data = require("../../Data/jsonobj.json");
 const chart_data = data;
 var count_tt = Object.keys(chart_data.TweetTimeline).length;
 
-var count1_6 = 0;
-var count7_12 = 0;
-var count13_18 = 0;
-var count19_00 = 0;
+const counthr = [0, 0, 0, 0];
+// 0-6,7-12,13-18,19-24
 
 var arr_dt = [];
 
@@ -45,23 +43,49 @@ for (let i = 0; i < count_tt; i++) {
   var abc = s.split(" ")[1];
   var xyz = abc.split("+")[0];
   var nvm = xyz.split(":")[0];
-  if (nvm)
-    // const d = new Date(s); // convert the string to datetime
-    // var hrName = d.toString(); //.split(",").pop()[0];
-    // var now = d.toLocaleDateString();
-    // arr_t.push(now); // adds that into an array
-    arr_thour.push(xyz); // adds that into an array
+
+  if (nvm >= 0 && nvm < 6) counthr[0]++;
+  else if (nvm >= 6 && nvm < 12) counthr[1]++;
+  else if (nvm >= 12 && nvm < 18) counthr[2]++;
+  else if (nvm >= 18 && nvm <= 23) counthr[3]++;
+
+  // const d = new Date(s); // convert the string to datetime
+  // var hrName = d.toString(); //.split(",").pop()[0];
+  // var now = d.toLocaleDateString();
+  // arr_t.push(now); // adds that into an array
+  arr_thour.push(xyz); // adds that into an array
   arr_thour2.push(nvm); // adds that into an array
 }
 for (let i = 0; i < arr_thour.length; i++) {
   // console.log(arr_thour[i]);
 }
-
+console.log(counthr);
 for (let i = 0; i < arr_thour2.length; i++) {
   // console.log(arr_thour2[i]);
 }
 
+let output3 = [];
+let hoursc = ["Hour 0-5", "Hour 6-11", "Hour 12-17", "Hour 18-23"];
+// console.log(weekNum.length);
+for (let i = 0; i < hoursc.length; i++) {
+  tmp = { name: hoursc[i], value: counthr[i] };
+  output3.push(tmp);
+}
+
 const fs = require("fs");
+
+const json_hcount = JSON.stringify(output3);
+fs.writeFile(
+  "../../Data/json_hcount.json",
+  json_hcount,
+  "utf8",
+  function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    // console.log("The file was saved!");
+  }
+);
 
 const json_hname = JSON.stringify(arr_thour);
 fs.writeFile("../../Data/json_hname.json", json_hname, "utf8", function (err) {

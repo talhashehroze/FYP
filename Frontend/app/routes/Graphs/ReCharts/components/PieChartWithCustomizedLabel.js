@@ -16,22 +16,23 @@ const data = [
   { name: "Group D", value: 200 },
 ];
 const COLORS = [
-  colors["primary"],
-  colors["purple"],
+  colors["red"],
+  colors["indigo"],
   colors["success"],
   colors["yellow"],
 ];
 
-export const PieChartWithCustomizedLabel = () => (
+export const PieChartWithCustomizedLabel = (props) => (
   <ResponsiveContainer width="100%" aspect={6.0 / 3.0}>
     <PieChart>
       <Pie
-        data={data}
+        data={props.data}
         dataKey="value"
         stroke={colors["white"]}
+        // fontSize={40}
         labelLine={false}
         label={<PieValueLabel />}
-        outerRadius={80}
+        outerRadius={140}
         fill="#8884d8"
       >
         {data.map((entry, index) => (

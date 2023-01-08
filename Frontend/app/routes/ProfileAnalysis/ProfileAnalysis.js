@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const tweetdaydatacount = require("../../../../Backend/Data/json_dnamecount.json");
 const tweetweekdatacount = require("../../../../Backend/Data/json_wnamecount.json");
-
+const hourtweetdatacount = require("../../../../Backend/Data/json_hcount.json");
 import {
   Container,
   Row,
@@ -46,31 +46,28 @@ const ProfileAnalysis = () => {
     history.replace("/dashboards/projects");
   }
   const fun = () => {
-   
-      console.log('i reached here')
-      axios
-        .get("http://localhost:3001/user/get-user")
-        .then(function (response) {
-          // handle success
-          let abc = setdata(response.data);
+    console.log("i reached here");
+    axios
+      .get("http://localhost:3001/user/get-user")
+      .then(function (response) {
+        // handle success
+        let abc = setdata(response.data);
 
-          setdata(response.data);
-          console.log("first", Twitterdata.mostInteractedLastWeek.Text);
-        })
-        .catch(function (error) {
-          // handle error
-          console.log(error);
-        })
-        .finally(function (response) {
-          // always executed
-          setdata(response.data);
-        });
-    
-  }
-   useEffect(() => {
-     setTimeout(() => {
-       fun()
-      
+        setdata(response.data);
+        console.log("first", Twitterdata.mostInteractedLastWeek.Text);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(function (response) {
+        // always executed
+        setdata(response.data);
+      });
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      fun();
     }, 5000);
   }, []);
   const [Twitterdata, setdata] = useState("");
@@ -94,7 +91,6 @@ const ProfileAnalysis = () => {
   //     });
   // }, []);
 
-  
   console.log("second", Twitterdata.mostInteractedLastWeek);
 
   console.log("worknnnnnnnnnnnnnn ", Twitterdata.mostInteractedLastWeek);
@@ -121,7 +117,7 @@ const ProfileAnalysis = () => {
                     </li>
                   </ul>
                 </div>
-              
+
                 <div className="mt-4 mb-2">
                   <span className="small">Description</span>
                 </div>
@@ -130,35 +126,34 @@ const ProfileAnalysis = () => {
             </Card>
 
             <CardGroup className="mb-5 mt-3">
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Total Tweets/Retweets"
-                        value={Twitterdata.statusesCount}
-                      />
-                    </Card>
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Tweets Liked made"
-                        value={Twitterdata.favouritesCount}
-                      />
-                    </Card>
-                  
-                  </CardGroup>
- <CardGroup className="mb-5 mt-3">
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Total Tweets/Retweets"
-                        value={Twitterdata.statusesCount}
-                      />
-                    </Card>
-                   
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Verification Status"
-                        value={Twitterdata.verified}
-                      />
-                    </Card>
-                  </CardGroup>
+              <Card body>
+                <ProfileOverviewCard
+                  title="Total Tweets"
+                  value={Twitterdata.statusesCount}
+                />
+              </Card>
+              <Card body>
+                <ProfileOverviewCard
+                  title="Tweets Liked made"
+                  value={Twitterdata.favouritesCount}
+                />
+              </Card>
+            </CardGroup>
+            <CardGroup className="mb-5 mt-3">
+              <Card body>
+                <ProfileOverviewCard
+                  title="Total Tweets"
+                  value={Twitterdata.statusesCount}
+                />
+              </Card>
+
+              <Card body>
+                <ProfileOverviewCard
+                  title="Verification Status"
+                  value={Twitterdata.verified}
+                />
+              </Card>
+            </CardGroup>
 
             {/* <Card className="mt-3">
             <CardBody>
@@ -193,19 +188,22 @@ const ProfileAnalysis = () => {
           </Card> */}
           </Col>
           <Col lg={8}>
-             <Card className="mt-0">
+            <Card className="mt-0">
               <CardBody>
                 <div className="d-flex">
                   <div>
                     <h6 className="card-title mb-1">
-                     At which Hours User mostly Tweet
+                      At which Hours User mostly Tweet
                     </h6>
-                   
                   </div>
                 </div>
                 <div className="pt-3 mb-3">
-                  <PieChartWithCustomizedLabel />
+                  <PieChartWithCustomizedLabel data={hourtweetdatacount} />
                 </div>
+                <h6 className="card-title mb-1">
+                  Red:- 00:00-05:59 Indigo:- 06:00-11:59 Green:- 12:00-17:59
+                  Yellow:- 18:00-23:59
+                </h6>
               </CardBody>
             </Card>
 
@@ -215,7 +213,6 @@ const ProfileAnalysis = () => {
               {/* END Pills Nav */}
               <UncontrolledTabs.TabContent>
                 <TabPane tabId="overview">
-                  
                   <Card className="mb-3 mt-3">
                     <CardBody>
                       <div className="d-flex">
@@ -233,11 +230,9 @@ const ProfileAnalysis = () => {
                     <CardBody>
                       <div className="d-flex">
                         <div>
-                         
                           <h6 className="card-title mb-1">
                             Tweets in Last 30 Days
                           </h6>
-                        
                         </div>
                       </div>
                       <SimpleAreaChart data={tweetweekdatacount} />

@@ -22,7 +22,7 @@ import colors from "./../../../../colors";
 //   { name: "Sunday", nooftweets: 0, pv: 4300, amt: 2100 },
 // ];
 
-const tweetdaydatacount = require("../../../../../../Backend/Data/json_dnamecount.json");
+// const tweetdaydatacount = require("../../../../../../Backend/Data/json_dnamecount.json");
 
 // const chart_data = tweetdaydatacount;
 // var count_tt = Object.keys(chart_data).length;
