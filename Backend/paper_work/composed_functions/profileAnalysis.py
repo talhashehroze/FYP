@@ -169,7 +169,7 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
         vvr = user_tweets_df[user_tweets_df['WeeksSince']==week]
         fourweeklistcount.append(len(vvr))
         week = week-1
-    print(fourweeklistcount)
+    # print(fourweeklistcount)
 
     # weekcountdic = dict(weekse[1]=fourweeklistcount[1])    
 
@@ -197,7 +197,7 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
 
 
 # first T/F for year, second T/F for month, third T/F for week.
-dict = profileAnalyis('ctalhaahmad', True, False, False) # pass data here map keyword here.
+dict = profileAnalyis('elonmusk', True, False, False) # pass data here map keyword here.
 
 pp = pprint.PrettyPrinter(depth=6)
 
