@@ -1,3 +1,4 @@
+const axios = require("axios");
 // const bcrypt = require("bcryptjs");
 // const userService = require("../Services/userService");
 // const auth = require("../Middlewares/auth");
@@ -65,10 +66,17 @@
 //   });
 // };
 
-const user_analysis_data = require("../Data/jsonobj.json");
+// let user_analysis_data = require("../Data/jsonobj.json");
 const getUser = async (req, res) => {
-  // const userId = req.user.id;
-  return res.status(200).send(user_analysis_data);
+  weekLimit = false;
+  monthLimit = false;
+  monthLimit = false;
+
+  let data = await axios.get(`http://localhost:5000`, {
+    params: req.query,
+  });
+
+  return res.status(200).send(data.data);
 };
 
 module.exports = {
