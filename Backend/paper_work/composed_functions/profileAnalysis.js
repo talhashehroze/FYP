@@ -27,18 +27,63 @@ for (let i = 0; i < count_tt; i++) {
   arr_d.push(now); // adds that into an array
   arr_dname.push(dayName); // adds that into an array
 }
-for (let i = 0; i < arr_dt.length; i++) {
+for (let i = 0; i < arr_d.length; i++) {
   // console.log(arr_d[i]);
 }
 
+var arr_t = [];
+var arr_thour = [];
+var arr_thour2 = [];
+
+for (let i = 0; i < count_tt; i++) {
+  const s = chart_data.TweetTimeline[i]; // reads string
+  var abc = s.split(" ")[1];
+  var xyz = abc.split("+")[0];
+  var nvm = xyz.split(":")[0];
+  // const d = new Date(s); // convert the string to datetime
+  // var hrName = d.toString(); //.split(",").pop()[0];
+  // var now = d.toLocaleDateString();
+  // arr_t.push(now); // adds that into an array
+  arr_thour.push(xyz); // adds that into an array
+  arr_thour2.push(nvm); // adds that into an array
+}
+for (let i = 0; i < arr_thour.length; i++) {
+  // console.log(arr_thour[i]);
+}
+
+for (let i = 0; i < arr_thour2.length; i++) {
+  // console.log(arr_thour2[i]);
+}
+
 const fs = require("fs");
+
+const json_hname = JSON.stringify(arr_thour);
+fs.writeFile("../../Data/json_hname.json", json_hname, "utf8", function (err) {
+  if (err) {
+    return console.log(err);
+  }
+  // console.log("The file was saved!");
+});
+
+const json_hname2 = JSON.stringify(arr_thour2);
+fs.writeFile(
+  "../../Data/json_hname2.json",
+  json_hname2,
+  "utf8",
+  function (err) {
+    if (err) {
+      return console.log(err);
+    }
+    // console.log("The file was saved!");
+  }
+);
 
 const json_dt = JSON.stringify(arr_dt);
 fs.writeFile("../../Data/json_dt.json", json_dt, "utf8", function (err) {
   if (err) {
     return console.log(err);
   }
-  console.log("The file was saved!");
+  // console.log("The file was saved!");
 });
 
 const json_d = JSON.stringify(arr_d);
@@ -46,7 +91,7 @@ fs.writeFile("../../Data/json_d.json", json_d, "utf8", function (err) {
   if (err) {
     return console.log(err);
   }
-  console.log("The file was saved!");
+  // console.log("The file was saved!");
 });
 
 const json_dname = JSON.stringify(arr_dname);
@@ -54,7 +99,7 @@ fs.writeFile("../../Data/json_dname.json", json_dname, "utf8", function (err) {
   if (err) {
     return console.log(err);
   }
-  console.log("The file was saved!");
+  // console.log("The file was saved!");
 });
 
 var datetimetoday = new Date().toLocaleDateString();
@@ -82,7 +127,7 @@ for (let i = 0; i < weekName.length; i++) {
   tmp = { name: weekName[i], nooftweets: count };
   output.push(tmp);
 }
-console.log(output);
+// console.log(output);
 
 const json_dnamecount = JSON.stringify(output);
 fs.writeFile(
@@ -93,19 +138,19 @@ fs.writeFile(
     if (err) {
       return console.log(err);
     }
-    console.log("The file was saved!");
+    // console.log("The file was saved!");
   }
 );
 
 weekNumData = chart_data.fourweeklistcount;
 let output2 = [];
 let weekNum = ["Week 1", "Week 2", "Week 3", "Week 4"];
-console.log(weekNum.length);
+// console.log(weekNum.length);
 for (let i = 0; i < weekNum.length; i++) {
   tmp = { name: weekNum[i], nooftweets: weekNumData[i] };
   output2.push(tmp);
 }
-console.log(output2);
+// console.log(output2);
 
 const json_wnamecount = JSON.stringify(output2);
 fs.writeFile(
@@ -116,7 +161,7 @@ fs.writeFile(
     if (err) {
       return console.log(err);
     }
-    console.log("The file was saved!");
+    // console.log("The file was saved!");
   }
 );
 
