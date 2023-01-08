@@ -3,10 +3,10 @@ const data = require("../../Data/jsonobj.json");
 
 const chart_data = data;
 var count_tt = Object.keys(chart_data.TweetTimeline).length;
-
+// console.log(count_tt);
 const counthr = [0, 0, 0, 0];
 // 0-6,7-12,13-18,19-24
-
+var del_length = count_tt;
 var arr_dt = [];
 
 for (let i = 0; i < count_tt; i++) {
@@ -15,9 +15,9 @@ for (let i = 0; i < count_tt; i++) {
   var now = d.toLocaleString();
   arr_dt.push(now); // adds that into an array
 }
-for (let i = 0; i < arr_dt.length; i++) {
-  // console.log(arr_dt[i]);
-}
+// for (let i = 0; i < arr_dt.length; i++) {
+//   // console.log(arr_dt[i]);
+// }
 
 var arr_d = [];
 var arr_dname = [];
@@ -30,10 +30,10 @@ for (let i = 0; i < count_tt; i++) {
   arr_d.push(now); // adds that into an array
   arr_dname.push(dayName); // adds that into an array
 }
-for (let i = 0; i < arr_d.length; i++) {
-  // console.log(arr_d[i]);
-}
-
+// for (let i = 0; i < arr_d.length; i++) {
+//   // console.log(arr_d[i]);
+// }
+// console.log(arr_dname);
 var arr_t = [];
 var arr_thour = [];
 var arr_thour2 = [];
@@ -56,13 +56,13 @@ for (let i = 0; i < count_tt; i++) {
   arr_thour.push(xyz); // adds that into an array
   arr_thour2.push(nvm); // adds that into an array
 }
-for (let i = 0; i < arr_thour.length; i++) {
-  // console.log(arr_thour[i]);
-}
-console.log(counthr);
-for (let i = 0; i < arr_thour2.length; i++) {
-  // console.log(arr_thour2[i]);
-}
+// for (let i = 0; i < arr_thour.length; i++) {
+//   // console.log(arr_thour[i]);
+// }
+// // console.log(counthr);
+// for (let i = 0; i < arr_thour2.length; i++) {
+//   // console.log(arr_thour2[i]);
+// }
 
 let output3 = [];
 let hoursc = ["Hour 0-5", "Hour 6-11", "Hour 12-17", "Hour 18-23"];
@@ -72,65 +72,65 @@ for (let i = 0; i < hoursc.length; i++) {
   output3.push(tmp);
 }
 
-const fs = require("fs");
+// const fs = require("fs");
 
-const json_hcount = JSON.stringify(output3);
-fs.writeFile(
-  "../../Data/json_hcount.json",
-  json_hcount,
-  "utf8",
-  function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    // console.log("The file was saved!");
-  }
-);
+// const json_hcount = JSON.stringify(output3);
+// fs.writeFile(
+//   "../../Data/json_hcount.json",
+//   json_hcount,
+//   "utf8",
+//   function (err) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     // console.log("The file was saved!");
+//   }
+// );
 
-const json_hname = JSON.stringify(arr_thour);
-fs.writeFile("../../Data/json_hname.json", json_hname, "utf8", function (err) {
-  if (err) {
-    return console.log(err);
-  }
-  // console.log("The file was saved!");
-});
+// const json_hname = JSON.stringify(arr_thour);
+// fs.writeFile("../../Data/json_hname.json", json_hname, "utf8", function (err) {
+//   if (err) {
+//     return console.log(err);
+//   }
+//   // console.log("The file was saved!");
+// });
 
-const json_hname2 = JSON.stringify(arr_thour2);
-fs.writeFile(
-  "../../Data/json_hname2.json",
-  json_hname2,
-  "utf8",
-  function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    // console.log("The file was saved!");
-  }
-);
+// const json_hname2 = JSON.stringify(arr_thour2);
+// fs.writeFile(
+//   "../../Data/json_hname2.json",
+//   json_hname2,
+//   "utf8",
+//   function (err) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     // console.log("The file was saved!");
+//   }
+// );
 
-const json_dt = JSON.stringify(arr_dt);
-fs.writeFile("../../Data/json_dt.json", json_dt, "utf8", function (err) {
-  if (err) {
-    return console.log(err);
-  }
-  // console.log("The file was saved!");
-});
+// const json_dt = JSON.stringify(arr_dt);
+// fs.writeFile("../../Data/json_dt.json", json_dt, "utf8", function (err) {
+//   if (err) {
+//     return console.log(err);
+//   }
+//   // console.log("The file was saved!");
+// });
 
-const json_d = JSON.stringify(arr_d);
-fs.writeFile("../../Data/json_d.json", json_d, "utf8", function (err) {
-  if (err) {
-    return console.log(err);
-  }
-  // console.log("The file was saved!");
-});
+// const json_d = JSON.stringify(arr_d);
+// fs.writeFile("../../Data/json_d.json", json_d, "utf8", function (err) {
+//   if (err) {
+//     return console.log(err);
+//   }
+//   // console.log("The file was saved!");
+// });
 
-const json_dname = JSON.stringify(arr_dname);
-fs.writeFile("../../Data/json_dname.json", json_dname, "utf8", function (err) {
-  if (err) {
-    return console.log(err);
-  }
-  // console.log("The file was saved!");
-});
+// const json_dname = JSON.stringify(arr_dname);
+// fs.writeFile("../../Data/json_dname.json", json_dname, "utf8", function (err) {
+//   if (err) {
+//     return console.log(err);
+//   }
+//   // console.log("The file was saved!");
+// });
 
 var datetimetoday = new Date().toLocaleDateString();
 // console.log("Today's Date", datetimetoday);
@@ -159,18 +159,18 @@ for (let i = 0; i < weekName.length; i++) {
 }
 // console.log(output);
 
-const json_dnamecount = JSON.stringify(output);
-fs.writeFile(
-  "../../Data/json_dnamecount.json",
-  json_dnamecount,
-  "utf8",
-  function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    // console.log("The file was saved!");
-  }
-);
+// const json_dnamecount = JSON.stringify(output);
+// fs.writeFile(
+//   "../../Data/json_dnamecount.json",
+//   json_dnamecount,
+//   "utf8",
+//   function (err) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     // console.log("The file was saved!");
+//   }
+// );
 
 weekNumData = chart_data.fourweeklistcount;
 let output2 = [];
@@ -182,20 +182,53 @@ for (let i = 0; i < weekNum.length; i++) {
 }
 // console.log(output2);
 
-const json_wnamecount = JSON.stringify(output2);
-fs.writeFile(
-  "../../Data/json_wnamecount.json",
-  json_wnamecount,
-  "utf8",
-  function (err) {
-    if (err) {
-      return console.log(err);
-    }
-    // console.log("The file was saved!");
-  }
-);
+// const json_wnamecount = JSON.stringify(output2);
+// fs.writeFile(
+//   "../../Data/json_wnamecount.json",
+//   json_wnamecount,
+//   "utf8",
+//   function (err) {
+//     if (err) {
+//       return console.log(err);
+//     }
+//     // console.log("The file was saved!");
+//   }
+// );
 
+output3["tweets_times_per_hour"] = output3;
+arr_thour["tweets_times"] = arr_thour;
+arr_thour2["tweets_times_hour_only"] = arr_thour2;
+arr_dt["tweets_times_day_time"] = arr_dt;
+arr_d["tweets_times_day_only"] = arr_d;
+arr_dname["tweets_times_day_name_only"] = arr_dname;
+output["tweets_times_tweetsperdaylastweek"] = output;
+output2["tweets_times_tweetsperdaylastmonth"] = output2;
+
+var finaljsonarray = {};
+for (key in data) finaljsonarray[key] = data[key];
+for (key in output3) finaljsonarray[key] = output3[key];
+for (key in arr_thour) finaljsonarray[key] = arr_thour[key];
+for (key in arr_thour2) finaljsonarray[key] = arr_thour2[key];
+for (key in arr_dt) finaljsonarray[key] = arr_dt[key];
+for (key in arr_d) finaljsonarray[key] = arr_d[key];
+for (key in arr_dname) finaljsonarray[key] = arr_dname[key];
+for (key in output) finaljsonarray[key] = output[key];
+for (key in output2) finaljsonarray[key] = output2[key];
+
+for (let i = 0; i < del_length; i++) {
+  delete finaljsonarray[i];
+}
+// console.log(finaljsonarray);
 /////
 ///
 //
 //
+const fs = require("fs");
+
+const json_hcount = JSON.stringify(finaljsonarray);
+fs.writeFile("../../Data/final_json.json", json_hcount, "utf8", function (err) {
+  if (err) {
+    return console.log(err);
+  }
+  // console.log("The file was saved!");
+});

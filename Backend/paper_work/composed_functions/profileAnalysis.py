@@ -90,7 +90,7 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
         #################################################################################
         #################################################################################
         if (justOneWeek == True):
-            if ():
+            if ((current_time.month-tweet.date.month)):
                 print('week end')
                 break
 
