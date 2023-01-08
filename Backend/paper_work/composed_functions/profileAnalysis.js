@@ -4,6 +4,11 @@ const data = require("../../Data/jsonobj.json");
 const chart_data = data;
 var count_tt = Object.keys(chart_data.TweetTimeline).length;
 
+var count1_6 = 0;
+var count7_12 = 0;
+var count13_18 = 0;
+var count19_00 = 0;
+
 var arr_dt = [];
 
 for (let i = 0; i < count_tt; i++) {
@@ -40,11 +45,12 @@ for (let i = 0; i < count_tt; i++) {
   var abc = s.split(" ")[1];
   var xyz = abc.split("+")[0];
   var nvm = xyz.split(":")[0];
-  // const d = new Date(s); // convert the string to datetime
-  // var hrName = d.toString(); //.split(",").pop()[0];
-  // var now = d.toLocaleDateString();
-  // arr_t.push(now); // adds that into an array
-  arr_thour.push(xyz); // adds that into an array
+  if (nvm)
+    // const d = new Date(s); // convert the string to datetime
+    // var hrName = d.toString(); //.split(",").pop()[0];
+    // var now = d.toLocaleDateString();
+    // arr_t.push(now); // adds that into an array
+    arr_thour.push(xyz); // adds that into an array
   arr_thour2.push(nvm); // adds that into an array
 }
 for (let i = 0; i < arr_thour.length; i++) {
