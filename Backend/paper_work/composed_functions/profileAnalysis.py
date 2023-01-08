@@ -107,6 +107,7 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
                                                              'QuoteCount', 'Media', 'Source', 'quotedTweet', 'mentionedUsers'])
 
     if (len(user_tweets_df['DateTime']) == 0):
+        print('nolength')
         msg = {}
         msg['msg'] = 'NOTweet'
         msg['StatusCode'] = 503
@@ -213,17 +214,22 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
 
 @app.route("/")
 def hello_world():
-
-    args = request.args
-    username = args.get("name")
-    yearLimit = bool(args.get("yearLimit"))
-    monthLimit = bool(args.get("monthLimit"))
-    weekLimit = bool(args.get("weekLimit"))
-    print(weekLimit)
-    print(username, yearLimit, monthLimit, weekLimit)
-    # first T/F for year, second T/F for month, third T/F for week.
-    dict = profileAnalyis(username, yearLimit, monthLimit, weekLimit)
-    jsonobj = json.dumps(dict, default=str)
+    try :
+        args = request.args
+        username = args.get("name")
+        yearLimit = bool(args.get("yearLimit"))
+        monthLimit = bool(args.get("monthLimit"))
+        weekLimit = bool(args.get("weekLimit"))
+        print(weekLimit)
+        print(username, yearLimit, monthLimit, weekLimit)
+        # first T/F for year, second T/F for month, third T/F for week.
+        dict = profileAnalyis(username, yearLimit, monthLimit, weekLimit)
+        jsonobj = json.dumps(dict, default=str)
+    except: 
+        msg = {}
+        msg['msg'] = 'Bad Reques'
+        msg['StatusCode'] = 400
+        return msg
     # if (jsonobj.sta)
     # Writing to json
     data_folder = Path("./backend/Data/")
