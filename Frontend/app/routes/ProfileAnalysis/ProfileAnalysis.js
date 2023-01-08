@@ -1,6 +1,4 @@
 import React from "react";
-import { faker } from "@faker-js/faker";
-import { Link } from "react-router-dom";
 
 const tweetdaydatacount = require("../../../../Backend/Data/json_dnamecount.json");
 const tweetweekdatacount = require("../../../../Backend/Data/json_wnamecount.json");
@@ -9,23 +7,12 @@ import {
   Container,
   Row,
   Col,
-  CardHeader,
-  DropdownToggle,
-  DropdownItem,
-  DropdownMenu,
-  UncontrolledButtonDropdown,
   Card,
-  ButtonGroup,
-  Button,
   CardBody,
-  CardFooter,
   CardTitle,
   CardGroup,
   Table,
   TabPane,
-  Badge,
-  Nav,
-  NavItem,
   UncontrolledTabs,
 } from "../../components";
 // } from './../../../components';
@@ -52,10 +39,18 @@ const ProfileAnalysis = () => {
         .get("http://localhost:3001/user/get-user")
         .then(function (response) {
           // handle success
-          let abc = setdata(response.data);
+           setdata(response.data);
 
           setdata(response.data);
-          console.log("first", Twitterdata.mostInteractedLastWeek.Text);
+          // this code is for me start
+          if (response.data.verified == true)
+          {
+            setcheck('true')
+          }
+          else {
+              setcheck('false')
+          }
+          // this code is for me end
         })
         .catch(function (error) {
           // handle error
@@ -74,6 +69,7 @@ const ProfileAnalysis = () => {
     }, 5000);
   }, []);
   const [Twitterdata, setdata] = useState("");
+  const[check,setcheck]=useState('')
   // useEffect(() => {
   //   axios
   //     .get("http://localhost:3001/user/get-user")
@@ -95,9 +91,6 @@ const ProfileAnalysis = () => {
   // }, []);
 
   
-  console.log("second", Twitterdata.mostInteractedLastWeek);
-
-  console.log("worknnnnnnnnnnnnnn ", Twitterdata.mostInteractedLastWeek);
 
   return (
     <React.Fragment>
@@ -128,37 +121,6 @@ const ProfileAnalysis = () => {
                 <p className="text-left">{Twitterdata.renderedDescription}</p>
               </CardBody>
             </Card>
-
-            <CardGroup className="mb-5 mt-3">
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Total Tweets/Retweets"
-                        value={Twitterdata.statusesCount}
-                      />
-                    </Card>
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Tweets Liked made"
-                        value={Twitterdata.favouritesCount}
-                      />
-                    </Card>
-                  
-                  </CardGroup>
- <CardGroup className="mb-5 mt-3">
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Total Tweets/Retweets"
-                        value={Twitterdata.statusesCount}
-                      />
-                    </Card>
-                   
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Verification Status"
-                        value={Twitterdata.verified}
-                      />
-                    </Card>
-                  </CardGroup>
 
             {/* <Card className="mt-3">
             <CardBody>
@@ -209,14 +171,37 @@ const ProfileAnalysis = () => {
               </CardBody>
             </Card>
 
-            <UncontrolledTabs initialActiveTabId="overview">
-              {/* START Pills Nav */}
+           
+          </Col>
+      
+        </Row>
+              <UncontrolledTabs initialActiveTabId="overview">
+            {/* START Pills Nav */}
 
-              {/* END Pills Nav */}
-              <UncontrolledTabs.TabContent>
-                <TabPane tabId="overview">
-                  
-                  <Card className="mb-3 mt-3">
+            {/* END Pills Nav */}
+            <UncontrolledTabs.TabContent>
+              <TabPane tabId="overview">
+                <CardGroup className="mb-5 mt-3">
+                  <Card  className="mr-3" body>
+                    <ProfileOverviewCard title="Total Tweets/Retweets" value={Twitterdata.statusesCount} />
+                  </Card>
+                  <Card className="mr-3" body>
+                    <ProfileOverviewCard title="Tweets Liked made" value={Twitterdata.favouritesCount} />
+                  </Card>
+                  <Card className="mr-3" body>
+                    <ProfileOverviewCard title="Verification Status" value={check} />
+                </Card>
+                  <Card body>
+                    <ProfileOverviewCard title="Verification Status" value={Twitterdata.verified} />
+                  </Card>
+              </CardGroup>
+            </TabPane>
+          </UncontrolledTabs.TabContent>
+          </UncontrolledTabs>
+        {/* Row 2 start from here  */}
+        <Row>
+          <Col lg={6}>
+                 <Card className="mb-3">
                     <CardBody>
                       <div className="d-flex">
                         <div>
@@ -228,8 +213,9 @@ const ProfileAnalysis = () => {
                       <SimpleAreaChart data={tweetdaydatacount} />
                     </CardBody>
                   </Card>
-
-                  <Card className="mb-3">
+          </Col>
+          <Col lg={6}>
+               <Card className="mb-3">
                     <CardBody>
                       <div className="d-flex">
                         <div>
@@ -243,11 +229,10 @@ const ProfileAnalysis = () => {
                       <SimpleAreaChart data={tweetweekdatacount} />
                     </CardBody>
                   </Card>
-                </TabPane>
-              </UncontrolledTabs.TabContent>
-            </UncontrolledTabs>
           </Col>
+
         </Row>
+        {/* Row 3 start from Here */}
         <Row>
           <Col lg={6}>
             <Card className="mb-3">
@@ -269,13 +254,13 @@ const ProfileAnalysis = () => {
             <Card className="mb-3">
               <CardBody>
                 <CardTitle className="mb-1 d-flex">
-                  <h6>Most Liked Tweets</h6>
+                  <h6>Most Interactive Tweet of Last Month</h6>
                 </CardTitle>
               </CardBody>
               <Table responsive striped className="mb-0">
                 <tbody>
                   <TrTableRecentFundings
-                    data={Twitterdata.mostInteractedLastWeek}
+                    data={Twitterdata.mostInteractedLastMonth}
                   />
                 </tbody>
               </Table>
