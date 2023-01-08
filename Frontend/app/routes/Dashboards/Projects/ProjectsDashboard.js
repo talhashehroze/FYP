@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import axios from "axios";
 import { faker } from "@faker-js/faker";
 import { Link } from "react-router-dom";
@@ -37,7 +37,6 @@ import { useHistory } from "react-router-dom";
 
 const ProjectsDashboard = () => {
   let history = useHistory();
- 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [value, setValue] = useState("Select operation");
   const [Keyword, setkeyword] = useState('')
@@ -52,8 +51,9 @@ const ProjectsDashboard = () => {
   const handleSelect = (e) => {
     console.log(value);
 
-    console.log("hyyyy");
   };
+     
+
   const onsubmit = (e) => {
     axios
       .get("http://localhost:3001/user/get-user")
@@ -75,11 +75,14 @@ const ProjectsDashboard = () => {
     <Container>
       <Row className="mb-5">
         <Col lg={12}>
-          <HeaderMain title="Projects" className="mb-4 mb-lg-5" />
+          <HeaderMain title="HomePage" className="mb-4 mb-lg-5" />
           <Card className="mb-3">
             <CardBody>
               <CardTitle tag="h6" className="mb-3">
-                Enter Keyword to Perform Operation
+                <p style={{ fontSize: 20, fontWeight: 'bold' }}>
+                  Enter Keyword to Perform Operation
+                     </p>
+
               </CardTitle>
 
               <Row className="mt-3">
@@ -131,15 +134,16 @@ const ProjectsDashboard = () => {
                      {/* <Button style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } to="/profileanalysis/profileanalysis">
                                  Search
                   </Button> */}
-                <Button onClick={handleClick} style={{ backgroundColor: "red", height: 50, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } >
+                <Button onClick={handleClick} style={{ backgroundColor: "#006A6D", height: 40, width: 100,marginTop:20}} class="btn btn-primary" type="button" tag={ Link } >
                       Search
                   </Button>
+                  
+                
+
                 </Col>
               </Row>
 
-              <Button class="btn btn-primary" type="button" tag={ Link } to="/dashboards/analytics">
-
-                                </Button>
+          
                           
 
               {/* </InputGroup> */}
@@ -152,14 +156,14 @@ const ProjectsDashboard = () => {
         <Col lg={6}>
           <Card className="mb-3">
             <CardBody>
-              <CardTitle tag="h6" className="mb-3">
-                Trending Keyword on Twitter
+              <CardTitle tag="h6" className="mb-0">
+               <p style={{fontSize:20,fontWeight:'bold'}}> Trending Keywords on Twitter </p>
               </CardTitle>
             </CardBody>
             <Col lg={12}>
               <ListGroup flush>
                 <ListGroupItem action>
-                  <TasksMedia iconColor="success" />
+                  <TasksMedia  />
                 </ListGroupItem>
                 <ListGroupItem action>
                   <TasksMedia iconColor="danger" id="2" />
@@ -170,15 +174,7 @@ const ProjectsDashboard = () => {
                 <ListGroupItem action>
                   <TasksMedia id="4" />
                 </ListGroupItem>
-                <ListGroupItem
-                  action
-                  tag={Link}
-                  to="/apps/tasks/list"
-                  className="text-center"
-                >
-                  View All Tasks
-                  <i className="fa fa-angle-right ml-2"></i>
-                </ListGroupItem>
+               
               </ListGroup>
             </Col>
           </Card>

@@ -108,6 +108,7 @@ import ProfileAnalysis from "./ProfileAnalysis/ProfileAnalysis";
 import TrendAnalysis from "./TrendAnalysis/TrendAnalysis";
 import TrendQuality from "./TrendQuality";
 import BotAccountRecognition from "./BotAccountRecognition/BotAccountRecognition";
+import DeveloperPortal from "./DeveloperPortal";
 //------ Route Definitions --------
 // eslint-disable-next-line no-unused-vars
 export const RoutedContent = () => {
@@ -239,6 +240,8 @@ export const RoutedContent = () => {
         component={TrendAnalysis}
       />
       <Route path="/TrendQuality/TrendQuality" exact component={TrendQuality} />
+      <Route path="/DeveloperPortal" exact component={DeveloperPortal} />
+
       <Route
         path="/BotAccountRecognition"
         exact

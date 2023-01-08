@@ -3,7 +3,7 @@ import _ from "lodash";
 import { faker } from "@faker-js/faker";
 
 const TrTableRecentFundings = (props) => {
-  console.log("trtable 1", props.data); //..
+  console.log("trtable 1", props.data?.Text);
   return (
     <React.Fragment>
       <tr>

@@ -19,14 +19,11 @@ const TasksMedia = (props) => (
       <Media body>
         <div className="mt-0 mb-2">
           <Link to="/apps/tasks/tasks-details" className="text-decoration-none">
-            {faker.hacker.phrase()}
+            keyword on Twitter
           </Link>
         </div>
-        <div className="mb-0">{faker.date.past().toString()}</div>
       </Media>
-      <Media right className="ml-3">
-        <i className={`fa fa-fw fa-circle text-${props.iconColor}`}></i>
-      </Media>
+     
     </Media>
   </React.Fragment>
 );
