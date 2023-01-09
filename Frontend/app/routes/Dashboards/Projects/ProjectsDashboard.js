@@ -190,7 +190,7 @@ const ProjectsDashboard = () => {
           <Card className="mb-3">
             <CardBody>
               <CardTitle tag="h6" className="mb-3">
-                Enter Keyword to Perform Operation
+                Search for Trending Keyword
               </CardTitle>
               {/* <InputGroup> */}
               <Input placeholder="Enter Keyword..." />
@@ -200,16 +200,20 @@ const ProjectsDashboard = () => {
                                 </Button>
                             </InputGroupAddon> */}
 
-              <div style={{ color: "red" }}>
-                <button
-                  type="button"
-                  class=" ml-200 mt-5 btn btn-primary"
-                  onClick={onsubmit}
-                  to="/dashboards/analytics"
-                >
-                  Search here
-                </button>
-              </div>
+              <Button
+                onClick={handleClick}
+                style={{
+                  backgroundColor: "#006A6D",
+                  height: 40,
+                  width: 100,
+                  marginTop: 20,
+                }}
+                class="btn btn-primary"
+                type="button"
+                tag={Link}
+              >
+                Search
+              </Button>
 
               {/* <Button class="btn btn-primary" type="button" tag={ Link } to="/dashboards/analytics">
 
