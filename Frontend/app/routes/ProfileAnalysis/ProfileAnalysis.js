@@ -41,18 +41,28 @@ import { TrTableRecentFundings } from "../components/Financial/TrTableRecentFund
 const ProfileAnalysis = () => {
   const [Keyword, setkeyword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const handleKeywordChange = (event) => {
     setkeyword(event.target.value);
+
+    if (!event.target.value.length) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
   };
 
   let history = useHistory();
   async function handleClick() {
     console.log(Keyword);
+    setLoading(true);
     let data = await axios.get(`http://localhost:3001/user/get-user/`, {
       params: { name: Keyword },
     });
+
     setdata(data.data);
+    setLoading(false);
     console.log(Twitterdata?.tweets_times_per_hour);
     // history.replace("/dashboards/projects");
   }
@@ -116,7 +126,6 @@ const ProfileAnalysis = () => {
         {/* START Content */}
         <Row className="mb-5">
           <Col lg={12}>
-            <HeaderMain title="HomePage" className="mb-4 mb-lg-5" />
             <Card className="mb-3">
               <CardBody>
                 <CardTitle tag="h6" className="mb-3">
@@ -126,7 +135,7 @@ const ProfileAnalysis = () => {
                 </CardTitle>
 
                 <Row className="mt-3">
-                  <Col sm={10} md={10}>
+                  <Col sm={9} md={9}>
                     <Input
                       type="text"
                       id="Keyword"
@@ -136,14 +145,15 @@ const ProfileAnalysis = () => {
                       placeholder="Enter  Keyword..."
                     />
                   </Col>
-                  <Col sm={2} md={2}>
+                  <Col sm={3} md={3}>
                     <Button
+                      disabled={isDisabled}
                       onClick={handleClick}
                       style={{
                         backgroundColor: "#006A6D",
                         height: 40,
                         width: 100,
-                        // marginTop: 20,
+                        // marginRight: 20,
                       }}
                       class="btn btn-primary"
                       type="button"
@@ -160,40 +170,52 @@ const ProfileAnalysis = () => {
             </Card>
           </Col>
         </Row>
-        {loading && <InfinitySpin width="200" color="#4fa94d" />}
-        {!loading && (
-          <Container>
+
+        <Container>
+          {loading && (
             <Row>
-              {/* <Row className="mt-3"> */}
-              <Col lg={4}>
-                <Card>
-                  <CardBody>
-                    <Profile data={Twitterdata} />
-                    <div className="text-center pb-1">
-                      <ul className="list-inline">
-                        <li className="list-inline-item text-center">
-                          <h2 className="mb-1">{Twitterdata?.friendsCount}</h2>
-                          <span>Following</span>
-                        </li>
-                        <li className="list-inline-item text-center">
-                          <h2 className="mb-1">
-                            {Twitterdata?.followersCount}
-                          </h2>
-                          <span>Follower</span>
-                        </li>
-                      </ul>
-                    </div>
+              <InfinitySpin
+                width="200"
+                color="#4fa94d"
+                // style={{ marginRight: "auto", marginLeft: "auto" }}
+              />
+            </Row>
+          )}
+          {!loading && (
+            <Container>
+              <Row>
+                {/* <Row className="mt-3"> */}
+                <Col lg={4}>
+                  <Card>
+                    <CardBody>
+                      <Profile data={Twitterdata} />
+                      <div className="text-center pb-1">
+                        <ul className="list-inline">
+                          <li className="list-inline-item text-center">
+                            <h2 className="mb-1">
+                              {Twitterdata?.friendsCount}
+                            </h2>
+                            <span>Following</span>
+                          </li>
+                          <li className="list-inline-item text-center">
+                            <h2 className="mb-1">
+                              {Twitterdata?.followersCount}
+                            </h2>
+                            <span>Follower</span>
+                          </li>
+                        </ul>
+                      </div>
 
-                    <div className="mt-4 mb-2">
-                      <span className="small">Description</span>
-                    </div>
-                    <p className="text-left">
-                      {Twitterdata?.renderedDescription}
-                    </p>
-                  </CardBody>
-                </Card>
+                      <div className="mt-4 mb-2">
+                        <span className="small">Description</span>
+                      </div>
+                      <p className="text-left">
+                        {Twitterdata?.renderedDescription}
+                      </p>
+                    </CardBody>
+                  </Card>
 
-                {/* <Card className="mt-3">
+                  {/* <Card className="mt-3">
             <CardBody>
               <div className="mb-4">
                 <div>
@@ -224,137 +246,138 @@ const ProfileAnalysis = () => {
               </div>
             </CardBody>
           </Card> */}
-              </Col>
-              <Col lg={8}>
-                <Card className="mt-0">
-                  <CardBody>
-                    <div className="d-flex">
-                      <div>
-                        <h6 className="card-title mb-1">
-                          At which Hours User mostly Tweet
-                        </h6>
+                </Col>
+                <Col lg={8}>
+                  <Card className="mt-0">
+                    <CardBody>
+                      <div className="d-flex">
+                        <div>
+                          <h6 className="card-title mb-1">
+                            At which Hours User mostly Tweet
+                          </h6>
+                        </div>
                       </div>
-                    </div>
-                    <div className="pt-3 mb-3">
-                      <PieChartWithCustomizedLabel
-                        data={Twitterdata?.tweets_times_per_hour}
-                      />
-                    </div>
-                    <h6 className="card-title mb-1">
-                      Red:- 00:00-05:59 Indigo:- 06:00-11:59 Green:- 12:00-17:59
-                      Yellow:- 18:00-23:59
-                    </h6>
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            <UncontrolledTabs initialActiveTabId="overview">
-              {/* START Pills Nav */}
+                      <div className="pt-3 mb-3">
+                        <PieChartWithCustomizedLabel
+                          data={Twitterdata?.tweets_times_per_hour}
+                        />
+                      </div>
+                      <h6 className="card-title mb-1">
+                        Red:- 00:00-05:59 Indigo:- 06:00-11:59 Green:-
+                        12:00-17:59 Yellow:- 18:00-23:59
+                      </h6>
+                    </CardBody>
+                  </Card>
+                </Col>
+              </Row>
+              <UncontrolledTabs initialActiveTabId="overview">
+                {/* START Pills Nav */}
 
-              {/* END Pills Nav */}
-              <UncontrolledTabs.TabContent>
-                <TabPane tabId="overview">
-                  <CardGroup className="mb-5 mt-3">
-                    <Card className="mr-3" body>
-                      <ProfileOverviewCard
-                        title="Total Tweets/Retweets"
-                        value={Twitterdata?.statusesCount}
-                      />
-                    </Card>
-                    <Card className="mr-3" body>
-                      <ProfileOverviewCard
-                        title="Tweets Liked made"
-                        value={Twitterdata?.favouritesCount}
-                      />
-                    </Card>
-                    <Card className="mr-3" body>
-                      <ProfileOverviewCard
-                        title="Verification Status"
-                        value={check}
-                      />
-                    </Card>
-                    <Card body>
-                      <ProfileOverviewCard
-                        title="Verification Status"
-                        value={Twitterdata?.verified}
-                      />
-                    </Card>
-                  </CardGroup>
-                </TabPane>
-              </UncontrolledTabs.TabContent>
-            </UncontrolledTabs>
-            {/* Row 2 start from here  */}
-            <Row>
-              <Col lg={6}>
-                <Card className="mb-3">
-                  <CardBody>
-                    <div className="d-flex">
-                      <div>
-                        <h6 className="card-title mb-1">
-                          Tweets in Last 7 Days
-                        </h6>
+                {/* END Pills Nav */}
+                <UncontrolledTabs.TabContent>
+                  <TabPane tabId="overview">
+                    <CardGroup className="mb-5 mt-3">
+                      <Card className="mr-3" body>
+                        <ProfileOverviewCard
+                          title="Total Tweets/Retweets"
+                          value={Twitterdata?.statusesCount}
+                        />
+                      </Card>
+                      <Card className="mr-3" body>
+                        <ProfileOverviewCard
+                          title="Tweets Liked made"
+                          value={Twitterdata?.favouritesCount}
+                        />
+                      </Card>
+                      <Card className="mr-3" body>
+                        <ProfileOverviewCard
+                          title="Verification Status"
+                          value={check}
+                        />
+                      </Card>
+                      <Card body>
+                        <ProfileOverviewCard
+                          title="Verification Status"
+                          value={Twitterdata?.verified}
+                        />
+                      </Card>
+                    </CardGroup>
+                  </TabPane>
+                </UncontrolledTabs.TabContent>
+              </UncontrolledTabs>
+              {/* Row 2 start from here  */}
+              <Row>
+                <Col lg={6}>
+                  <Card className="mb-3">
+                    <CardBody>
+                      <div className="d-flex">
+                        <div>
+                          <h6 className="card-title mb-1">
+                            Tweets in Last 7 Days
+                          </h6>
+                        </div>
                       </div>
-                    </div>
-                    <SimpleAreaChart
-                      data={Twitterdata?.tweets_times_tweetsperdaylastweek}
-                    />
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col lg={6}>
-                <Card className="mb-3">
-                  <CardBody>
-                    <div className="d-flex">
-                      <div>
-                        <h6 className="card-title mb-1">
-                          Tweets in Last 30 Days
-                        </h6>
+                      <SimpleAreaChart
+                        data={Twitterdata?.tweets_times_tweetsperdaylastweek}
+                      />
+                    </CardBody>
+                  </Card>
+                </Col>
+                <Col lg={6}>
+                  <Card className="mb-3">
+                    <CardBody>
+                      <div className="d-flex">
+                        <div>
+                          <h6 className="card-title mb-1">
+                            Tweets in Last 30 Days
+                          </h6>
+                        </div>
                       </div>
-                    </div>
-                    <SimpleAreaChart
-                      data={Twitterdata?.tweets_times_tweetsperdaylastmonth}
-                    />
-                  </CardBody>
-                </Card>
-              </Col>
-            </Row>
-            {/* Row 3 start from Here */}
-            <Row>
-              <Col lg={6}>
-                <Card className="mb-3">
-                  <CardBody>
-                    <CardTitle className="mb-1 d-flex">
-                      <h6>Most Interacted Tweet of Last Week</h6>
-                    </CardTitle>
-                  </CardBody>
-                  <Table responsive striped className="mb-0">
-                    <tbody>
-                      <TrTableRecentFundings
-                        data={Twitterdata?.mostInteractedLastWeek}
+                      <SimpleAreaChart
+                        data={Twitterdata?.tweets_times_tweetsperdaylastmonth}
                       />
-                    </tbody>
-                  </Table>
-                </Card>
-              </Col>
-              <Col lg={6}>
-                <Card className="mb-3">
-                  <CardBody>
-                    <CardTitle className="mb-1 d-flex">
-                      <h6>Most Interactive Tweet of Last Month</h6>
-                    </CardTitle>
-                  </CardBody>
-                  <Table responsive striped className="mb-0">
-                    <tbody>
-                      <TrTableRecentFundings
-                        data={Twitterdata?.mostInteractedLastMonth}
-                      />
-                    </tbody>
-                  </Table>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
-        )}
+                    </CardBody>
+                  </Card>
+                </Col>
+              </Row>
+              {/* Row 3 start from Here */}
+              <Row>
+                <Col lg={6}>
+                  <Card className="mb-3">
+                    <CardBody>
+                      <CardTitle className="mb-1 d-flex">
+                        <h6>Most Interacted Tweet of Last Week</h6>
+                      </CardTitle>
+                    </CardBody>
+                    <Table responsive striped className="mb-0">
+                      <tbody>
+                        <TrTableRecentFundings
+                          data={Twitterdata?.mostInteractedLastWeek}
+                        />
+                      </tbody>
+                    </Table>
+                  </Card>
+                </Col>
+                <Col lg={6}>
+                  <Card className="mb-3">
+                    <CardBody>
+                      <CardTitle className="mb-1 d-flex">
+                        <h6>Most Interactive Tweet of Last Month</h6>
+                      </CardTitle>
+                    </CardBody>
+                    <Table responsive striped className="mb-0">
+                      <tbody>
+                        <TrTableRecentFundings
+                          data={Twitterdata?.mostInteractedLastMonth}
+                        />
+                      </tbody>
+                    </Table>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
+          )}
+        </Container>
         {/* END Content */}
       </Container>
     </React.Fragment>
