@@ -4,9 +4,9 @@ import React from "react";
 // const tweetweekdatacount = require("../../../../Backend/Data/json_wnamecount.json");
 // const hourtweetdatacount = require("../../../../Backend/Data/json_hcount.json");
 
-const tweetdaydatacount = require("../../../../Backend/Data/final_json.json");
-const tweetweekdatacount = require("../../../../Backend/Data/final_json.json");
-const hourtweetdatacount = require("../../../../Backend/Data/final_json.json");
+// const tweetdaydatacount = require("../../../../Backend/Data/final_json.json");
+// const tweetweekdatacount = require("../../../../Backend/Data/final_json.json");
+// const hourtweetdatacount = require("../../../../Backend/Data/final_json.json");
 // tweetdaydatacount.tweets_times_tweetsperdaylastweek;
 // tweetweekdatacount.tweets_times_tweetsperdaylastmonth;
 // hourtweetdatacount.tweets_times_per_hour;
@@ -49,10 +49,11 @@ const ProfileAnalysis = () => {
   let history = useHistory();
   async function handleClick() {
     console.log(Keyword);
-    let data = await axios.get(`http://localhost:5000`, {
+    let data = await axios.get(`http://localhost:3001/user/get-user/`, {
       params: { name: Keyword },
     });
     setdata(data.data);
+    console.log(Twitterdata?.tweets_times_per_hour);
     // history.replace("/dashboards/projects");
   }
   // const fun = () => {
@@ -96,7 +97,7 @@ const ProfileAnalysis = () => {
   //       let abc = setdata(response.data);
 
   //       setdata(response.data);
-  //       console.log("first", Twitterdata.mostInteractedLastWeek.Text);
+  //       console.log("first", Twitterdata?.mostInteractedLastWeek.Text);
   //     })
   //     .catch(function (error) {
   //       // handle error
@@ -171,11 +172,13 @@ const ProfileAnalysis = () => {
                     <div className="text-center pb-1">
                       <ul className="list-inline">
                         <li className="list-inline-item text-center">
-                          <h2 className="mb-1">{Twitterdata.friendsCount}</h2>
+                          <h2 className="mb-1">{Twitterdata?.friendsCount}</h2>
                           <span>Following</span>
                         </li>
                         <li className="list-inline-item text-center">
-                          <h2 className="mb-1">{Twitterdata.followersCount}</h2>
+                          <h2 className="mb-1">
+                            {Twitterdata?.followersCount}
+                          </h2>
                           <span>Follower</span>
                         </li>
                       </ul>
@@ -185,7 +188,7 @@ const ProfileAnalysis = () => {
                       <span className="small">Description</span>
                     </div>
                     <p className="text-left">
-                      {Twitterdata.renderedDescription}
+                      {Twitterdata?.renderedDescription}
                     </p>
                   </CardBody>
                 </Card>
@@ -234,7 +237,7 @@ const ProfileAnalysis = () => {
                     </div>
                     <div className="pt-3 mb-3">
                       <PieChartWithCustomizedLabel
-                        data={hourtweetdatacount.tweets_times_per_hour}
+                        data={Twitterdata?.tweets_times_per_hour}
                       />
                     </div>
                     <h6 className="card-title mb-1">
@@ -255,13 +258,13 @@ const ProfileAnalysis = () => {
                     <Card className="mr-3" body>
                       <ProfileOverviewCard
                         title="Total Tweets/Retweets"
-                        value={Twitterdata.statusesCount}
+                        value={Twitterdata?.statusesCount}
                       />
                     </Card>
                     <Card className="mr-3" body>
                       <ProfileOverviewCard
                         title="Tweets Liked made"
-                        value={Twitterdata.favouritesCount}
+                        value={Twitterdata?.favouritesCount}
                       />
                     </Card>
                     <Card className="mr-3" body>
@@ -273,7 +276,7 @@ const ProfileAnalysis = () => {
                     <Card body>
                       <ProfileOverviewCard
                         title="Verification Status"
-                        value={Twitterdata.verified}
+                        value={Twitterdata?.verified}
                       />
                     </Card>
                   </CardGroup>
@@ -293,7 +296,7 @@ const ProfileAnalysis = () => {
                       </div>
                     </div>
                     <SimpleAreaChart
-                      data={tweetdaydatacount.tweets_times_tweetsperdaylastweek}
+                      data={Twitterdata?.tweets_times_tweetsperdaylastweek}
                     />
                   </CardBody>
                 </Card>
@@ -309,9 +312,7 @@ const ProfileAnalysis = () => {
                       </div>
                     </div>
                     <SimpleAreaChart
-                      data={
-                        tweetweekdatacount.tweets_times_tweetsperdaylastmonth
-                      }
+                      data={Twitterdata?.tweets_times_tweetsperdaylastmonth}
                     />
                   </CardBody>
                 </Card>
@@ -329,7 +330,7 @@ const ProfileAnalysis = () => {
                   <Table responsive striped className="mb-0">
                     <tbody>
                       <TrTableRecentFundings
-                        data={Twitterdata.mostInteractedLastWeek}
+                        data={Twitterdata?.mostInteractedLastWeek}
                       />
                     </tbody>
                   </Table>
@@ -345,7 +346,7 @@ const ProfileAnalysis = () => {
                   <Table responsive striped className="mb-0">
                     <tbody>
                       <TrTableRecentFundings
-                        data={Twitterdata.mostInteractedLastMonth}
+                        data={Twitterdata?.mostInteractedLastMonth}
                       />
                     </tbody>
                   </Table>

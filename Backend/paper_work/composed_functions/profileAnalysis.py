@@ -232,11 +232,11 @@ def hello_world():
         return msg
     # if (jsonobj.sta)
     # Writing to json
-    data_folder = Path("./backend/Data/")
-    file_to_open = data_folder / "jsonobj.json"
-    file = open(file_to_open, "w")
-    file.write(jsonobj)
-    file.close()
+    # data_folder = Path("./backend/Data/")
+    # file_to_open = data_folder / "jsonobj.json"
+    # file = open(file_to_open, "w")
+    # file.write(jsonobj)
+    # file.close()
     return jsonobj
 
 
