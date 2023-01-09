@@ -312,9 +312,7 @@ const ProfileAnalysis = () => {
                     <CardBody>
                       <div className="d-flex">
                         <div>
-                          <h6 className="card-title mb-1">
-                            Tweets in Last 7 Days
-                          </h6>
+                          <h6 className="card-title mb-1">Tweets per 7 Days</h6>
                         </div>
                       </div>
                       <SimpleAreaChart
@@ -329,7 +327,7 @@ const ProfileAnalysis = () => {
                       <div className="d-flex">
                         <div>
                           <h6 className="card-title mb-1">
-                            Tweets in Last 30 Days
+                            Recent Tweets per Week
                           </h6>
                         </div>
                       </div>

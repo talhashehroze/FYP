@@ -46,12 +46,12 @@ const SidebarTopA = () => (
             color="link"
             className="pl-0 pb-0 btn-profile sidebar__link"
           >
-            {faker.name.firstName()} {faker.name.lastName()}
-            <i className="fa fa-angle-down ml-2"></i>
+            {"Babar"} {"Azam"}
+            {/* <i className="fa fa-angle-down ml-2"></i> */}
           </DropdownToggle>
-          <DropdownMenu persist>
+          {/* <DropdownMenu persist>
             <DropdownItem header>
-              {faker.name.firstName()} {faker.name.lastName()}
+              {"Babar"} {"Azam"}
             </DropdownItem>
             <DropdownItem divider />
             <DropdownItem tag={Link} to="/apps/profile-details">
@@ -68,11 +68,9 @@ const SidebarTopA = () => (
               <i className="fa fa-fw fa-sign-out mr-2"></i>
               Sign Out
             </DropdownItem>
-          </DropdownMenu>
+          </DropdownMenu> */}
         </UncontrolledButtonDropdown>
-        <div className="small sidebar__link--muted">
-          {faker.name.jobTitle()}
-        </div>
+        <div className="small sidebar__link--muted">{"Athlete"}</div>
       </Sidebar.Section>
     </Sidebar.HideSlim>
     {/* END: Sidebar Default */}
