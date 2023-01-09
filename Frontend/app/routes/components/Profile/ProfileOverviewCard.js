@@ -11,7 +11,9 @@ const ProfileOverviewCard = (props) => (
                 { props.badgeTitle }
             </Badge> */}
     </div>
+
     <div className="text-center my-4">
+      {props.icon && <props.icon />}
       <h2>{props.value}</h2>
       {/* <span>
                 { props.valueTitle }

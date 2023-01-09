@@ -10,7 +10,8 @@ import React from "react";
 // tweetdaydatacount.tweets_times_tweetsperdaylastweek;
 // tweetweekdatacount.tweets_times_tweetsperdaylastmonth;
 // hourtweetdatacount.tweets_times_per_hour;
-
+import RemoveModeratorIcon from "@mui/icons-material/RemoveModerator";
+import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import {
   Container,
   Row,
@@ -292,13 +293,18 @@ const ProfileAnalysis = () => {
                       <Card className="mr-3" body>
                         <ProfileOverviewCard
                           title="Verification Status"
+                          icon={
+                            Twitterdata?.verified
+                              ? VerifiedUserIcon
+                              : RemoveModeratorIcon
+                          }
                           value={check}
                         />
                       </Card>
                       <Card body>
                         <ProfileOverviewCard
-                          title="Verification Status"
-                          value={Twitterdata?.verified}
+                          title="Total Media Posted"
+                          value={Twitterdata?.mediaCount}
                         />
                       </Card>
                     </CardGroup>
