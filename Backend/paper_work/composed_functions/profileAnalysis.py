@@ -212,6 +212,137 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
     return userDict
 
 
+import snscrape.modules.twitter as sntwitter
+import pandas as pd
+from joblib import dump, load
+from textblob import TextBlob
+import datetime
+
+def botRecgonation(twitter_username): 
+
+
+    tweets_list = []
+    scrapper=sntwitter.TwitterProfileScraper(twitter_username)
+    user=scrapper.entity
+    try:
+        if user.profileImageUrl.startswith(
+                "https://abs.twimg.com/sticky/default_profile_images/"):
+            xdefault_profile_image = 'TRUE'
+        else:
+            xdefault_profile_image = 'FALSE'
+
+        # # custom logic
+        if xdefault_profile_image == 'FALSE' or user.profileBannerUrl or user.renderedDescription or user.verified or user.location or user.link:
+            xdefaultProfile = 'FALSE'
+        else:
+            xdefaultProfile = 'TRUE'
+
+        tweets_list.append([
+            user.created,
+            xdefaultProfile,
+            xdefault_profile_image,
+            user.renderedDescription,
+            user.favouritesCount,
+            user.followersCount,
+            user.friendsCount,
+            # user.geo_enabled,
+            user.id,
+            user.location,
+            user.profileBannerUrl,
+            user.profileImageUrl,
+            user.username,
+            user.statusesCount,
+            user.verified,
+            user.statusesCount /
+            (pd.Timestamp.now().date() - user.created.date()).days,
+            (pd.Timestamp.now().date() - user.created.date()).days,
+        ])
+
+        user_df = pd.DataFrame(
+        tweets_list,
+        columns=[
+            'created_at',
+            'default_profile',
+            'default_profile_image',
+            'description',
+            'favourites_count',
+            'followers_count',
+            'friends_count',
+            # 'geo_enabled',
+            'id',
+            'location',
+            'profile_background_image_url',
+            'profile_image_url',
+            'screen_name',
+            'statuses_count',
+            'verified',
+            'average_tweets_per_day',
+            'account_age_days',
+        ])
+        
+    except:
+        dict={'result':[-1]}
+        user_df = pd.DataFrame(dict)
+        return user_df
+
+    if (user_df['average_tweets_per_day'][0]<0.2):
+        user_df['result']=0
+        return user_df
+    
+    user_df.verified=user_df.verified.astype('bool')
+    user_df.verified=user_df.verified.astype(int)
+    user_df.default_profile=user_df.default_profile.astype('bool')
+    user_df.default_profile=user_df.default_profile.astype(int)
+    user_df.default_profile_image=user_df.default_profile_image.astype('bool')
+    user_df.default_profile_image=user_df.default_profile_image.astype(int)
+
+    user_df.followers_count = user_df.followers_count.astype(int)
+    user_df.friends_count = user_df.friends_count.astype(int)
+    user_df.favourites_count = user_df.favourites_count.astype(int)
+    user_df.statuses_count = user_df.statuses_count.astype(int)
+
+    user_df["screen_name_len"] = [len(i) for i in user_df["screen_name"]]
+    user_df["bot_is_substr"] = [int('bot' in i.lower()) for i in user_df["screen_name"]]
+    user_df["bot_in_des"] = [int('bot' in str(i).lower()) for i in user_df['description']]
+
+    # Getting the ages in years from created_at
+    ages = []
+    for i in user_df["created_at"]:
+        year=i.year
+        age = 17-year
+        ages.append(age)
+    user_df["age"] = ages
+
+    
+
+    descriptions = [TextBlob(str(txt)) for txt in user_df['description']]
+
+    # Creating lists of the polarity and the descriptions
+    desc_pol = [blob.sentiment.polarity for blob in descriptions]
+    desc_subj = [blob.sentiment.subjectivity for blob in descriptions]
+
+    # Turning them into features
+    user_df["desc_pol"] = desc_pol
+    user_df["desc_subj"] = desc_subj
+
+
+    clf=load('randomforest.joblib') 
+    features = ['age','followers_count','friends_count','favourites_count','statuses_count','screen_name_len','bot_in_des','bot_is_substr', 'desc_pol','desc_subj']
+    pre=clf.predict(user_df[features])
+    print(pre)
+
+
+   
+    # //better
+    clf=load('randomforest1.joblib')
+
+    pre=clf.predict(user_df[features])
+    print(pre)
+    user_df['result']=pre
+    return user_df
+
+
+
 @app.route("/")
 def hello_world():
     try :
@@ -227,7 +358,7 @@ def hello_world():
         jsonobj = json.dumps(dict, default=str)
     except: 
         msg = {}
-        msg['msg'] = 'Bad Reques'
+        msg['msg'] = 'Bad Request'
         msg['StatusCode'] = 400
         return msg
     # if (jsonobj.sta)
@@ -237,6 +368,23 @@ def hello_world():
     # file = open(file_to_open, "w")
     # file.write(jsonobj)
     # file.close()
+    return jsonobj
+
+
+
+@app.route("/botOrNot")
+def hello_world():
+    try :
+        args = request.args
+        username = args.get("name")
+        dict=botRecgonation('username')
+        jsonobj = json.dumps(dict, default=str)
+    except: 
+        msg = {}
+        msg['msg'] = 'Bad Request'
+        msg['StatusCode'] = 400
+        return msg
+    
     return jsonobj
 
 
