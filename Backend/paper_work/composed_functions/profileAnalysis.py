@@ -10,6 +10,11 @@ import ast
 import numpy as np
 import pandas as pd
 import snscrape.modules.twitter as sntwitter
+# import snscrape.modules.twitter as sntwitter
+# import pandas as pd
+from joblib import dump, load
+from textblob import TextBlob
+# import datetime
 
 from flask import Flask, request
 
@@ -324,12 +329,13 @@ def botRecgonation(twitter_username):
     # Turning them into features
     user_df["desc_pol"] = desc_pol
     user_df["desc_subj"] = desc_subj
-
-
-    clf=load('randomforest.joblib') 
     features = ['age','followers_count','friends_count','favourites_count','statuses_count','screen_name_len','bot_in_des','bot_is_substr', 'desc_pol','desc_subj']
-    pre=clf.predict(user_df[features])
-    print(pre)
+
+
+    # clf=load('randomforest.joblib') 
+    # features = ['age','followers_count','friends_count','favourites_count','statuses_count','screen_name_len','bot_in_des','bot_is_substr', 'desc_pol','desc_subj']
+    # pre=clf.predict(user_df[features])
+    # print(pre)
 
 
    
@@ -373,12 +379,15 @@ def hello_world():
 
 
 @app.route("/botOrNot")
-def hello_world():
+def predict():
     try :
         args = request.args
         username = args.get("name")
-        dict=botRecgonation('username')
-        jsonobj = json.dumps(dict, default=str)
+        user_df=botRecgonation(username)
+        userDict = user_df.to_dict('records')[0]
+        # print(dict.to_json())
+        jsonobj = json.dumps(userDict, default=str)
+        
     except: 
         msg = {}
         msg['msg'] = 'Bad Request'
@@ -388,32 +397,4 @@ def hello_world():
     return jsonobj
 
 
-# first T/F for year, second T/F for month, third T/F for week.
-# dict = profileAnalyis('ctalhaahmad', True, False, False) # pass data here map keyword here.
 
-# pp = pprint.PrettyPrinter(depth=6)
-
-# pp.pprint(dict)
-
-# jsonobj = json.dumps(dict, default=str)
-# print(jsonobj)
-
-# Writing to json
-# data_folder = Path("backend/paper_work/composed_functions/json_obj/")
-# file_to_open = data_folder / "jsonobj.json"
-# file = open(file_to_open, "w")
-# file.write(jsonobj)
-# file.close()
-
-# Writing to json
-# data_folder = Path("./backend/Data/")
-# file_to_open = data_folder / "jsonobj.json"
-# file = open(file_to_open, "w")
-# file.write(jsonobj)
-# file.close()
-
-# import os
-
-# cwd = os.getcwd()  # Get the current working directory (cwd)
-# files = os.listdir(cwd)  # Get all the files in that directory
-# print("Files in %r: %s" % (cwd, files))
