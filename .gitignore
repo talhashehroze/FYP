@@ -10,3 +10,4 @@ yarn.lock
 .DS_Store
 __pycache__
 to_start.txt
+tweets_24_notendencias_raw.csv
