@@ -587,7 +587,7 @@ def trendQualityAnalysis(hashtag):
             counttwb = counttwb+1
 
     df2['tweets_by_bots'] = counttwb
-    print('no of tweet made by bot overall', counttwb)
+    # print('no of tweet made by bot overall', counttwb)
 
     # checking tweets made by human accounts
     counttwh = 0
@@ -597,7 +597,7 @@ def trendQualityAnalysis(hashtag):
             counttwh = counttwh+1
 
     df2['tweets_by_human'] = counttwh
-    print('no of tweet made by human overall', counttwh)
+    # print('no of tweet made by human overall', counttwh)
 
     # filter dataframe by time
     df2['date'] = pd.to_datetime(df2['date'], format='%Y-%m-%d %H:%M:%S%z')
@@ -626,7 +626,7 @@ def trendQualityAnalysis(hashtag):
         if (df3['username'].isin([value]).any()):
             count1 = count1 + 1
 
-    df2['bot_tweets_in_data'] = count1
+    # df2['bot_tweets_in_data'] = count1
     # print('bot number of df2 in first 1000 tweets', count1)
 
     #
@@ -722,8 +722,8 @@ def trendQualityAnalysis(hashtag):
 
     # df_dummy.head()
 
-    df = pd.read_csv('./custom_twitter_trend_dataset.csv')
-    df.head()
+    # df = pd.read_csv('./custom_twitter_trend_dataset.csv')
+    # df.head()
 
     json_object = df2.to_json()
 
