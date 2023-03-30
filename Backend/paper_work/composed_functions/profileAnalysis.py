@@ -341,7 +341,24 @@ def botRecgonation(twitter_username):
 
 
 def trendQualityAnalysis(hashtag):
-    # hashtag = "SupremeCourt"
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    hashtag = "SupremeCourt"  # comment this after passing value from frontend
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
+    #
     num_tweets = 20
 
     # TwitterHashtagScraper
@@ -377,25 +394,49 @@ def trendQualityAnalysis(hashtag):
     max_likedtweets_indexes = df2.nlargest(num_tweets, 'likes_count')[
         'likes_count'].index.tolist()
 
-    max_liked_tweets = df2.loc[max_likedtweets_indexes, 'tweet'].tolist()
+    tweets = []
+    likes_count = []
+    usernames = []
+
+    for index in max_likedtweets_indexes:
+        tweet = df2.loc[index, 'tweet']
+        likes = df2.loc[index, 'likes_count']
+        username = df2.loc[index, 'username']
+
+        tweets.append(tweet)
+        likes_count.append(likes)
+        usernames.append(username)
+
+    df2['max_liked_tweets'] = tweets
+    df2['number_max_liked_tweets'] = likes_count
+    df2['max_liked_tweet_username'] = usernames
 
     max_retweets_count_indexes = df2.nlargest(num_tweets, 'retweets_count')[
         'likes_count'].index.tolist()
 
-    max_retweets_tweets = df2.loc[max_retweets_count_indexes, 'tweet'].tolist()
+    tweet_list = []
+    retweets_count_list = []
+    username_list = []
+
+    for index in max_retweets_count_indexes:
+        tweet = df2.at[index, 'tweet']
+        retweets_count = df2.at[index, 'retweets_count']
+        username = df2.at[index, 'username']
+        tweet_list.append(tweet)
+        retweets_count_list.append(retweets_count)
+        username_list.append(username)
+
+    # create new columns in df2
+    df2['max_retweets_tweets'] = tweet_list
+    df2['number_max_retweets_tweets'] = retweets_count_list
+    df2['max_retweets_username'] = username_list
 
     df2['media_tweets'] = media_tweets
     df2['text_tweets'] = non_media_tweets
 
-    df2['number_max_liked_tweets'] = max_likedtweets_indexes
-    df2['max_liked_tweets'] = max_liked_tweets
+    # check_bot_human = 'bot/human'  # 0 - 1
 
-    df2['number_max_retweets_tweets'] = max_retweets_count_indexes
-    df2['max_retweets_tweets'] = max_retweets_tweets
-
-    check_bot_human = 'bot/human'  # 0 - 1
-
-    df2['check_bot_human'] = check_bot_human
+    # df2['check_bot_human'] = check_bot_human
 
     unique_users = df2['username'].nunique()
 
@@ -586,7 +627,7 @@ def trendQualityAnalysis(hashtag):
         if (df3['username'].isin([value]).any()):
             counttwb = counttwb+1
 
-    df2['tweets_by_bots'] = counttwb
+    df2['bot_profiles_in_data'] = counttwb
     # print('no of tweet made by bot overall', counttwb)
 
     # checking tweets made by human accounts
@@ -596,7 +637,7 @@ def trendQualityAnalysis(hashtag):
         if (df4['username'].isin([value]).any()):
             counttwh = counttwh+1
 
-    df2['tweets_by_human'] = counttwh
+    df2['human_profiles_in_data'] = counttwh
     # print('no of tweet made by human overall', counttwh)
 
     # filter dataframe by time
