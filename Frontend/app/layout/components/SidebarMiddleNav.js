@@ -78,12 +78,12 @@ export const SidebarMiddleNav = () => (
             <SidebarMenu.Item title="Calendar" to='/interface/calendar' />
         </SidebarMenu.Item> */}
     {/* -------- Graphs ---------*/}
-    {/* <SidebarMenu.Item
+    <SidebarMenu.Item
       icon={<i className="fa fa-fw fa-pie-chart"></i>}
       title="Graphs"
     >
       <SidebarMenu.Item title="ReCharts" to="/graphs/re-charts" />
-    </SidebarMenu.Item> */}
+    </SidebarMenu.Item>
     {/* -------- Forms ---------*/}
     {/* <SidebarMenu.Item
       icon={<i className="fa fa-fw fa-check-square-o"></i>}

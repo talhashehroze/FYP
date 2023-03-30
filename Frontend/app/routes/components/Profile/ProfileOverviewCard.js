@@ -6,7 +6,7 @@ import { CardTitle, Badge } from "./../../../components";
 const ProfileOverviewCard = (props) => (
   <React.Fragment>
     <div className="d-flex">
-      <CardTitle tag="h6">{props.title}</CardTitle>
+      <CardTitle style={{fontWeight:'bold', color:'#646464'}} tag="h6">{props.title}</CardTitle>
       {/* <Badge pill color={ `${ props.badgeColor }` } className="align-self-start ml-auto">
                 { props.badgeTitle }
             </Badge> */}
