@@ -1,0 +1,20 @@
+->First Time Only
+
+pip3 install git+https://github.com/JustAnotherArchivist/snscrape.git
+Frontend > npm i
+Backend > npm i
+npm install -g nodemon
+Windows PowerShell (as admin) > Set-ExecutionPolicy RemoteSigned -Scope CurrentUser 
+
+
+
+
+
+
+
+
+->Every Time
+
+Frontend > npm start
+Backend > paper_work > composed_functions > python -m flask --app .\profileAnalysis.py run
+Backend > nodemon server.js
