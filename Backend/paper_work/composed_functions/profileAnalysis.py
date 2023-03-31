@@ -342,8 +342,8 @@ def botRecgonation(twitter_username):
 
 def trendQualityAnalysis(hashtag):
 
-    hashtag = "SupremeCourt"
-    num_tweets = 10
+    # hashtag = "SupremeCourt"
+    num_tweets = 30
 
     # TwitterHashtagScraper
     # scrapper = sntwitter.TwitterSearchScraper(keyword)
@@ -805,6 +805,8 @@ def trendQualityAnalysis(hashtag):
         file.write(json_object)
         file.close()
 
+    return json_object
+
     # unique accounts
     # unique messages
     # bot list by hour
@@ -859,20 +861,20 @@ def predict():
     return jsonobj
 
 
-# @app.route("/botOrNot")
-# def predict():
-#     try:
-#         args = request.args
-#         username = args.get("name")
-#         user_df = botRecgonation(username)
-#         userDict = user_df.to_dict('records')[0]
-#         # print(dict.to_json())
-#         jsonobj = json.dumps(userDict, default=str)
+@app.route("/trendQA")
+def analyze():
+    try:
+        args = request.args
+        username = args.get("name")
+        jsonobj = trendQualityAnalysis(username)
+        # userDict = user_df.to_dict('records')[0]
+        # print(dict.to_json())
+        # jsonobj = json.dumps(userDict, default=str)
 
-#     except:
-#         msg = {}
-#         msg['msg'] = 'Bad Request'
-#         msg['StatusCode'] = 400
-#         return msg
+    except:
+        msg = {}
+        msg['msg'] = 'Bad Request'
+        msg['StatusCode'] = 400
+        return msg
 
-#     return jsonobj
+    return jsonobj

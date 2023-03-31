@@ -310,19 +310,32 @@ const getUser = async (req, res) => {
   // console.log(finaljsonarray);
   return res.status(200).send(finaljsonarray);
 };
+
 const predictUser = async (req, res) => {
   // console.log("fffff");
   let resp = await axios.get(`http://localhost:5000/botOrNot`, {
     params: req.query,
   });
   // console.log(resp.data);
-  resp.data
+  resp.data;
   return res.status(200).send(resp.data);
 };
+
+const analyzeTrend = async (req, res) => {
+  // console.log("fffff");
+  let resp = await axios.get(`http://localhost:5000/trendQA`, {
+    params: req.query,
+  });
+  // console.log(resp.data);
+  resp.data;
+  return res.status(200).send(resp.data);
+};
+
 module.exports = {
   // register,
   // login,
   predictUser,
   getUser,
+  analyzeTrend,
   // getUserWithMail,
 };

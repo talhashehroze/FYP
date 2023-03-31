@@ -105,7 +105,6 @@ export const TrendAnalysis = () => (
           <CardBody>
             <CardTitle className="mb-1 d-flex">
               <h6>Most Liked Tweets</h6>
-              
             </CardTitle>
           </CardBody>
           <Table responsive striped className="mb-0">
