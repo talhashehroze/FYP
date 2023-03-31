@@ -341,25 +341,9 @@ def botRecgonation(twitter_username):
 
 
 def trendQualityAnalysis(hashtag):
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    hashtag = "SupremeCourt"  # comment this after passing value from frontend
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    #
-    num_tweets = 20
+
+    hashtag = "SupremeCourt"
+    num_tweets = 10
 
     # TwitterHashtagScraper
     # scrapper = sntwitter.TwitterSearchScraper(keyword)
@@ -589,14 +573,22 @@ def trendQualityAnalysis(hashtag):
         botRecognition(twitter_username)
 
     human_list
+    unique_human_count = set(human_list)
 
     bot_list
+    unique_bots_count = set(bot_list)
 
     df_bot = pd.DataFrame(bot_list, columns=['username'])
     df_bot.to_csv('ide_bot.csv', index=False)
 
     df_human = pd.DataFrame(human_list, columns=['username'])
     df_human.to_csv('ide_human.csv', index=False)
+
+    df_bot_unique = pd.DataFrame(unique_bots_count, columns=['username'])
+    df_bot_unique.to_csv('ide_bot_unique.csv', index=False)
+
+    df_human_unique = pd.DataFrame(unique_human_count, columns=['username'])
+    df_human_unique.to_csv('ide_human_unique.csv', index=False)
 
     #
     #
@@ -612,6 +604,9 @@ def trendQualityAnalysis(hashtag):
     df3 = pd.read_csv("./ide_bot.csv")
     df4 = pd.read_csv("./ide_human.csv")
 
+    df7 = pd.read_csv("./ide_bot_unique.csv")
+    df8 = pd.read_csv("./ide_human_unique.csv")
+
     # # checking tweet made by bot accounts
     # count = 0
     # for i in range(num_tweets):
@@ -624,21 +619,43 @@ def trendQualityAnalysis(hashtag):
     counttwb = 0
     for i in range(num_tweets):
         value = (df2['username'][i])
-        if (df3['username'].isin([value]).any()):
-            counttwb = counttwb+1
+    if (df7['username'].isin([value]).any()):
+        counttwb = counttwb+1
 
-    df2['bot_profiles_in_data'] = counttwb
-    # print('no of tweet made by bot overall', counttwb)
+    df2['no_bots_in_data'] = counttwb
+    print('no of bot in data', counttwb)
 
     # checking tweets made by human accounts
     counttwh = 0
     for i in range(num_tweets):
         value = (df2['username'][i])
-        if (df4['username'].isin([value]).any()):
-            counttwh = counttwh+1
+    if (df8['username'].isin([value]).any()):
+        counttwh = counttwh+1
 
-    df2['human_profiles_in_data'] = counttwh
-    # print('no of tweet made by human overall', counttwh)
+    df2['analyzed_tweets'] = num_tweets
+    df2['trend_name'] = hashtag
+    df2['no_humans_in_data'] = counttwh
+    print('no of human in data', counttwh)
+
+    # checking tweets made by bot accounts
+    counttwb = 0
+    for i in range(num_tweets):
+        value = (df2['username'][i])
+    if (df3['username'].isin([value]).any()):
+        counttwb = counttwb+1
+
+    df2['tweets_by_bots'] = counttwb
+    print('no of tweet made by bot overall', counttwb)
+
+    # checking tweets made by human accounts
+    counttwh = 0
+    for i in range(num_tweets):
+        value = (df2['username'][i])
+    if (df4['username'].isin([value]).any()):
+        counttwh = counttwh+1
+
+    df2['tweets_by_human'] = counttwh
+    print('no of tweet made by human overall', counttwh)
 
     # filter dataframe by time
     df2['date'] = pd.to_datetime(df2['date'], format='%Y-%m-%d %H:%M:%S%z')
@@ -655,17 +672,17 @@ def trendQualityAnalysis(hashtag):
     count1 = 0
     for i in range(num_tweets):
         value = (df2.iloc[i]['username'])
-        if (df3['username'].isin([value]).any()):
-            count1 = count1 + 1
+    if (df3['username'].isin([value]).any()):
+        count1 = count1 + 1
 
-    df2['bot_tweets_in_data'] = count1
+    # df2['bot_tweets_in_data'] = count1
 
     # checking ratio of human in first 1000
-    count1 = 0
+    count2 = 0
     for i in range(num_tweets):
         value = (df2.iloc[i]['username'])
-        if (df3['username'].isin([value]).any()):
-            count1 = count1 + 1
+    if (df3['username'].isin([value]).any()):
+        count2 = count2 + 1
 
     # df2['bot_tweets_in_data'] = count1
     # print('bot number of df2 in first 1000 tweets', count1)
@@ -763,12 +780,15 @@ def trendQualityAnalysis(hashtag):
 
     # df_dummy.head()
 
-    # df = pd.read_csv('./custom_twitter_trend_dataset.csv')
-    # df.head()
+    df = pd.read_csv('./custom_twitter_trend_dataset.csv')
+    df.head()
 
     json_object = df2.to_json()
 
     # print(json_object)
+
+    import json
+    from pathlib import Path
 
     # jsonobjc = json.dumps(json_object)
     # data_folder = Path("")
