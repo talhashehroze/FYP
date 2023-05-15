@@ -1328,6 +1328,20 @@ export const TrendQuality = () => {
         1: 10,
         0: 10,
       },
+      timeline: {
+        9: 10,
+        7: 10,
+        8: 10,
+        5: 10,
+        6: 10,
+        4: 10,
+        3: 10,
+        2: 10,
+        1: 10,
+        0: [{'name': 'Hour 1', 'human': 12, 'bot': 4}, {'name': 'Hour 2', 'human': 157, 'bot': 10}, 
+        {'name': 'Hour 3', 'human': 32, 'bot': 40}, {'name': 'Hour 4', 'human': 16, 'bot': 13}, 
+        {'name': 'Hour 5', 'human': 19, 'bot': 61}, {'name': 'Hour 6', 'human': 16, 'bot': 70}]
+      },
     },
   ]);
 
@@ -1624,7 +1638,7 @@ export const TrendQuality = () => {
                 <h6>Trend Timeline</h6>
               </CardTitle>
               <div className="d-flex justify-content-center">
-                <StackedAreaChart />
+                <StackedAreaChart data={data[0]?.timeline["0"]}/>
               </div>
             </CardBody>
           </Card>

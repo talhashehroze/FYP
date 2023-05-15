@@ -75,12 +75,9 @@ const generateTriangle =
     );
   };
 
-const data = [{'name': 'Hour 1', 'human': 12, 'bot': 4}, {'name': 'Hour 2', 'human': 157, 'bot': 10}, 
-{'name': 'Hour 3', 'human': 32, 'bot': 40}, {'name': 'Hour 4', 'human': 16, 'bot': 13}, 
-{'name': 'Hour 5', 'human': 19, 'bot': 61}, {'name': 'Hour 6', 'human': 16, 'bot': 70}]
 
 
-const StackedAreaChart = (props) => (
+const NewStackedAreaChart = (props) => (
   <ResponsiveContainer width="100%" aspect={6.0 / 3.0}>
     <AreaChart data={props.data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
       <CartesianGrid strokeDasharray="3 3" />
@@ -88,7 +85,7 @@ const StackedAreaChart = (props) => (
       <YAxis />
       <Tooltip />
       <Area
-        dataKey="human"
+        dataKey="tweets"
         stackId="1"
         stroke={colors["purple"]}
         fill={colors["purple-04"]}
@@ -103,25 +100,10 @@ const StackedAreaChart = (props) => (
           fill: colors["purple"],
         })}
       />
-      <Area
-        dataKey="bot"
-        stackId="1"
-        stroke={colors["primary"]}
-        fill={colors["primary-04"]}
-        dot={generateSquare({
-          height: 5,
-          stroke: colors["primary"],
-          fill: colors["primary"],
-        })}
-        activeDot={generateSquare({
-          height: 7,
-          stroke: colors["primary"],
-          fill: colors["primary"],
-        })}
-      />
+     
     
     </AreaChart>
   </ResponsiveContainer>
 );
 
-export { StackedAreaChart };
+export { NewStackedAreaChart };

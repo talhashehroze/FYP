@@ -2,7 +2,7 @@ import React from "react";
 import _ from "lodash";
 import { faker } from "@faker-js/faker";
 
-const RecentAndPopTweetTable = ({data,count,txt}) =>{
+const MentionUsers = ({data,count}) =>{
   console.log("data");
   console.log(count);
   return(
@@ -14,10 +14,9 @@ const RecentAndPopTweetTable = ({data,count,txt}) =>{
           <span className="text-inverse">{data[index]}</span>
         </td>
         <td className="align-middle">{count[index]}</td>
-        <td className="align-middle text-nowrap">{txt[index]?.substring(0, 25)}</td>
       </tr>
     ))}
   </React.Fragment>
 );
     }
-export { RecentAndPopTweetTable };
+export { MentionUsers };
