@@ -25,106 +25,29 @@ import {
   button,
   textarea,
 } from "../../components";
+import { CopyBlock, solarizedLight } from "react-code-blocks";
 import { HeaderMain } from "../components/HeaderMain";
 export const DeveloperPortal = () => {
-  const [color, setcolor] = useState("#F9FAFC");
-  const [Keyword1, setkeyword1] = useState("");
-  const [Keyword2, setkeyword2] = useState("");
-  const [Keyword3, setkeyword3] = useState("");
-  const handleKeywordChange1 = (event) => {
-    setkeyword1(event.target.value);
-
-    console.log("value is:", event.target.value);
-  };
-  const handleKeywordChange2 = (event) => {
-    setkeyword2(event.target.value);
-
-    console.log("value is:", event.target.value);
-  };
-  const handleKeywordChange3 = (event) => {
-    setkeyword3(event.target.value);
-
-    console.log("value is:", event.target.value);
-  };
+  const [Apikey, setApikey] = useState("Click your button below for you devloper API token");
+ 
+  
   const handleButton = () => {
-    // setkeyword1(event.target.value);
-    // console.log("value is:", event.target.value);
-    setkeyword1("");
-    setkeyword2("");
-    setkeyword3("");
-    alert("Application Submitted");
+    setApikey(localStorage.getItem('token'))
+    
   };
   return (
     <Container>
       <HeaderMain title="Developer Portal" className="mb-5 mt-4" />
       <Card className="mb-3">
         <CardBody>
-          <Form className="my-form" action="" method="post">
-            <div className="field">
-              <label for="name">Name</label>
-              <Input
-                style={{
-                  backgroundColor: "#F9FAFC",
-                  width: "100%",
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                  borderRadius: 3,
-                  borderWidth: 1,
-                  borderStyle: "solid",
-                  borderColor: "black",
-                }}
-                type="text"
-                name="name"
-                id="name"
-                required
-                onChange={handleKeywordChange1}
-                value={Keyword1}
-              />
-            </div>
-            <div className="field">
-              <label for="email">Email</label>
-              <Input
-                style={{
-                  backgroundColor: "#F9FAFC",
-                  width: "100%",
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                  borderRadius: 3,
-                  borderWidth: 1,
-                  borderStyle: "solid",
-                  borderColor: "black",
-                }}
-                type="email"
-                name="eemail"
-                id="email"
-                required
-                onChange={handleKeywordChange2}
-                value={Keyword2}
-              />
-            </div>
-            <div className="field">
-              <label for="name">Message</label>
-              <textarea
-                onClick={() => setcolor("white")}
-                onMouseLeave={() => setcolor("white")}
-                style={{
-                  backgroundColor: "#F9FAFC",
-                  width: "100%",
-                  paddingTop: 10,
-                  paddingBottom: 10,
-                  borderRadius: 3,
-                  borderWidth: 1,
-                  borderStyle: "solid",
-                }}
-                typeof="text"
-                rows="5"
-                name="msg"
-                id="msg"
-                required
-                onChange={handleKeywordChange3}
-                value={Keyword3}
-              />
-            </div>
+          <CopyBlock
+
+            language={'js'}
+            text={Apikey}
+            showLineNumbers={false}
+            theme={solarizedLight}
+            wrapLines={false}
+        />
             <Button
               style={{
                 backgroundColor: "#006A6D",
@@ -136,10 +59,9 @@ export const DeveloperPortal = () => {
               type="button"
               onClick={handleButton}
             >
-              Search
+              Get Token
               {/* <button onclick="myFunction()">alert("Form Submitted");</button> */}
             </Button>
-          </Form>
         </CardBody>
       </Card>
     </Container>

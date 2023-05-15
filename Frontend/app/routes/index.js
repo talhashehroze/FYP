@@ -114,7 +114,7 @@ import DeveloperPortal from "./DeveloperPortal";
 export const RoutedContent = () => {
   return (
     <Switch>
-      <Redirect from="/" to="/dashboards/projects" exact />
+      <Redirect from="/" to={localStorage.getItem("token")? "/dashboards/projects" : "/pages/login"} exact />
 
       <Route path="/dashboards/analytics" exact component={Analytics} />
       <Route path="/dashboards/projects" exact component={ProjectsDashboard} />
