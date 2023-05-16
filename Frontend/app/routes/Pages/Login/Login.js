@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Paper ,Typography} from "@mui/material";
+import colors from "../../../colors";
+import { Alert } from 'reactstrap';
 
 import {
   Form,
@@ -17,13 +20,20 @@ import { useHistory } from "react-router-dom";
 import { HeaderAuth } from "../../components/Pages/HeaderAuth";
 
 
-
+const COLORS = [
+  colors["primary"],
+  colors["red"],
+  colors["success"],
+  colors["yellow"],
+];
 
 const Login = () => {
 
   const history = useHistory();
   const [email, setEmail] = useState('')
-  const [password, setpassword]= useState('')
+  const [password, setpassword] = useState('')
+    const [error,setError]=useState("")
+
 
 
   const onFieldChange = async (e) => { 
@@ -51,9 +61,11 @@ const Login = () => {
       // setBearer(user.token);
       // dispatch(loginSuccess({ user }));
     
-    } catch (erro) {
+    } catch (errorPromise) {
       // console.error(error)
-      console.log(erro);
+        let error = await errorPromise;
+      setError(error.response.data.errMessage);
+      console.error(error.response);
     }
 
 
@@ -66,12 +78,15 @@ const Login = () => {
 
 
   return (
+    
     <EmptyLayout>
-      <EmptyLayout.Section center>
+      <EmptyLayout.Section  center>
         {/* START Header */}
+        <Paper elevation={3} sx={{width:"150%", padding:"5rem"}}>
         <HeaderAuth title="Sign In to Application" />
         {/* END Header */}
         {/* START Form */}
+        
         <Form className="mb-3">
           <FormGroup>
             <Label for="emailAdress">Email Adress</Label>
@@ -83,9 +98,7 @@ const Login = () => {
               className="bg-white"
               onChange={onFieldChange}
             />
-            <FormText color="muted">
-              We&amp;ll never share your email with anyone else.
-            </FormText>
+            
           </FormGroup>
           <FormGroup>
             <Label for="password">Password</Label>
@@ -98,14 +111,14 @@ const Login = () => {
                onChange={onFieldChange}
             />
           </FormGroup>
-          <FormGroup>
-            <CustomInput
-              type="checkbox"
-              id="rememberPassword"
-              label="Remember Password"
-              inline
-            />
-          </FormGroup>
+             {/* START Bottom Links */}
+        <div className="d-flex mt-1 mb-1">
+        <Link to="/pages/register" className="ml-auto text-decoration-none">
+            Register
+          </Link>
+        
+        </div>
+        {/* END Bottom Links */}
           <ThemeConsumer>
             {({ color }) => (
               <Button color={color} block onClick={submitLogin}>
@@ -115,21 +128,22 @@ const Login = () => {
           </ThemeConsumer>
         </Form>
         {/* END Form */}
-        {/* START Bottom Links */}
-        <div className="d-flex mb-5">
-          <Link to="/pages/forgotpassword" className="text-decoration-none">
-            Forgot Password
-          </Link>
-          <Link to="/pages/register" className="ml-auto text-decoration-none">
-            Register
-          </Link>
-        </div>
-        {/* END Bottom Links */}
+       
         {/* START Footer */}
         {/* <FooterAuth /> */}
-        {/* END Footer */}
+          {/* END Footer */}
+           {error && (<Alert color="danger" style={{
+            
+        backgroundColor: 'rgba(248, 215, 218, 0.5)'
+      }}>
+        
+          <Typography style={{fontSize:'15px',color:'#792046' ,display:'inline'}} > {error} </Typography>  
+        {/* </span> */}
+      </Alert>)}
+            </Paper>
       </EmptyLayout.Section>
-    </EmptyLayout>
+      </EmptyLayout>
+    
   );
 }
 
