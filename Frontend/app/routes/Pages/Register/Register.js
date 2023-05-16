@@ -13,9 +13,9 @@ import {
   EmptyLayout,
   ThemeConsumer,
 } from "./../../../components";
-import { Alert } from 'reactstrap';
+import { Alert } from "reactstrap";
 
-import { Paper,Typography } from "@mui/material";
+import { Paper, Typography } from "@mui/material";
 import { HeaderAuth } from "../../components/Pages/HeaderAuth";
 import { FooterAuth } from "../../components/Pages/FooterAuth";
 import Axios from "axios";
@@ -29,60 +29,53 @@ const COLORS = [
 ];
 
 const Register = () => {
-  const [username, setUsername] = useState("")
-  const [password,setpassword ]=useState("")
-  const [email, setEmail] = useState("")
-  const [error,setError]=useState("")
-  
-  const history=useHistory()
+  const [username, setUsername] = useState("");
+  const [password, setpassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  const history = useHistory();
 
   const submitSignup = async () => {
-
     // dispatch(loginStart());
     try {
-      
-      const res = await Axios.post("http://localhost:3001/" + "user/register", { email, password,name:username });
+      const res = await Axios.post("http://localhost:3001/" + "user/register", {
+        email,
+        password,
+        name: username,
+      });
       const { user, message } = res.data;
       // localStorage.setItem("token", user.token);
       // Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
       history.push("/pages/login");
       // setBearer(user.token);
       // dispatch(loginSuccess({ user }));
-    
     } catch (errorPromise) {
       // console.error(error)
       let error = await errorPromise;
       setError(error.response.data.errMessage);
       console.error(error.response);
     }
+  };
 
-
-  }
-
-
-const onFieldChange = async (e) => { 
-  
-  switch (e.target.name) {
-       case 'text':
-        setUsername(e.target.value)
-        break
-      case 'password':
-        setpassword(e.target.value)
-        break
-      case 'email':
+  const onFieldChange = async (e) => {
+    switch (e.target.name) {
+      case "text":
+        setUsername(e.target.value);
+        break;
+      case "password":
+        setpassword(e.target.value);
+        break;
+      case "email":
         setEmail(e.target.value);
-        break
-
+        break;
     }
-}
-
-
+  };
 
   return (
     <EmptyLayout>
       <EmptyLayout.Section center>
         <Paper elevation={3} sx={{ width: "150%", padding: "5rem" }}>
-
           {/* START Header */}
           <HeaderAuth title="Create Account" />
           {/* END Header */}
@@ -110,7 +103,7 @@ const onFieldChange = async (e) => {
                 className="bg-white"
               />
             </FormGroup>
-  
+
             <FormGroup>
               <Label for="emailAdress">Email Adress</Label>
               <Input
@@ -125,7 +118,7 @@ const onFieldChange = async (e) => {
                         We&amp;ll never share your email with anyone else.
                     </FormText> */}
             </FormGroup>
-          
+
             <ThemeConsumer>
               {({ color }) => (
                 <Button color={color} onClick={submitSignup}>
@@ -136,24 +129,35 @@ const onFieldChange = async (e) => {
           </Form>
           {/* END Form */}
           {/* START Bottom Links */}
-       
+
           {/* END Bottom Links */}
           {/* START Footer */}
           {/* <FooterAuth /> */}
           {/* END Footer */}
-          {error && (<Alert color="danger" style={{
-            
-        backgroundColor: 'rgba(248, 215, 218, 0.5)'
-      }}>
-        
-          <Typography style={{fontSize:'15px',color:'#792046' ,display:'inline'}} > {error} </Typography>  
-        {/* </span> */}
-      </Alert>)}
+          {error && (
+            <Alert
+              color="danger"
+              style={{
+                backgroundColor: "rgba(248, 215, 218, 0.5)",
+              }}
+            >
+              <Typography
+                style={{
+                  fontSize: "15px",
+                  color: "#792046",
+                  display: "inline",
+                }}
+              >
+                {" "}
+                {error}{" "}
+              </Typography>
+              {/* </span> */}
+            </Alert>
+          )}
         </Paper>
-
       </EmptyLayout.Section>
     </EmptyLayout>
   );
-}
+};
 
 export default Register;
