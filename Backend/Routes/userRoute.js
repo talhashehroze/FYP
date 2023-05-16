@@ -7,6 +7,7 @@ router.post("/login", userController.login);
 router.get("/get-user", userController.getUser);
 router.get("/predict-user", userController.predictUser);
 router.get("/trendQA", userController.analyzeTrend);
+// router.get("/trend-analysis", userController.analyzeTrend);
 
 // router.post("/get-user-with-email", userController.getUserWithMail);
 
