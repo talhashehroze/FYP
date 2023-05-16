@@ -80,7 +80,7 @@ const NewEmail = () => (
               <div className="mb-4">
                 <InputGroup className="mb-3">
                   <InputGroupAddon addonType="prepend">To:</InputGroupAddon>
-                  <Input placeholder="Enter email(s)..." />
+                  <Input placeholder="Enter Email(s)..." />
                   <InputGroupAddon addonType="append">
                     <Button color="secondary" outline>
                       <i className="fa fa-fw fa-plus"></i>
@@ -91,7 +91,7 @@ const NewEmail = () => (
                   <Col sm={12} lg={6} className="mb-3 mb-lg-0">
                     <InputGroup>
                       <InputGroupAddon addonType="prepend">CC:</InputGroupAddon>
-                      <Input placeholder="Enter email(s)..." />
+                      <Input placeholder="Enter Email(s)..." />
                     </InputGroup>
                   </Col>
                   <Col sm={12} lg={6}>
@@ -99,7 +99,7 @@ const NewEmail = () => (
                       <InputGroupAddon addonType="prepend">
                         BCC:
                       </InputGroupAddon>
-                      <Input placeholder="Enter email(s)..." />
+                      <Input placeholder="Enter Email(s)..." />
                     </InputGroup>
                   </Col>
                 </Row>

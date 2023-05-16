@@ -10,10 +10,12 @@ import ast
 import numpy as np
 import pandas as pd
 import snscrape.modules.twitter as sntwitter
+
 # import snscrape.modules.twitter as sntwitter
 # import pandas as pd
 from joblib import dump, load
 from textblob import TextBlob
+
 # import datetime
 
 from flask import Flask, request
@@ -46,44 +48,75 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
         user = scrapper.entity
 
         def human_format(num):
-            if (num):
+            if num:
                 magnitude = 0
                 while abs(num) >= 1000:
                     magnitude += 1
                     num /= 1000.0
                 # add more suffixes if you need them
-                return '%.2f%s' % (num, ['', 'K', 'M', 'G', 'T', 'P'][magnitude])
+                return "%.2f%s" % (num, ["", "K", "M", "G", "T", "P"][magnitude])
 
         user.followersCount = human_format(user.followersCount)
         user.friendsCount = human_format(user.friendsCount)
 
-        list1.append([user.username, user.id, user.displayname,
-                      user.renderedDescription, user.verified, user.created,
-                      user.followersCount, user.friendsCount, user.statusesCount,
-                      user.favouritesCount, user.listedCount, user.mediaCount, user.location,
-                      user.protected, user.link, user.profileImageUrl])
+        list1.append(
+            [
+                user.username,
+                user.id,
+                user.displayname,
+                user.renderedDescription,
+                user.verified,
+                user.created,
+                user.followersCount,
+                user.friendsCount,
+                user.statusesCount,
+                user.favouritesCount,
+                user.listedCount,
+                user.mediaCount,
+                user.location,
+                user.protected,
+                user.link,
+                user.profileImageUrl,
+            ]
+        )
 
     except:
-        print('fail')
+        print("fail")
         return None
 
-    user_df = pd.DataFrame(list1, columns=['username', 'id', 'displayname',
-                                           'renderedDescription', 'verified', 'created',
-                                           'followersCount', 'friendsCount', 'statusesCount',
-                                           'favouritesCount', 'listedCount', 'mediaCount', 'location',
-                                           'protected', 'link', 'profileImageUrl'])
+    user_df = pd.DataFrame(
+        list1,
+        columns=[
+            "username",
+            "id",
+            "displayname",
+            "renderedDescription",
+            "verified",
+            "created",
+            "followersCount",
+            "friendsCount",
+            "statusesCount",
+            "favouritesCount",
+            "listedCount",
+            "mediaCount",
+            "location",
+            "protected",
+            "link",
+            "profileImageUrl",
+        ],
+    )
 
     current_time = datetime.datetime.now()
 
     for i, tweet in enumerate(sntwitter.TwitterUserScraper(username).get_items()):
-        if (justOneYear == True):
-            if ((current_time.year-tweet.date.year)):
-                print('year end')
+        if justOneYear == True:
+            if current_time.year - tweet.date.year:
+                print("year end")
                 break
 
-        if (justOneMonth == True):
-            if ((current_time.month-tweet.date.month)):
-                print('month end')
+        if justOneMonth == True:
+            if current_time.month - tweet.date.month:
+                print("month end")
                 break
 
         # print(tweet.date.day)
@@ -94,88 +127,125 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
 
         #################################################################################
         #################################################################################
-        if (justOneWeek == True):
-            if ((current_time.month-tweet.date.month)):
-                print('week end')
+        if justOneWeek == True:
+            if current_time.month - tweet.date.month:
+                print("week end")
                 break
 
-        tweetItem = [tweet.date, tweet.id, tweet.rawContent, tweet.user.username, tweet.lang,
-                     tweet.hashtags, tweet.replyCount, tweet.retweetCount, tweet.likeCount,
-                     tweet.quoteCount, tweet.media, tweet.sourceLabel, tweet.quotedTweet, tweet.mentionedUsers]
+        tweetItem = [
+            tweet.date,
+            tweet.id,
+            tweet.rawContent,
+            tweet.user.username,
+            tweet.lang,
+            tweet.hashtags,
+            tweet.replyCount,
+            tweet.retweetCount,
+            tweet.likeCount,
+            tweet.quoteCount,
+            tweet.media,
+            tweet.sourceLabel,
+            tweet.quotedTweet,
+            tweet.mentionedUsers,
+        ]
         # print(tweetItem)
 
         user_tweets_list.append(tweetItem)
 
     # print(user_tweets_list[0])
-    user_tweets_df = pd.DataFrame(user_tweets_list, columns=['DateTime', 'TweetId', 'Text', 'Username', 'Language',
-                                                             'Hashtags', 'ReplyCount', 'RetweetCount', 'LikeCount',
-                                                             'QuoteCount', 'Media', 'Source', 'quotedTweet', 'mentionedUsers'])
+    user_tweets_df = pd.DataFrame(
+        user_tweets_list,
+        columns=[
+            "DateTime",
+            "TweetId",
+            "Text",
+            "Username",
+            "Language",
+            "Hashtags",
+            "ReplyCount",
+            "RetweetCount",
+            "LikeCount",
+            "QuoteCount",
+            "Media",
+            "Source",
+            "quotedTweet",
+            "mentionedUsers",
+        ],
+    )
 
-    if (len(user_tweets_df['DateTime']) == 0):
-        print('nolength')
+    if len(user_tweets_df["DateTime"]) == 0:
+        print("nolength")
         msg = {}
-        msg['msg'] = 'NOTweet'
-        msg['StatusCode'] = 503
+        msg["msg"] = "NOTweet"
+        msg["StatusCode"] = 503
         return msg
 
-    user_tweets_df['Hour'] = user_tweets_df['DateTime'].dt.hour
+    user_tweets_df["Hour"] = user_tweets_df["DateTime"].dt.hour
 
-    user_tweets_df['Year'] = user_tweets_df['DateTime'].dt.year
+    user_tweets_df["Year"] = user_tweets_df["DateTime"].dt.year
 
-    user_tweets_df['Month'] = user_tweets_df['DateTime'].dt.month
+    user_tweets_df["Month"] = user_tweets_df["DateTime"].dt.month
 
-    user_tweets_df['MonthName'] = user_tweets_df['DateTime'].dt.month_name()
+    user_tweets_df["MonthName"] = user_tweets_df["DateTime"].dt.month_name()
 
-    user_tweets_df['MonthDay'] = user_tweets_df['DateTime'].dt.day
+    user_tweets_df["MonthDay"] = user_tweets_df["DateTime"].dt.day
 
-    user_tweets_df['DayName'] = user_tweets_df['DateTime'].dt.day_name()
+    user_tweets_df["DayName"] = user_tweets_df["DateTime"].dt.day_name()
 
-    user_tweets_df['InteractionRating'] = (user_tweets_df['LikeCount'])+(
-        user_tweets_df['RetweetCount']*2)+(user_tweets_df['ReplyCount']*3)
+    user_tweets_df["InteractionRating"] = (
+        (user_tweets_df["LikeCount"])
+        + (user_tweets_df["RetweetCount"] * 2)
+        + (user_tweets_df["ReplyCount"] * 3)
+    )
 
-    user_tweets_df['Week'] = user_tweets_df['DateTime'].dt.day_of_year/7
+    user_tweets_df["Week"] = user_tweets_df["DateTime"].dt.day_of_year / 7
 
-    user_tweets_df['Week'] = user_tweets_df['Week'].apply(np.ceil)
+    user_tweets_df["Week"] = user_tweets_df["Week"].apply(np.ceil)
 
-    user_tweets_df['Week'] = user_tweets_df['Week'].astype(int)
+    user_tweets_df["Week"] = user_tweets_df["Week"].astype(int)
 
-    user_tweets_df['Date'] = [d.date() for d in user_tweets_df['DateTime']]
+    user_tweets_df["Date"] = [d.date() for d in user_tweets_df["DateTime"]]
 
-    user_tweets_df['Time'] = [d.time() for d in user_tweets_df['DateTime']]
+    user_tweets_df["Time"] = [d.time() for d in user_tweets_df["DateTime"]]
 
-    lastYearTweets = user_tweets_df[user_tweets_df['Year']
-                                    == user_tweets_df['Year'].max()]
+    lastYearTweets = user_tweets_df[
+        user_tweets_df["Year"] == user_tweets_df["Year"].max()
+    ]
 
-    lastMonthTweets = lastYearTweets[lastYearTweets['Month']
-                                     == lastYearTweets['Month'].max()]
+    lastMonthTweets = lastYearTweets[
+        lastYearTweets["Month"] == lastYearTweets["Month"].max()
+    ]
 
-    lastweekTweets = lastMonthTweets[lastMonthTweets['Week']
-                                     == lastMonthTweets['Week'].max()]
-    mostInteractedLastYear = lastYearTweets[lastYearTweets['InteractionRating']
-                                            == lastYearTweets['InteractionRating'].max()]
+    lastweekTweets = lastMonthTweets[
+        lastMonthTweets["Week"] == lastMonthTweets["Week"].max()
+    ]
+    mostInteractedLastYear = lastYearTweets[
+        lastYearTweets["InteractionRating"] == lastYearTweets["InteractionRating"].max()
+    ]
 
-    mostInteractedLastWeek = lastweekTweets[lastweekTweets['InteractionRating']
-                                            == lastweekTweets['InteractionRating'].max()]
+    mostInteractedLastWeek = lastweekTweets[
+        lastweekTweets["InteractionRating"] == lastweekTweets["InteractionRating"].max()
+    ]
 
-    mostInteractedLastMonth = lastMonthTweets[lastMonthTweets['InteractionRating']
-                                              == lastMonthTweets['InteractionRating'].max()]
+    mostInteractedLastMonth = lastMonthTweets[
+        lastMonthTweets["InteractionRating"]
+        == lastMonthTweets["InteractionRating"].max()
+    ]
 
     # user_tweets_df['week_since']=user_tweets_df['Year']
 
-    user_tweets_df['DaysSince'] = user_tweets_df['Date'] - \
-        datetime.date(2006, 7, 15)
+    user_tweets_df["DaysSince"] = user_tweets_df["Date"] - datetime.date(2006, 7, 15)
     # print(user_tweets_df['DaysSince'])
 
-    user_tweets_df['DaysSince'] = user_tweets_df['DaysSince'].map(
-        lambda x: x.days)
+    user_tweets_df["DaysSince"] = user_tweets_df["DaysSince"].map(lambda x: x.days)
     # print(user_tweets_df['DaysSince'])
 
-    user_tweets_df['WeeksSince'] = (user_tweets_df['DaysSince']/7)
-    user_tweets_df['WeeksSince'] = user_tweets_df['WeeksSince'].apply(np.ceil)
+    user_tweets_df["WeeksSince"] = user_tweets_df["DaysSince"] / 7
+    user_tweets_df["WeeksSince"] = user_tweets_df["WeeksSince"].apply(np.ceil)
     # print(user_tweets_df['WeeksSince'])
 
     fourweeklistcount = []
-    unqweeklist = user_tweets_df['WeeksSince'].unique().tolist()
+    unqweeklist = user_tweets_df["WeeksSince"].unique().tolist()
 
     # if(len(unqweeklist)>=4):
     #     length=4
@@ -185,272 +255,65 @@ def profileAnalyis(username, justOneYear, justOneMonth, justOneWeek):
     week = unqweeklist[0]
 
     for i in range(4):
-        vvr = user_tweets_df[user_tweets_df['WeeksSince'] == week]
+        vvr = user_tweets_df[user_tweets_df["WeeksSince"] == week]
         fourweeklistcount.append(len(vvr))
-        week = week-1
+        week = week - 1
     # print(fourweeklistcount)
 
     # weekcountdic = dict(weekse[1]=fourweeklistcount[1])
 
     scrapper = sntwitter.TwitterProfileScraper(username)
 
-    SourceList = user_tweets_df['Source'].unique().tolist()
+    SourceList = user_tweets_df["Source"].unique().tolist()
 
-    user_df['sources'] = [SourceList]
+    user_df["sources"] = [SourceList]
 
-    userDict = user_df.to_dict('records')[0]
+    userDict = user_df.to_dict("records")[0]
 
     # user_tweets_df1=user_tweets_df[['DayName','Month','Week','MonthName','Year']]
     # userTWDict = user_tweets_df1.to_dict('records')
-    LastYearDict = mostInteractedLastYear.to_dict('records')[0]
-    LastWeekDict = mostInteractedLastWeek.to_dict('records')[0]
-    LastMonthDict = mostInteractedLastMonth.to_dict('records')[0]
-    userDict['mostInteractedLastMonth'] = LastMonthDict
-    userDict['mostInteractedLastWeek'] = LastWeekDict
-    userDict['mostInteractedLastYear'] = LastYearDict
-    TweetTimeline = user_tweets_df['DateTime'].to_list()
+    LastYearDict = mostInteractedLastYear.to_dict("records")[0]
+    LastWeekDict = mostInteractedLastWeek.to_dict("records")[0]
+    LastMonthDict = mostInteractedLastMonth.to_dict("records")[0]
+    userDict["mostInteractedLastMonth"] = LastMonthDict
+    userDict["mostInteractedLastWeek"] = LastWeekDict
+    userDict["mostInteractedLastYear"] = LastYearDict
+    TweetTimeline = user_tweets_df["DateTime"].to_list()
     TweetTimeline
-    userDict['TweetTimeline'] = TweetTimeline
-    userDict['fourweeklistcount'] = fourweeklistcount
-    userDict['msg'] = 'Successful'
-    userDict['StatusCode'] = 200
+    userDict["TweetTimeline"] = TweetTimeline
+    userDict["fourweeklistcount"] = fourweeklistcount
+    userDict["msg"] = "Successful"
+    userDict["StatusCode"] = 200
     return userDict
 
 
 def botRecgonation(twitter_username):
-
     tweets_list = []
     scrapper = sntwitter.TwitterProfileScraper(twitter_username)
     user = scrapper.entity
     try:
         if user.profileImageUrl.startswith(
-                "https://abs.twimg.com/sticky/default_profile_images/"):
-            xdefault_profile_image = 'TRUE'
+            "https://abs.twimg.com/sticky/default_profile_images/"
+        ):
+            xdefault_profile_image = "TRUE"
         else:
-            xdefault_profile_image = 'FALSE'
+            xdefault_profile_image = "FALSE"
 
         # # custom logic
-        if xdefault_profile_image == 'FALSE' or user.profileBannerUrl or user.renderedDescription or user.verified or user.location or user.link:
-            xdefaultProfile = 'FALSE'
+        if (
+            xdefault_profile_image == "FALSE"
+            or user.profileBannerUrl
+            or user.renderedDescription
+            or user.verified
+            or user.location
+            or user.link
+        ):
+            xdefaultProfile = "FALSE"
         else:
-            xdefaultProfile = 'TRUE'
+            xdefaultProfile = "TRUE"
 
-        tweets_list.append([
-            user.created,
-            xdefaultProfile,
-            xdefault_profile_image,
-            user.renderedDescription,
-            user.favouritesCount,
-            user.followersCount,
-            user.friendsCount,
-            # user.geo_enabled,
-            user.id,
-            user.location,
-            user.profileBannerUrl,
-            user.profileImageUrl,
-            user.username,
-            user.statusesCount,
-            user.verified,
-            user.statusesCount /
-            (pd.Timestamp.now().date() - user.created.date()).days,
-            (pd.Timestamp.now().date() - user.created.date()).days,
-        ])
-
-        user_df = pd.DataFrame(
-            tweets_list,
-            columns=[
-                'created_at',
-                'default_profile',
-                'default_profile_image',
-                'description',
-                'favourites_count',
-                'followers_count',
-                'friends_count',
-                # 'geo_enabled',
-                'id',
-                'location',
-                'profile_background_image_url',
-                'profile_image_url',
-                'screen_name',
-                'statuses_count',
-                'verified',
-                'average_tweets_per_day',
-                'account_age_days',
-            ])
-
-    except:
-        dict = {'result': [-1]}
-        user_df = pd.DataFrame(dict)
-        return user_df
-
-    if (user_df['average_tweets_per_day'][0] < 0.2):
-        user_df['result'] = 0
-        return user_df
-
-    user_df.verified = user_df.verified.astype('bool')
-    user_df.verified = user_df.verified.astype(int)
-    user_df.default_profile = user_df.default_profile.astype('bool')
-    user_df.default_profile = user_df.default_profile.astype(int)
-    user_df.default_profile_image = user_df.default_profile_image.astype(
-        'bool')
-    user_df.default_profile_image = user_df.default_profile_image.astype(int)
-
-    user_df.followers_count = user_df.followers_count.astype(int)
-    user_df.friends_count = user_df.friends_count.astype(int)
-    user_df.favourites_count = user_df.favourites_count.astype(int)
-    user_df.statuses_count = user_df.statuses_count.astype(int)
-
-    user_df["screen_name_len"] = [len(i) for i in user_df["screen_name"]]
-    user_df["bot_is_substr"] = [int('bot' in i.lower())
-                                for i in user_df["screen_name"]]
-    user_df["bot_in_des"] = [int('bot' in str(i).lower())
-                             for i in user_df['description']]
-
-    # Getting the ages in years from created_at
-    ages = []
-    for i in user_df["created_at"]:
-        year = i.year
-        age = 17-year
-        ages.append(age)
-    user_df["age"] = ages
-
-    descriptions = [TextBlob(str(txt)) for txt in user_df['description']]
-
-    # Creating lists of the polarity and the descriptions
-    desc_pol = [blob.sentiment.polarity for blob in descriptions]
-    desc_subj = [blob.sentiment.subjectivity for blob in descriptions]
-
-    # Turning them into features
-    user_df["desc_pol"] = desc_pol
-    user_df["desc_subj"] = desc_subj
-    features = ['age', 'followers_count', 'friends_count', 'favourites_count', 'statuses_count',
-                'screen_name_len', 'bot_in_des', 'bot_is_substr', 'desc_pol', 'desc_subj']
-
-    # clf=load('randomforest.joblib')
-    # features = ['age','followers_count','friends_count','favourites_count','statuses_count','screen_name_len','bot_in_des','bot_is_substr', 'desc_pol','desc_subj']
-    # pre=clf.predict(user_df[features])
-    # print(pre)
-
-    # //better
-    clf = load('randomforest1.joblib')
-
-    pre = clf.predict(user_df[features])
-    print(pre)
-    user_df['result'] = pre
-    return user_df
-
-
-def trendQualityAnalysis(hashtag):
-
-    # hashtag = "SupremeCourt"
-    num_tweets = 30
-
-    # TwitterHashtagScraper
-    # scrapper = sntwitter.TwitterSearchScraper(keyword)
-
-    tweets_list = []
-
-    for i, tweet in enumerate(sntwitter.TwitterSearchScraper(hashtag + ' lang:en').get_items()):
-        if i >= num_tweets:
-            break
-        tweets_list.append([tweet.id, tweet.conversationId, tweet.date, tweet.user.id, tweet.user.username,
-                            tweet.user.displayname, tweet.place, tweet.rawContent, tweet.lang, tweet.mentionedUsers,
-                            tweet.links, tweet.media, tweet.replyCount, tweet.retweetCount,
-                            tweet.likeCount, tweet.hashtags, tweet.cashtags, tweet.source, tweet.retweetedTweet,
-                            tweet.quotedTweet, tweet.inReplyToUser, tweet.inReplyToTweetId, tweet.viewCount])
-
-    tweets_df = pd.DataFrame(tweets_list, columns=['id', 'conversation_id', 'date', 'user_id', 'username',
-                                                   'name', 'place', 'tweet', 'language', 'mentions',
-                                                   'urls', 'photos', 'replies_count', 'retweets_count',
-                                                   'likes_count', 'hashtags', 'cashtags', 'source', 'retweet',
-                                                   'quote_url', 'reply_to', 'reply_to_id', 'view_count'])
-
-    tweets_df.to_csv('custom_twitter_trend_dataset.csv', index=False)
-
-    df2 = pd.read_csv('./custom_twitter_trend_dataset.csv')
-    # df2['photos']
-    # total_tweets = df2['photos'].sum()
-    # print(total_tweets)
-
-    non_media_tweets = df2['photos'].isnull().sum()
-    media_tweets = num_tweets-non_media_tweets
-
-    max_likedtweets_indexes = df2.nlargest(num_tweets, 'likes_count')[
-        'likes_count'].index.tolist()
-
-    tweets = []
-    likes_count = []
-    usernames = []
-
-    for index in max_likedtweets_indexes:
-        tweet = df2.loc[index, 'tweet']
-        likes = df2.loc[index, 'likes_count']
-        username = df2.loc[index, 'username']
-
-        tweets.append(tweet)
-        likes_count.append(likes)
-        usernames.append(username)
-
-    df2['max_liked_tweets'] = tweets
-    df2['number_max_liked_tweets'] = likes_count
-    df2['max_liked_tweet_username'] = usernames
-
-    max_retweets_count_indexes = df2.nlargest(num_tweets, 'retweets_count')[
-        'likes_count'].index.tolist()
-
-    tweet_list = []
-    retweets_count_list = []
-    username_list = []
-
-    for index in max_retweets_count_indexes:
-        tweet = df2.at[index, 'tweet']
-        retweets_count = df2.at[index, 'retweets_count']
-        username = df2.at[index, 'username']
-        tweet_list.append(tweet)
-        retweets_count_list.append(retweets_count)
-        username_list.append(username)
-
-    # create new columns in df2
-    df2['max_retweets_tweets'] = tweet_list
-    df2['number_max_retweets_tweets'] = retweets_count_list
-    df2['max_retweets_username'] = username_list
-
-    df2['media_tweets'] = media_tweets
-    df2['text_tweets'] = non_media_tweets
-
-    # check_bot_human = 'bot/human'  # 0 - 1
-
-    # df2['check_bot_human'] = check_bot_human
-
-    unique_users = df2['username'].nunique()
-
-    df2['unique_participants'] = unique_users
-
-    unique_users
-    # df2.columns
-
-    human_list = []
-    bot_list = []
-
-    def botRecognition(twitter_username):
-
-        tweets_list = []
-        scrapper = sntwitter.TwitterProfileScraper(twitter_username)
-        user = scrapper.entity
-        try:
-            if user.profileImageUrl.startswith(
-                    "https://abs.twimg.com/sticky/default_profile_images/"):
-                xdefault_profile_image = 'TRUE'
-            else:
-                xdefault_profile_image = 'FALSE'
-
-            # # custom logic
-            if xdefault_profile_image == 'FALSE' or user.profileBannerUrl or user.renderedDescription or user.verified or user.location or user.link:
-                xdefaultProfile = 'FALSE'
-            else:
-                xdefaultProfile = 'TRUE'
-
-            tweets_list.append([
+        tweets_list.append(
+            [
                 user.created,
                 xdefaultProfile,
                 xdefault_profile_image,
@@ -466,50 +329,332 @@ def trendQualityAnalysis(hashtag):
                 user.username,
                 user.statusesCount,
                 user.verified,
-                user.statusesCount /
+                user.statusesCount
+                / (pd.Timestamp.now().date() - user.created.date()).days,
                 (pd.Timestamp.now().date() - user.created.date()).days,
-                (pd.Timestamp.now().date() - user.created.date()).days,
-            ])
+            ]
+        )
+
+        user_df = pd.DataFrame(
+            tweets_list,
+            columns=[
+                "created_at",
+                "default_profile",
+                "default_profile_image",
+                "description",
+                "favourites_count",
+                "followers_count",
+                "friends_count",
+                # 'geo_enabled',
+                "id",
+                "location",
+                "profile_background_image_url",
+                "profile_image_url",
+                "screen_name",
+                "statuses_count",
+                "verified",
+                "average_tweets_per_day",
+                "account_age_days",
+            ],
+        )
+
+    except:
+        dict = {"result": [-1]}
+        user_df = pd.DataFrame(dict)
+        return user_df
+
+    if user_df["average_tweets_per_day"][0] < 0.2:
+        user_df["result"] = 0
+        return user_df
+
+    user_df.verified = user_df.verified.astype("bool")
+    user_df.verified = user_df.verified.astype(int)
+    user_df.default_profile = user_df.default_profile.astype("bool")
+    user_df.default_profile = user_df.default_profile.astype(int)
+    user_df.default_profile_image = user_df.default_profile_image.astype("bool")
+    user_df.default_profile_image = user_df.default_profile_image.astype(int)
+
+    user_df.followers_count = user_df.followers_count.astype(int)
+    user_df.friends_count = user_df.friends_count.astype(int)
+    user_df.favourites_count = user_df.favourites_count.astype(int)
+    user_df.statuses_count = user_df.statuses_count.astype(int)
+
+    user_df["screen_name_len"] = [len(i) for i in user_df["screen_name"]]
+    user_df["bot_is_substr"] = [int("bot" in i.lower()) for i in user_df["screen_name"]]
+    user_df["bot_in_des"] = [
+        int("bot" in str(i).lower()) for i in user_df["description"]
+    ]
+
+    # Getting the ages in years from created_at
+    ages = []
+    for i in user_df["created_at"]:
+        year = i.year
+        age = 17 - year
+        ages.append(age)
+    user_df["age"] = ages
+
+    descriptions = [TextBlob(str(txt)) for txt in user_df["description"]]
+
+    # Creating lists of the polarity and the descriptions
+    desc_pol = [blob.sentiment.polarity for blob in descriptions]
+    desc_subj = [blob.sentiment.subjectivity for blob in descriptions]
+
+    # Turning them into features
+    user_df["desc_pol"] = desc_pol
+    user_df["desc_subj"] = desc_subj
+    features = [
+        "age",
+        "followers_count",
+        "friends_count",
+        "favourites_count",
+        "statuses_count",
+        "screen_name_len",
+        "bot_in_des",
+        "bot_is_substr",
+        "desc_pol",
+        "desc_subj",
+    ]
+
+    # clf=load('randomforest.joblib')
+    # features = ['age','followers_count','friends_count','favourites_count','statuses_count','screen_name_len','bot_in_des','bot_is_substr', 'desc_pol','desc_subj']
+    # pre=clf.predict(user_df[features])
+    # print(pre)
+
+    # //better
+    clf = load("randomforest1.joblib")
+
+    pre = clf.predict(user_df[features])
+    print(pre)
+    user_df["result"] = pre
+    return user_df
+
+
+def trendQualityAnalysis(hashtag):
+    # hashtag = "SupremeCourt"
+    num_tweets = 30
+
+    # TwitterHashtagScraper
+    # scrapper = sntwitter.TwitterSearchScraper(keyword)
+
+    tweets_list = []
+
+    for i, tweet in enumerate(
+        sntwitter.TwitterSearchScraper(hashtag + " lang:en").get_items()
+    ):
+        if i >= num_tweets:
+            break
+        tweets_list.append(
+            [
+                tweet.id,
+                tweet.conversationId,
+                tweet.date,
+                tweet.user.id,
+                tweet.user.username,
+                tweet.user.displayname,
+                tweet.place,
+                tweet.rawContent,
+                tweet.lang,
+                tweet.mentionedUsers,
+                tweet.links,
+                tweet.media,
+                tweet.replyCount,
+                tweet.retweetCount,
+                tweet.likeCount,
+                tweet.hashtags,
+                tweet.cashtags,
+                tweet.source,
+                tweet.retweetedTweet,
+                tweet.quotedTweet,
+                tweet.inReplyToUser,
+                tweet.inReplyToTweetId,
+                tweet.viewCount,
+            ]
+        )
+
+    tweets_df = pd.DataFrame(
+        tweets_list,
+        columns=[
+            "id",
+            "conversation_id",
+            "date",
+            "user_id",
+            "username",
+            "name",
+            "place",
+            "tweet",
+            "language",
+            "mentions",
+            "urls",
+            "photos",
+            "replies_count",
+            "retweets_count",
+            "likes_count",
+            "hashtags",
+            "cashtags",
+            "source",
+            "retweet",
+            "quote_url",
+            "reply_to",
+            "reply_to_id",
+            "view_count",
+        ],
+    )
+
+    tweets_df.to_csv("custom_twitter_trend_dataset.csv", index=False)
+
+    df2 = pd.read_csv("./custom_twitter_trend_dataset.csv")
+    # df2['photos']
+    # total_tweets = df2['photos'].sum()
+    # print(total_tweets)
+
+    non_media_tweets = df2["photos"].isnull().sum()
+    media_tweets = num_tweets - non_media_tweets
+
+    max_likedtweets_indexes = df2.nlargest(num_tweets, "likes_count")[
+        "likes_count"
+    ].index.tolist()
+
+    tweets = []
+    likes_count = []
+    usernames = []
+
+    for index in max_likedtweets_indexes:
+        tweet = df2.loc[index, "tweet"]
+        likes = df2.loc[index, "likes_count"]
+        username = df2.loc[index, "username"]
+
+        tweets.append(tweet)
+        likes_count.append(likes)
+        usernames.append(username)
+
+    df2["max_liked_tweets"] = tweets
+    df2["number_max_liked_tweets"] = likes_count
+    df2["max_liked_tweet_username"] = usernames
+
+    max_retweets_count_indexes = df2.nlargest(num_tweets, "retweets_count")[
+        "likes_count"
+    ].index.tolist()
+
+    tweet_list = []
+    retweets_count_list = []
+    username_list = []
+
+    for index in max_retweets_count_indexes:
+        tweet = df2.at[index, "tweet"]
+        retweets_count = df2.at[index, "retweets_count"]
+        username = df2.at[index, "username"]
+        tweet_list.append(tweet)
+        retweets_count_list.append(retweets_count)
+        username_list.append(username)
+
+    # create new columns in df2
+    df2["max_retweets_tweets"] = tweet_list
+    df2["number_max_retweets_tweets"] = retweets_count_list
+    df2["max_retweets_username"] = username_list
+
+    df2["media_tweets"] = media_tweets
+    df2["text_tweets"] = non_media_tweets
+
+    # check_bot_human = 'bot/human'  # 0 - 1
+
+    # df2['check_bot_human'] = check_bot_human
+
+    unique_users = df2["username"].nunique()
+
+    df2["unique_participants"] = unique_users
+
+    unique_users
+    # df2.columns
+
+    human_list = []
+    bot_list = []
+
+    def botRecognition(twitter_username):
+        tweets_list = []
+        scrapper = sntwitter.TwitterProfileScraper(twitter_username)
+        user = scrapper.entity
+        try:
+            if user.profileImageUrl.startswith(
+                "https://abs.twimg.com/sticky/default_profile_images/"
+            ):
+                xdefault_profile_image = "TRUE"
+            else:
+                xdefault_profile_image = "FALSE"
+
+            # # custom logic
+            if (
+                xdefault_profile_image == "FALSE"
+                or user.profileBannerUrl
+                or user.renderedDescription
+                or user.verified
+                or user.location
+                or user.link
+            ):
+                xdefaultProfile = "FALSE"
+            else:
+                xdefaultProfile = "TRUE"
+
+            tweets_list.append(
+                [
+                    user.created,
+                    xdefaultProfile,
+                    xdefault_profile_image,
+                    user.renderedDescription,
+                    user.favouritesCount,
+                    user.followersCount,
+                    user.friendsCount,
+                    # user.geo_enabled,
+                    user.id,
+                    user.location,
+                    user.profileBannerUrl,
+                    user.profileImageUrl,
+                    user.username,
+                    user.statusesCount,
+                    user.verified,
+                    user.statusesCount
+                    / (pd.Timestamp.now().date() - user.created.date()).days,
+                    (pd.Timestamp.now().date() - user.created.date()).days,
+                ]
+            )
 
             user_df = pd.DataFrame(
                 tweets_list,
                 columns=[
-                    'created_at',
-                    'default_profile',
-                    'default_profile_image',
-                    'description',
-                    'favourites_count',
-                    'followers_count',
-                    'friends_count',
+                    "created_at",
+                    "default_profile",
+                    "default_profile_image",
+                    "description",
+                    "favourites_count",
+                    "followers_count",
+                    "friends_count",
                     # 'geo_enabled',
-                    'id',
-                    'location',
-                    'profile_background_image_url',
-                    'profile_image_url',
-                    'screen_name',
-                    'statuses_count',
-                    'verified',
-                    'average_tweets_per_day',
-                    'account_age_days',
-                ])
+                    "id",
+                    "location",
+                    "profile_background_image_url",
+                    "profile_image_url",
+                    "screen_name",
+                    "statuses_count",
+                    "verified",
+                    "average_tweets_per_day",
+                    "account_age_days",
+                ],
+            )
 
         except:
-            dict = {'result': [-1]}
+            dict = {"result": [-1]}
             user_df = pd.DataFrame(dict)
             return user_df
 
-        if (user_df['average_tweets_per_day'][0] < 0.2):
-            user_df['result'] = 0
+        if user_df["average_tweets_per_day"][0] < 0.2:
+            user_df["result"] = 0
             return user_df
 
-        user_df.verified = user_df.verified.astype('bool')
+        user_df.verified = user_df.verified.astype("bool")
         user_df.verified = user_df.verified.astype(int)
-        user_df.default_profile = user_df.default_profile.astype('bool')
+        user_df.default_profile = user_df.default_profile.astype("bool")
         user_df.default_profile = user_df.default_profile.astype(int)
-        user_df.default_profile_image = user_df.default_profile_image.astype(
-            'bool')
-        user_df.default_profile_image = user_df.default_profile_image.astype(
-            int)
+        user_df.default_profile_image = user_df.default_profile_image.astype("bool")
+        user_df.default_profile_image = user_df.default_profile_image.astype(int)
 
         user_df.followers_count = user_df.followers_count.astype(int)
         user_df.friends_count = user_df.friends_count.astype(int)
@@ -517,20 +662,22 @@ def trendQualityAnalysis(hashtag):
         user_df.statuses_count = user_df.statuses_count.astype(int)
 
         user_df["screen_name_len"] = [len(i) for i in user_df["screen_name"]]
-        user_df["bot_is_substr"] = [int('bot' in i.lower())
-                                    for i in user_df["screen_name"]]
-        user_df["bot_in_des"] = [int('bot' in str(i).lower())
-                                 for i in user_df['description']]
+        user_df["bot_is_substr"] = [
+            int("bot" in i.lower()) for i in user_df["screen_name"]
+        ]
+        user_df["bot_in_des"] = [
+            int("bot" in str(i).lower()) for i in user_df["description"]
+        ]
 
         # Getting the ages in years from created_at
         ages = []
         for i in user_df["created_at"]:
             year = i.year
-            age = 17-year
+            age = 17 - year
             ages.append(age)
         user_df["age"] = ages
 
-        descriptions = [TextBlob(str(txt)) for txt in user_df['description']]
+        descriptions = [TextBlob(str(txt)) for txt in user_df["description"]]
 
         # Creating lists of the polarity and the descriptions
         desc_pol = [blob.sentiment.polarity for blob in descriptions]
@@ -539,8 +686,18 @@ def trendQualityAnalysis(hashtag):
         # Turning them into features
         user_df["desc_pol"] = desc_pol
         user_df["desc_subj"] = desc_subj
-        features = ['age', 'followers_count', 'friends_count', 'favourites_count', 'statuses_count',
-                    'screen_name_len', 'bot_in_des', 'bot_is_substr', 'desc_pol', 'desc_subj']
+        features = [
+            "age",
+            "followers_count",
+            "friends_count",
+            "favourites_count",
+            "statuses_count",
+            "screen_name_len",
+            "bot_in_des",
+            "bot_is_substr",
+            "desc_pol",
+            "desc_subj",
+        ]
 
         # clf=load('randomforest.joblib')
         # features = ['age','followers_count','friends_count','favourites_count','statuses_count','screen_name_len','bot_in_des','bot_is_substr', 'desc_pol','desc_subj']
@@ -548,13 +705,13 @@ def trendQualityAnalysis(hashtag):
         # print(pre)
 
         # //better
-        clf = load('randomforest1.joblib')
+        clf = load("randomforest1.joblib")
 
         pre = clf.predict(user_df[features])
         # print(pre)
-        user_df['result'] = pre
+        user_df["result"] = pre
 
-        temp = user_df['result'][0]
+        temp = user_df["result"][0]
 
         # print(temp)
 
@@ -569,7 +726,7 @@ def trendQualityAnalysis(hashtag):
 
         return user_df
 
-    for twitter_username in df2['username']:
+    for twitter_username in df2["username"]:
         botRecognition(twitter_username)
 
     human_list
@@ -578,17 +735,17 @@ def trendQualityAnalysis(hashtag):
     bot_list
     unique_bots_count = set(bot_list)
 
-    df_bot = pd.DataFrame(bot_list, columns=['username'])
-    df_bot.to_csv('ide_bot.csv', index=False)
+    df_bot = pd.DataFrame(bot_list, columns=["username"])
+    df_bot.to_csv("ide_bot.csv", index=False)
 
-    df_human = pd.DataFrame(human_list, columns=['username'])
-    df_human.to_csv('ide_human.csv', index=False)
+    df_human = pd.DataFrame(human_list, columns=["username"])
+    df_human.to_csv("ide_human.csv", index=False)
 
-    df_bot_unique = pd.DataFrame(unique_bots_count, columns=['username'])
-    df_bot_unique.to_csv('ide_bot_unique.csv', index=False)
+    df_bot_unique = pd.DataFrame(unique_bots_count, columns=["username"])
+    df_bot_unique.to_csv("ide_bot_unique.csv", index=False)
 
-    df_human_unique = pd.DataFrame(unique_human_count, columns=['username'])
-    df_human_unique.to_csv('ide_human_unique.csv', index=False)
+    df_human_unique = pd.DataFrame(unique_human_count, columns=["username"])
+    df_human_unique.to_csv("ide_human_unique.csv", index=False)
 
     #
     #
@@ -618,61 +775,61 @@ def trendQualityAnalysis(hashtag):
     # checking tweets made by bot accounts
     counttwb = 0
     for i in range(num_tweets):
-        value = (df2['username'][i])
-    if (df7['username'].isin([value]).any()):
-        counttwb = counttwb+1
+        value = df2["username"][i]
+    if df7["username"].isin([value]).any():
+        counttwb = counttwb + 1
 
-    df2['no_bots_in_data'] = counttwb
-    print('no of bot in data', counttwb)
+    df2["no_bots_in_data"] = counttwb
+    print("no of bot in data", counttwb)
 
     # checking tweets made by human accounts
     counttwh = 0
     for i in range(num_tweets):
-        value = (df2['username'][i])
-    if (df8['username'].isin([value]).any()):
-        counttwh = counttwh+1
+        value = df2["username"][i]
+    if df8["username"].isin([value]).any():
+        counttwh = counttwh + 1
 
-    df2['analyzed_tweets'] = num_tweets
-    df2['trend_name'] = hashtag
-    df2['no_humans_in_data'] = counttwh
-    print('no of human in data', counttwh)
+    df2["analyzed_tweets"] = num_tweets
+    df2["trend_name"] = hashtag
+    df2["no_humans_in_data"] = counttwh
+    print("no of human in data", counttwh)
 
     # checking tweets made by bot accounts
     counttwb = 0
     for i in range(num_tweets):
-        value = (df2['username'][i])
-    if (df3['username'].isin([value]).any()):
-        counttwb = counttwb+1
+        value = df2["username"][i]
+    if df3["username"].isin([value]).any():
+        counttwb = counttwb + 1
 
-    df2['tweets_by_bots'] = counttwb
-    print('no of tweet made by bot overall', counttwb)
+    df2["tweets_by_bots"] = counttwb
+    print("no of tweet made by bot overall", counttwb)
 
     # checking tweets made by human accounts
     counttwh = 0
     for i in range(num_tweets):
-        value = (df2['username'][i])
-    if (df4['username'].isin([value]).any()):
-        counttwh = counttwh+1
+        value = df2["username"][i]
+    if df4["username"].isin([value]).any():
+        counttwh = counttwh + 1
 
-    df2['tweets_by_human'] = counttwh
-    print('no of tweet made by human overall', counttwh)
+    df2["tweets_by_human"] = counttwh
+    print("no of tweet made by human overall", counttwh)
 
     # filter dataframe by time
-    df2['date'] = pd.to_datetime(df2['date'], format='%Y-%m-%d %H:%M:%S%z')
-    df2 = df2.sort_values(by='date')
+    df2["date"] = pd.to_datetime(df2["date"], format="%Y-%m-%d %H:%M:%S%z")
+    df2 = df2.sort_values(by="date")
 
     # access time filtered datafram index by index
     for i in range(1):
-        df2.iloc[i]['username']
-        df2.iloc[i]['date']
+        df2.iloc[i]["username"]
+        df2.iloc[i]["date"]
         # print(df2.iloc[i]['username'])
         # print(df2.iloc[i]['date'])
 
     # checking ratio of bot in first 1000
     count1 = 0
     for i in range(num_tweets):
-        value = (df2.iloc[i]['username'])
-    if (df3['username'].isin([value]).any()):
+        value = df2.iloc[i]["username"]
+    if df3["username"].isin([value]).any():
         count1 = count1 + 1
 
     # df2['bot_tweets_in_data'] = count1
@@ -680,8 +837,8 @@ def trendQualityAnalysis(hashtag):
     # checking ratio of human in first 1000
     count2 = 0
     for i in range(num_tweets):
-        value = (df2.iloc[i]['username'])
-    if (df3['username'].isin([value]).any()):
+        value = df2.iloc[i]["username"]
+    if df3["username"].isin([value]).any():
         count2 = count2 + 1
 
     # df2['bot_tweets_in_data'] = count1
@@ -692,13 +849,13 @@ def trendQualityAnalysis(hashtag):
     # finding df2 in first 2 hour
     # print('start time is ')
     hcount = 0
-    start_time = pd.to_datetime(df2.iloc[0]['date'], format='%H:%M:%S')
+    start_time = pd.to_datetime(df2.iloc[0]["date"], format="%H:%M:%S")
     # print('start time is ', start_time)
 
     end_time = start_time + pd.Timedelta(hours=2)
     # print('end time is ', end_time)
 
-    hcount = len(df2[(df2['date'] >= start_time) & (df2['date'] < end_time)])
+    hcount = len(df2[(df2["date"] >= start_time) & (df2["date"] < end_time)])
 
     # df2['tweets'] = count1
     # print('df2 in first 2 hours is :', hcount)
@@ -711,22 +868,21 @@ def trendQualityAnalysis(hashtag):
     # print('df2 in first 2 hours is :',hcount);
 
     # unique account participation
-    unique_account = df2['username'].nunique()
+    unique_account = df2["username"].nunique()
 
-    df2['unique_acc_partic'] = unique_account
+    df2["unique_acc_partic"] = unique_account
     # print("Unique account participation is :", unique_account)
 
     # unique message in trend
-    unique_tweet = df2['tweet'].nunique()
-    df2['unique_twt_partic'] = unique_tweet
+    unique_tweet = df2["tweet"].nunique()
+    df2["unique_twt_partic"] = unique_tweet
     # print('unique df2 is :', unique_tweet)
 
     # finding velocity of trend
 
     # print('')
     # print('Finding Acceleration.')
-    start_time = pd.to_datetime(
-        df2.iloc[0]['date'], format='%Y-%m-%d %H:%M:%S%z')
+    start_time = pd.to_datetime(df2.iloc[0]["date"], format="%Y-%m-%d %H:%M:%S%z")
     # print('start time is ', start_time)
     i = 1
     acceleration_list = []
@@ -734,28 +890,26 @@ def trendQualityAnalysis(hashtag):
     count_list = []
     merge_list = []
     for i in range(6):
-
         end_time = start_time + pd.Timedelta(hours=1)
         # print('end time is ', end_time)
 
-        hcount = len(df2[(df2['date'] >= start_time)
-                     & (df2['date'] < end_time)])
+        hcount = len(df2[(df2["date"] >= start_time) & (df2["date"] < end_time)])
         # Create a boolean mask for df2s in the time range
-        time_mask = (df2['date'] >= start_time) & (df2['date'] < end_time)
+        time_mask = (df2["date"] >= start_time) & (df2["date"] < end_time)
 
         # Select the user IDs of df2s in the time range
-        users_in_range = df2.loc[time_mask, 'username']
+        users_in_range = df2.loc[time_mask, "username"]
 
         # Count the number of bot users in the time range
-        num_bot_users = users_in_range.isin(df3['username']).sum()
+        num_bot_users = users_in_range.isin(df3["username"]).sum()
         # print('num of bot user ', num_bot_users)
         # print("df2 in first " + str(i+1) + " hours is :", hcount)
         count_list.append(hcount)
-        hour_list.append(i+1)
-        if (i == 0):
+        hour_list.append(i + 1)
+        if i == 0:
             acceleration_list.append(hcount)
         else:
-            acceleration_list.append(hcount - acceleration_list[i-1])
+            acceleration_list.append(hcount - acceleration_list[i - 1])
         start_time = end_time
 
     # print(acceleration_list)
@@ -780,7 +934,7 @@ def trendQualityAnalysis(hashtag):
 
     # df_dummy.head()
 
-    df = pd.read_csv('./custom_twitter_trend_dataset.csv')
+    df = pd.read_csv("./custom_twitter_trend_dataset.csv")
     df.head()
 
     json_object = df2.to_json()
@@ -797,7 +951,7 @@ def trendQualityAnalysis(hashtag):
     # file.write(jsonobjc)
     # file.close()
 
-    if (json_object):
+    if json_object:
         # Writing to json
         data_folder = Path("")
         file_to_open = data_folder / "jsonobjtrend.json"
@@ -829,8 +983,8 @@ def hello_world():
         jsonobj = json.dumps(dict, default=str)
     except:
         msg = {}
-        msg['msg'] = 'Bad Request'
-        msg['StatusCode'] = 400
+        msg["msg"] = "Bad Request"
+        msg["StatusCode"] = 400
         return msg
     # if (jsonobj.sta)
     # Writing to json
@@ -848,14 +1002,14 @@ def predict():
         args = request.args
         username = args.get("name")
         user_df = botRecgonation(username)
-        userDict = user_df.to_dict('records')[0]
+        userDict = user_df.to_dict("records")[0]
         # print(dict.to_json())
         jsonobj = json.dumps(userDict, default=str)
 
     except:
         msg = {}
-        msg['msg'] = 'Bad Request'
-        msg['StatusCode'] = 400
+        msg["msg"] = "Bad Request"
+        msg["StatusCode"] = 400
         return msg
 
     return jsonobj
@@ -873,8 +1027,8 @@ def analyze():
 
     except:
         msg = {}
-        msg['msg'] = 'Bad Request'
-        msg['StatusCode'] = 400
+        msg["msg"] = "Bad Request"
+        msg["StatusCode"] = 400
         return msg
 
     return jsonobj

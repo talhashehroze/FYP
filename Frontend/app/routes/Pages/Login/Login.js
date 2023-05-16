@@ -16,54 +16,39 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import { HeaderAuth } from "../../components/Pages/HeaderAuth";
 
-
-
-
 const Login = () => {
-
   const history = useHistory();
-  const [email, setEmail] = useState('')
-  const [password, setpassword]= useState('')
+  const [email, setEmail] = useState("");
+  const [password, setpassword] = useState("");
 
-
-  const onFieldChange = async (e) => { 
-  
+  const onFieldChange = async (e) => {
     switch (e.target.name) {
-      case 'password':
-        setpassword(e.target.value)
-        break
-      case 'email':
+      case "password":
+        setpassword(e.target.value);
+        break;
+      case "email":
         setEmail(e.target.value);
-        break
-
+        break;
     }
-}
+  };
   const submitLogin = async () => {
-
     // dispatch(loginStart());
     try {
-      
-      const res = await Axios.post("http://localhost:3001/" + "user/login", { email, password });
+      const res = await Axios.post("http://localhost:3001/" + "user/login", {
+        email,
+        password,
+      });
       const { user, message } = res.data;
       localStorage.setItem("token", user.token);
       Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;
       history.push("/BotAccountRecognition");
       // setBearer(user.token);
       // dispatch(loginSuccess({ user }));
-    
     } catch (erro) {
       // console.error(error)
       console.log(erro);
     }
-
-
-  }
-
-
-
-
-
-
+  };
 
   return (
     <EmptyLayout>
@@ -74,17 +59,17 @@ const Login = () => {
         {/* START Form */}
         <Form className="mb-3">
           <FormGroup>
-            <Label for="emailAdress">Email Adress</Label>
+            <Label for="emailAdress">Email Address</Label>
             <Input
               type="email"
               name="email"
               id="emailAdress"
-              placeholder="Enter email..."
+              placeholder="Enter Email..."
               className="bg-white"
               onChange={onFieldChange}
             />
             <FormText color="muted">
-              We&amp;ll never share your email with anyone else.
+              We will never share your email with anyone.
             </FormText>
           </FormGroup>
           <FormGroup>
@@ -95,7 +80,7 @@ const Login = () => {
               id="password"
               placeholder="Password..."
               className="bg-white"
-               onChange={onFieldChange}
+              onChange={onFieldChange}
             />
           </FormGroup>
           <FormGroup>
@@ -131,6 +116,6 @@ const Login = () => {
       </EmptyLayout.Section>
     </EmptyLayout>
   );
-}
+};
 
 export default Login;

@@ -16,7 +16,7 @@ const HeaderAuth = (props) => (
       </Link>
     </div>
     <h5 className="text-center mb-4">{props.title}</h5>
-    <p className="text-center">{"to Use Whats trending Make Account"}</p>
+    <p className="text-center">{"to use Whats Trending? An Account is required"}</p>
   </div>
 );
 HeaderAuth.propTypes = {

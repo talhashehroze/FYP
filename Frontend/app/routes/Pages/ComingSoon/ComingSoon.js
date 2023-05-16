@@ -48,7 +48,7 @@ const ComingSoon = () => (
       {/* START Form */}
       <Form className="mb-3">
         <FormGroup>
-          <Label for="email">Enter email</Label>
+          <Label for="email">Enter Email</Label>
           <InputGroup>
             <Input
               type="email"

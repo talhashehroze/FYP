@@ -542,9 +542,14 @@ export const TrendAnalysis = () => {
         3: 10,
         2: 10,
         1: 10,
-        0: [{'name': 'Hour 1', 'human': 12, 'bot': 4}, {'name': 'Hour 2', 'human': 157, 'bot': 10}, 
-        {'name': 'Hour 3', 'human': 32, 'bot': 40}, {'name': 'Hour 4', 'human': 16, 'bot': 13}, 
-        {'name': 'Hour 5', 'human': 19, 'bot': 61}, {'name': 'Hour 6', 'human': 16, 'bot': 70}]
+        0: [
+          { name: "Hour 1", human: 12, bot: 4 },
+          { name: "Hour 2", human: 157, bot: 10 },
+          { name: "Hour 3", human: 32, bot: 40 },
+          { name: "Hour 4", human: 16, bot: 13 },
+          { name: "Hour 5", human: 19, bot: 61 },
+          { name: "Hour 6", human: 16, bot: 70 },
+        ],
       },
       tweet_each_hour: {
         9: 10,
@@ -556,186 +561,189 @@ export const TrendAnalysis = () => {
         3: 10,
         2: 10,
         1: 10,
-        0: [{'name': 'Hour 1', 'tweets': 12}, {'name': 'Hour 2', 'tweets': 157}, 
-        {'name': 'Hour 3', 'tweets': 32}, {'name': 'Hour 4', 'tweets': 16}, 
-        {'name': 'Hour 5', 'tweets': 19}, {'name': 'Hour 6', 'tweets': 16}],
+        0: [
+          { name: "Hour 1", tweets: 12 },
+          { name: "Hour 2", tweets: 157 },
+          { name: "Hour 3", tweets: 32 },
+          { name: "Hour 4", tweets: 16 },
+          { name: "Hour 5", tweets: 19 },
+          { name: "Hour 6", tweets: 16 },
+        ],
       },
     },
-    
   ]);
 
-  return(
-  <Container>
-    <HeaderMain title="Trend Analysis" className="mb-5 mt-4" />
+  return (
+    <Container>
+      <HeaderMain title="Trend Analysis" className="mb-5 mt-4" />
 
-    <CardDeck>
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard
-            title="Trend Name"
-            value={data[0]?.trend_name["0"]}
-         
-          />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard
-             title="Trend Language"
-            value={data[0]?.language["0"]}
-              
+      <CardDeck>
+        {/* START Card Widget */}
+        <Card className="mb-3">
+          <CardBody>
+            <ProfileOverviewCard
+              title="Trend Name"
+              value={data[0]?.trend_name["0"]}
             />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard title="Trend Start date" value="9 Dec" />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard
-            title="Analyze Tweets"
-            value={data[0]?.analyzed_tweets["0"]}
-            
+          </CardBody>
+        </Card>
+        {/* START Card Widget */}
+        {/* START Card Widget */}
+        <Card className="mb-3">
+          <CardBody>
+            <ProfileOverviewCard
+              title="Trend Language"
+              value={data[0]?.language["0"]}
             />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-    </CardDeck>
-    <CardDeck>
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard title="Total Tweets" value="?" />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard
-            title="Total Participant"
-            value={data[0]?.unique_twt_partic["0"]}
-          />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard 
-            title="Text Based Tweets"
-            value={data[0]?.text_tweets["0"]}
-          />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-      {/* START Card Widget */}
-      <Card className="mb-3">
-        <CardBody>
-          <ProfileOverviewCard 
-           title="Image/Link Tweets"
-           value={data[0]?.media_tweets["0"]} 
-           
-           />
-        </CardBody>
-      </Card>
-      {/* START Card Widget */}
-    </CardDeck>
+          </CardBody>
+        </Card>
+        {/* START Card Widget */}
+        {/* START Card Widget */}
+        <Card className="mb-3">
+          <CardBody>
+            <ProfileOverviewCard title="Trend Start date" value="9 Dec" />
+          </CardBody>
+        </Card>
+        {/* START Card Widget */}
+        {/* START Card Widget */}
+        <Card className="mb-3">
+          <CardBody>
+            <ProfileOverviewCard
+              title="Analyze Tweets"
+              value={data[0]?.analyzed_tweets["0"]}
+            />
+          </CardBody>
+        </Card>
+        {/* START Card Widget */}
+      </CardDeck>
+      <CardDeck>
+        {/* START Card Widget */}
+        <Card className="mb-3">
+          <CardBody>
+            <ProfileOverviewCard title="Total Tweets" value="?" />
+          </CardBody>
+        </Card>
+        {/* START Card Widget */}
+        {/* START Card Widget */}
+        <Card className="mb-3">
+          <CardBody>
+            <ProfileOverviewCard
+              title="Total Participant"
+              value={data[0]?.unique_twt_partic["0"]}
+            />
+          </CardBody>
+        </Card>
+        {/* START Card Widget */}
+        {/* START Card Widget */}
+        <Card className="mb-3">
+          <CardBody>
+            <ProfileOverviewCard
+              title="Text Based Tweets"
+              value={data[0]?.text_tweets["0"]}
+            />
+          </CardBody>
+        </Card>
+        {/* START Card Widget */}
+        {/* START Card Widget */}
+        <Card className="mb-3">
+          <CardBody>
+            <ProfileOverviewCard
+              title="Image/Link Tweets"
+              value={data[0]?.media_tweets["0"]}
+            />
+          </CardBody>
+        </Card>
+        {/* START Card Widget */}
+      </CardDeck>
 
-    <Row>
-      <Col lg={6}>
-        <Card className="mb-3">
-          <CardBody>
-            <CardTitle className="mb-1 d-flex">
-              <h6>Most Liked Tweets</h6>
-            </CardTitle>
-          </CardBody>
-          <Table responsive striped className="mb-0">
-            <thead>
-              <tr>
-                <th className="bt-0">User Name</th>
-                <th className="bt-0">No of likes</th>
-                <th className="bt-0">Tweet</th>
-              </tr>
-            </thead>
-            <tbody>
-              <RecentAndPopTweetTable data={data[0]?.max_liked_tweet_username}
-              count={data[0]?.number_max_liked_tweets}
-              txt={data[0]?.max_liked_tweets}
-              />
-            </tbody>
-          </Table>
-        </Card>
-        <Card className="mb-3">
-          <CardBody>
-            <CardTitle className="mb-4 d-flex">
-              <h6>Trend Timeline</h6>
-            </CardTitle>
-            <div className="d-flex justify-content-center">
-              <NewStackedAreaChart data={data[0]?.tweet_each_hour["0"]}/>
-            </div>
-          </CardBody>
-        </Card>
-      </Col>
-      <Col lg={6}>
-        <Card className="mb-3">
-          <CardBody>
-            <CardTitle className="mb-1 d-flex">
-              <h6>Popular ReTweeted Tweet</h6>
-              <Button color="link" size="sm" className="pt-0 ml-auto">
-                View All <i className="fa fa-angle-right"></i>
-              </Button>
-            </CardTitle>
-          </CardBody>
-          <Table responsive striped className="mb-0">
-            <thead>
-              <tr>
-                <th className="bt-0">User Name</th>
-                <th className="bt-0">No of time Retweet</th>
-                <th className="bt-0">Tweet</th>
-              </tr>
-            </thead>
-            <tbody>
-              <RecentAndPopTweetTable data={data[0]?.max_retweets_username} 
-              count={data[0]?.number_max_retweets_tweets}
-              txt={data[0]?.max_retweets_tweets}
-              />
-            </tbody>
-          </Table>
-        </Card>
-        <Card className="mb-3">
-          <CardBody>
-            <CardTitle className="mb-1 d-flex">
-              <h6>Most Mention Users</h6>
-            </CardTitle>
-          </CardBody>
-          <Table responsive striped className="mb-0">
-            <thead>
-              <tr>
-                <th className="bt-0">User Name</th>
-                <th className="bt-0">No of Mentions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <MentionUsers data={data[0]?.mention_user}
-              count={data[0]?.mention_user_count}
-              />
-            </tbody>
-          </Table>
-        </Card>
-      </Col>
-    </Row>
-  </Container>
-);
-}
+      <Row>
+        <Col lg={6}>
+          <Card className="mb-3">
+            <CardBody>
+              <CardTitle className="mb-1 d-flex">
+                <h6>Most Liked Tweets</h6>
+              </CardTitle>
+            </CardBody>
+            <Table responsive striped className="mb-0">
+              <thead>
+                <tr>
+                  <th className="bt-0">User Name</th>
+                  <th className="bt-0">No of likes</th>
+                  <th className="bt-0">Tweet</th>
+                </tr>
+              </thead>
+              <tbody>
+                <RecentAndPopTweetTable
+                  data={data[0]?.max_liked_tweet_username}
+                  count={data[0]?.number_max_liked_tweets}
+                  txt={data[0]?.max_liked_tweets}
+                />
+              </tbody>
+            </Table>
+          </Card>
+          <Card className="mb-3">
+            <CardBody>
+              <CardTitle className="mb-4 d-flex">
+                <h6>Trend Timeline</h6>
+              </CardTitle>
+              <div className="d-flex justify-content-center">
+                <NewStackedAreaChart data={data[0]?.tweet_each_hour["0"]} />
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+        <Col lg={6}>
+          <Card className="mb-3">
+            <CardBody>
+              <CardTitle className="mb-1 d-flex">
+                <h6>Popular ReTweeted Tweet</h6>
+                <Button color="link" size="sm" className="pt-0 ml-auto">
+                  View All <i className="fa fa-angle-right"></i>
+                </Button>
+              </CardTitle>
+            </CardBody>
+            <Table responsive striped className="mb-0">
+              <thead>
+                <tr>
+                  <th className="bt-0">User Name</th>
+                  <th className="bt-0">No of time Retweet</th>
+                  <th className="bt-0">Tweet</th>
+                </tr>
+              </thead>
+              <tbody>
+                <RecentAndPopTweetTable
+                  data={data[0]?.max_retweets_username}
+                  count={data[0]?.number_max_retweets_tweets}
+                  txt={data[0]?.max_retweets_tweets}
+                />
+              </tbody>
+            </Table>
+          </Card>
+          <Card className="mb-3">
+            <CardBody>
+              <CardTitle className="mb-1 d-flex">
+                <h6>Most Mention Users</h6>
+              </CardTitle>
+            </CardBody>
+            <Table responsive striped className="mb-0">
+              <thead>
+                <tr>
+                  <th className="bt-0">User Name</th>
+                  <th className="bt-0">No of Mentions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <MentionUsers
+                  data={data[0]?.mention_user}
+                  count={data[0]?.mention_user_count}
+                />
+              </tbody>
+            </Table>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
 export default TrendAnalysis;

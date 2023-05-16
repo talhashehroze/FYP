@@ -382,7 +382,7 @@ const Forms = () => (
                         />
                         <FormText color="muted">
                           <i className="fa fa-info-circle mr-2"></i>
-                          We&apos;ll never share your email.
+                          We will never share your email.
                         </FormText>
                       </Col>
                       <Col sm={12} lg={4} className="mb-3 mb-md-0">
@@ -394,7 +394,7 @@ const Forms = () => (
                         />
                         <FormText color="muted text-center">
                           <i className="fa fa-info-circle mr-2"></i>
-                          We&apos;ll never share your email.
+                          We will never share your email.
                         </FormText>
                       </Col>
                       <Col sm={12} lg={4}>
@@ -406,7 +406,7 @@ const Forms = () => (
                         />
                         <FormText color="muted text-right">
                           <i className="fa fa-info-circle mr-2"></i>
-                          We&apos;ll never share your email.
+                          We will never share your email.
                         </FormText>
                       </Col>
                     </Row>

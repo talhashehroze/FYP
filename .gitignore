@@ -11,3 +11,6 @@ yarn.lock
 __pycache__
 to_start.txt
 tweets_24_notendencias_raw.csv
+
+_Design
+.vscode

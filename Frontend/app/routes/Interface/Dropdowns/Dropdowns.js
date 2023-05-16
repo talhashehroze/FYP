@@ -644,7 +644,7 @@ const Dropdowns = () => (
                 <DropdownMenu persist className="p-4">
                   <Form>
                     <FormGroup>
-                      <Label for="emailAdress">Email Adress</Label>
+                      <Label for="emailAdress">Email Address</Label>
                       <Input
                         type="email"
                         name="email"

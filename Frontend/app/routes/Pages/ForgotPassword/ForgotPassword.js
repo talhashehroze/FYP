@@ -24,7 +24,7 @@ const ForgotPassword = () => (
       {/* START Form */}
       <Form className="mb-3">
         <FormGroup>
-          <Label for="emailAdress">Email Adress or Username</Label>
+          <Label for="emailAdress">Email Address or Username</Label>
           <Input
             type="email"
             name="email"
@@ -33,7 +33,7 @@ const ForgotPassword = () => (
             className="bg-white"
           />
           {/* <FormText color="muted">
-                        We&amp;ll never share your email with anyone else.
+                        We will never share your email with anyone.
                     </FormText> */}
         </FormGroup>
         <div className="d-flex">
