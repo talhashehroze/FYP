@@ -7,7 +7,6 @@ const ApiDoc = ({ endpoint, response, description, queryParams }) => {
   return (
       <Paper elevation={3} sx={{ padding: '1rem', marginBottom: '1rem' }}>
          <CopyBlock
-            style={{height:"500px"}}
             language={'text'}
             text={endpoint}
             showLineNumbers={false}
@@ -16,8 +15,8 @@ const ApiDoc = ({ endpoint, response, description, queryParams }) => {
           codeBlock
         />
       {/* <Typography variant="h5" component="h2">{endpoint}</Typography> */}
-      <Typography variant="body1">{description}</Typography>
-        <Typography variant="h6" component="h3">Response:</Typography>
+      <Typography sx={{ paddingTop: '3rem',paddingBottom: '3rem', }} variant="body1">{description}</Typography>
+        <Typography variant="h4" component="h3">Response:</Typography>
         <SyntaxHighlighter language="json" style={docco}>
       {JSON.stringify(response, null, 2)}
     </SyntaxHighlighter>
@@ -25,21 +24,21 @@ const ApiDoc = ({ endpoint, response, description, queryParams }) => {
       {/* <pre>{JSON.stringify(response, null, 2)}</pre> */}
       {queryParams && (
         <div>
-          <Typography variant="h6" component="h3">Query Parameters:</Typography>
+          <Typography sx={{ paddingTop: '1rem',paddingBottom: '1rem', }}  variant="h4" component="h3">Query Parameters:</Typography>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell>Type</TableCell>
+                <TableCell><Typography variant="h6" component="h3">Name</Typography></TableCell>
+                <TableCell><Typography variant="h6" component="h3">Type</Typography></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {/* {queryParams.map(([name, type]) => (
+              {queryParams.map(({name, type}) => (
                 <TableRow key={name}>
                   <TableCell>{name}</TableCell>
                   <TableCell>{type}</TableCell>
                 </TableRow>
-              ))} */}
+              ))}
             </TableBody>
           </Table>
         </div>

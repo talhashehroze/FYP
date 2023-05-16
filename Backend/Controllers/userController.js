@@ -4,11 +4,11 @@ const userService = require("../Services/userService");
 const auth = require("../Middlewares/auth");
 
  const register = async (req, res) => {
-   const { name, surname, email, password } = req.body;
+   const { name,  email, password } = req.body;
    console.log(req.body);
-  if (!(name && surname && email && password))
+  if (!(name  && email && password))
     return res
-      .status("400")
+      .status(400)
       .send({ errMessage: "Please fill all required areas!" });
 
   const salt = bcrypt.genSaltSync(10);
@@ -59,7 +59,6 @@ const getUserWithMail = async (req, res) => {
 
     const dataTransferObject = {
       name: result.name,
-      surname: result.surname,
       color: result.color,
       email: result.email,
     };

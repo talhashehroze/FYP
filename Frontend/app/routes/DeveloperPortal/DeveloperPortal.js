@@ -3,6 +3,7 @@ import { Typography, Table, TableHead, TableRow, TableCell, TableBody, Paper } f
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import ApiDoc from "./ApiDoc";
+import "./Dev.css";
 import {
   Container,
   Row,
@@ -49,9 +50,9 @@ export const DeveloperPortal = () => {
           <CopyBlock
 
             language={'js'}
-            text={Apikey}
+            text={`Bearer ${Apikey}`}
             showLineNumbers={false}
-            theme={solarizedLight}
+            theme={dracula}
             codeBlock
         />
             <Button

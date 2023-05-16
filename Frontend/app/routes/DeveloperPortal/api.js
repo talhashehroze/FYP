@@ -63,8 +63,42 @@ Users can integrate this API into their applications, platforms, or systems to a
         queryParams: [{ name: "usarname", type: "sting" }],
         response: `the usr datatr`
     },
+     {
+         endpoint: '/user/trend-analysis',
+         description: `The Trend Quality Prediction API utilizes the keywords provided by the user to predict the quality of a trend, categorizing it as either Authentic, Fabricated, or Intermediate. By making an API call and including the necessary Authorization header, users can obtain predictions about the quality of a trend based on the specified keywords.
+
+The API applies advanced machine learning techniques and statistical models to analyze the provided keywords and assess the trend's authenticity. It takes into account various factors, such as the relevance of keywords, historical data, and patterns, to make an informed prediction regarding the trend's quality.
+
+Users can integrate this API into their applications, platforms, or systems to automate the trend quality prediction process. The predictions are helpful in identifying trends that may be authentic or fabricated, aiding in decision-making, trend analysis, and content evaluation. The Authorization header is required to ensure secure access to the API and protect user data during the prediction process.`,
+         queryParams: [{ name: "usarname", type: "sting" }],
+         response: {
+    
+             username: ["user1", "user2"],
+             name: ['farhan', 'Ali'],
+             replies_count: 0,
+             retweets_count: 12,
+             likes_count: 100,
+             hashtags: ['#sxsxs', '#hasthaf'],
+             cashtags: '',
+             source: 'Twitter Web App',
+             view_count: 23,
+             max_liked_tweets: 100,
+             number_max_liked_tweets: 122,
+             max_liked_tweet_username: 12,
+             max_retweets_tweets: 12,
+             number_max_retweets_tweets: 100,
+             max_retweets_username: "username",
+             media_tweets: 12,
+             text_tweets: 13,
+             unique_participants: 19,
+             tweets_by_bots: 6,
+             tweets_by_human: 14,
+             unique_acc_partic: 19,
+             unique_twt_partic: 20,
+         },
+     },
     {
-        endpoint: '/user/trend-analysis',
+        endpoint: '/user',
         description: `The Trend Quality Prediction API utilizes the keywords provided by the user to predict the quality of a trend, categorizing it as either Authentic, Fabricated, or Intermediate. By making an API call and including the necessary Authorization header, users can obtain predictions about the quality of a trend based on the specified keywords.
 
 The API applies advanced machine learning techniques and statistical models to analyze the provided keywords and assess the trend's authenticity. It takes into account various factors, such as the relevance of keywords, historical data, and patterns, to make an informed prediction regarding the trend's quality.
@@ -73,47 +107,29 @@ Users can integrate this API into their applications, platforms, or systems to a
         queryParams: [{ name: "usarname", type: "sting" }],
         response: {
     
-      username: ["user1","user2"],
-      name:['farhan' ,'Ali'],
-      replies_count: 0,
-      retweets_count: 12,
-      likes_count: 100,
-      hashtags: ['#sxsxs','#hasthaf'],
-      cashtags: '',
-      source: 'Twitter Web App',
-      view_count: 23,
-      max_liked_tweets: 100,
-      number_max_liked_tweets: 122,
-      max_liked_tweet_username: 12},
-      max_retweets_tweets: 12,
-      number_max_retweets_tweets: 100,
-      max_retweets_username: "username",
-      media_tweets: 12,
-      text_tweets: 13,
-      unique_participants: 19,
-      tweets_by_bots: 6,
-      tweets_by_human: 14,
-      unique_acc_partic: 19,
-      unique_twt_partic: 20,
-    },
-
-    {
-        endpoint: '/user',
-        description: "return user statitce",
-        queryParams: [{ name: "usarname", type: "sting" }],
-        response: "the usr datatr"
-    },
-    {
-        endpoint: '/user',
-        description: "return user statitce",
-        queryParams: [{ name: "usarname", type: "sting" }],
-        response: "the usr datatr"
-    },
-    {
-        endpoint: '/user',
-        description: "return user statitce",
-        queryParams: [{ name: "usarname", type: "sting" }],
-        response: "the usr datatr"
+             username: ["user1", "user2"],
+             name: ['farhan', 'Ali'],
+             replies_count: 0,
+             retweets_count: 12,
+             likes_count: 100,
+             hashtags: ['#sxsxs', '#hasthaf'],
+             cashtags: '',
+             source: 'Twitter Web App',
+             view_count: 23,
+             max_liked_tweets: 100,
+             number_max_liked_tweets: 122,
+             max_liked_tweet_username: 12,
+             max_retweets_tweets: 12,
+             number_max_retweets_tweets: 100,
+             max_retweets_username: "username",
+             media_tweets: 12,
+             text_tweets: 13,
+             unique_participants: 19,
+             tweets_by_bots: 6,
+             tweets_by_human: 14,
+             unique_acc_partic: 19,
+             unique_twt_partic: 20,
+         },
     },
 
 
