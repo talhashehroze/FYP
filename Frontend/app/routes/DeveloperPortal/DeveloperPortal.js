@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import { Typography, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import ApiDoc from "./ApiDoc";
 import {
   Container,
   Row,
@@ -20,16 +24,17 @@ import {
   DropdownToggle,
   DropdownItem,
   Button,
-  Table,
+  // Table,
   Form,
   button,
   textarea,
 } from "../../components";
-import { CopyBlock, solarizedLight } from "react-code-blocks";
+import {des} from "./api"
+import { CopyBlock, solarizedLight,dracula } from "react-code-blocks";
 import { HeaderMain } from "../components/HeaderMain";
 export const DeveloperPortal = () => {
   const [Apikey, setApikey] = useState("Click your button below for you devloper API token");
- 
+  const [obj, setObj] = useState(des);
   
   const handleButton = () => {
     setApikey(localStorage.getItem('token'))
@@ -40,13 +45,14 @@ export const DeveloperPortal = () => {
       <HeaderMain title="Developer Portal" className="mb-5 mt-4" />
       <Card className="mb-3">
         <CardBody>
+          <code>Apikey</code>
           <CopyBlock
 
             language={'js'}
             text={Apikey}
             showLineNumbers={false}
             theme={solarizedLight}
-            wrapLines={false}
+            codeBlock
         />
             <Button
               style={{
@@ -64,6 +70,18 @@ export const DeveloperPortal = () => {
             </Button>
         </CardBody>
       </Card>
+      {obj.map(({ endpoint, response, description, queryParams }) => (
+       <ApiDoc
+         key={endpoint}
+         endpoint={endpoint}
+         response={response}
+         description={description}
+         queryParams={queryParams}
+       
+       />
+              ))}
+    
+      
     </Container>
   );
 };

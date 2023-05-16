@@ -109,9 +109,13 @@ import TrendAnalysis from "./TrendAnalysis/TrendAnalysis";
 import TrendQuality from "./TrendQuality";
 import BotAccountRecognition from "./BotAccountRecognition/BotAccountRecognition";
 import DeveloperPortal from "./DeveloperPortal";
+import Axios from "axios";
+
 //------ Route Definitions --------
 // eslint-disable-next-line no-unused-vars
 export const RoutedContent = () => {
+
+   Axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem("token")}`;
   return (
     <Switch>
       <Redirect from="/" to={localStorage.getItem("token")? "/dashboards/projects" : "/pages/login"} exact />
