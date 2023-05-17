@@ -1340,9 +1340,14 @@ export const TrendQuality = () => {
         3: 10,
         2: 10,
         1: 10,
-        0: [{'name': 'Hour 1', 'human': 12, 'bot': 4}, {'name': 'Hour 2', 'human': 157, 'bot': 10}, 
-        {'name': 'Hour 3', 'human': 32, 'bot': 40}, {'name': 'Hour 4', 'human': 16, 'bot': 13}, 
-        {'name': 'Hour 5', 'human': 19, 'bot': 61}, {'name': 'Hour 6', 'human': 16, 'bot': 70}]
+        0: [
+          { name: "Hour 1", human: 12, bot: 4 },
+          { name: "Hour 2", human: 157, bot: 10 },
+          { name: "Hour 3", human: 32, bot: 40 },
+          { name: "Hour 4", human: 16, bot: 13 },
+          { name: "Hour 5", human: 19, bot: 61 },
+          { name: "Hour 6", human: 16, bot: 70 },
+        ],
       },
       human_bot_MTU_list: {
         9: 10,
@@ -1355,12 +1360,11 @@ export const TrendQuality = () => {
         2: 10,
         1: 10,
         0: [
-          { name: "Media Tweets", Human: 4000, Bot: 2400, },
-          { name: "Text Tweets", Human: 3000, Bot: 1398, },
-          { name: "Unique Tweets", Human: 2000, Bot: 9800,  },
-        ]
+          { name: "Media Tweets", Human: 4000, Bot: 2400 },
+          { name: "Text Tweets", Human: 3000, Bot: 1398 },
+          { name: "Unique Tweets", Human: 2000, Bot: 9800 },
+        ],
       },
-
     },
   ]);
 
@@ -1610,7 +1614,7 @@ export const TrendQuality = () => {
           <CardBody>
             <ProfileOverviewCard
               title="Image/Link Tweets"
-              value={data[0]?.media_tweets["0"]}
+              // value={data[0]?.media_tweets["0"]}
             />
           </CardBody>
         </Card>
@@ -1657,13 +1661,13 @@ export const TrendQuality = () => {
                 <h6>Trend Timeline</h6>
               </CardTitle>
               <div className="d-flex justify-content-center">
-                <StackedAreaChart data={data[0]?.timeline["0"]}/>
+                {/* <StackedAreaChart data={data[0]?.timeline["0"]} /> */}
               </div>
             </CardBody>
           </Card>
         </Col>
         <Col>
-          <Card className="mb-3">
+          {/* <Card className="mb-3">
             <CardBody>
               <CardTitle className="mb-1 d-flex">
                 <h6>Human/Bot Tweet type Comparison</h6>
@@ -1671,7 +1675,7 @@ export const TrendQuality = () => {
               </CardTitle>
               <SimpleBarChart data={data[0]?.human_bot_MTU_list["0"]}/>
             </CardBody>
-          </Card>
+          </Card> */}
         </Col>
       </Row>
     </Container>

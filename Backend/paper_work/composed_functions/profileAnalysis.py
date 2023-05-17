@@ -431,7 +431,7 @@ def botRecgonation(twitter_username):
 
 def trendQualityAnalysis(hashtag):
     # hashtag = "SupremeCourt"
-    num_tweets = 50
+    num_tweets = 10
 
     # TwitterHashtagScraper
     # scrapper = sntwitter.TwitterSearchScraper(keyword)
@@ -470,6 +470,7 @@ def trendQualityAnalysis(hashtag):
                 tweet.viewCount,
             ]
         )
+        print(tweets_list)
 
     tweets_df = pd.DataFrame(
         tweets_list,
@@ -735,16 +736,16 @@ def trendQualityAnalysis(hashtag):
     bot_list
     unique_bots_count = set(bot_list)
 
-    df_bot = pd.DataFrame(bot_list, columns=["username", "photos"])
+    df_bot = pd.DataFrame(bot_list, columns=["username"])
     df_bot.to_csv("ide_bot.csv", index=False)
 
-    df_human = pd.DataFrame(human_list, columns=["username", "photos"])
+    df_human = pd.DataFrame(human_list, columns=["username"])
     df_human.to_csv("ide_human.csv", index=False)
 
-    df_bot_unique = pd.DataFrame(unique_bots_count, columns=["username", "photos"])
+    df_bot_unique = pd.DataFrame(unique_bots_count, columns=["username"])
     df_bot_unique.to_csv("ide_bot_unique.csv", index=False)
 
-    df_human_unique = pd.DataFrame(unique_human_count, columns=["username", "photos"])
+    df_human_unique = pd.DataFrame(unique_human_count, columns=["username"])
     df_human_unique.to_csv("ide_human_unique.csv", index=False)
 
     #
@@ -820,36 +821,42 @@ def trendQualityAnalysis(hashtag):
     #######################################################
     #######################################################
 
-    bot_non_media_tweets = df3["photos"].isnull().sum()
+    bot_non_media_tweets = df2["photos"].isnull().sum()
     bot_media_tweets = num_tweets - non_media_tweets
 
-    human_non_media_tweets = df4["photos"].isnull().sum()
+    human_non_media_tweets = df2["photos"].isnull().sum()
     human_media_tweets = num_tweets - non_media_tweets
 
-    unq_bot_non_media_tweets = df7["photos"].isnull().sum()
+    unq_bot_non_media_tweets = df2["photos"].isnull().sum()
     unq_bot_media_tweets = num_tweets - non_media_tweets
 
     tempsum = unq_bot_non_media_tweets + unq_bot_media_tweets
 
-    unq_human_non_media_tweets = df8["photos"].isnull().sum()
+    unq_human_non_media_tweets = df2["photos"].isnull().sum()
     unq_human_media_tweets = num_tweets - non_media_tweets
 
     tempsum2 = unq_human_non_media_tweets + unq_human_media_tweets
 
-    data_hum_bot = [
-        {"name": "Media Tweets", "Human": human_media_tweets, "Bot": bot_media_tweets},
-        {
-            "name": "Text Tweets",
-            "Human": human_non_media_tweets,
-            "Bot": bot_non_media_tweets,
-        },
-        {"name": "Unique Tweets", "Human": tempsum2, "Bot": tempsum},
-    ]
+    human_MTU_list = []
+    bot_MTU_list = []
+    human_bot_MTU_list = []
+    human_MTU_list.append(human_media_tweets)
+    human_MTU_list.append(human_non_media_tweets)
+    human_MTU_list.append(tempsum2)
 
-    df2["fetched_tweets_by_bots"] = sum(counttwb)
-    df2["fetched_tweets_by_human"] = sum(counttwh)
+    bot_MTU_list.append(bot_media_tweets)
+    bot_MTU_list.append(bot_non_media_tweets)
+    bot_MTU_list.append(tempsum)
 
-    df2 = pd.concat([df2, pd.DataFrame(data_hum_bot)])
+    MTU_list = ["Media Tweets", "Text Tweets", "Unique Tweets"]
+    for i in range(3):
+        tmp = {"name": MTU_list[i], "Human": human_MTU_list[i], "Bot": bot_MTU_list[i]}
+        human_bot_MTU_list.append(tmp)
+
+    # df2["fetched_tweets_by_bots"] = sum(counttwb)
+    # df2["fetched_tweets_by_human"] = sum(counttwh)
+
+    # df2 = pd.concat([df2, pd.DataFrame(human_bot_MTU_list)])
 
     # filter dataframe by time
     df2["date"] = pd.to_datetime(df2["date"], format="%Y-%m-%d %H:%M:%S%z")
@@ -903,6 +910,42 @@ def trendQualityAnalysis(hashtag):
     #         hcount = hcount+1
 
     # print('df2 in first 2 hours is :',hcount);
+
+    # num_bot_users = []
+    # num_human_users = []
+    # tweet_each_hour = []
+    # for i in range(6):
+    #     end_time = start_time + pd.Timedelta(hours=1)
+    #     print("end time is ", end_time)
+
+    #     hcount = len(tweet[(tweet["time"] >= start_time) & (tweet["time"] < end_time)])
+    #     # Create a boolean mask for tweets in the time range
+    #     time_mask = (tweet["time"] >= start_time) & (tweet["time"] < end_time)
+
+    #     # Select the user IDs of tweets in the time range
+    #     users_in_range = tweet.loc[time_mask, "username"]
+    #     # Count the number of bot users in the time range
+    #     num_bot_users.append(users_in_range.isin(df3["username"]).sum())
+    #     num_human_users.append(hcount - num_bot_users[i])
+    #     tweet_each_hour.append(hcount)
+
+    # print(tweet_each_hour)
+    # df2["tweet_each_hour"] = tweet_each_hour
+
+    # human_bot_count = []
+    # human_hour_list = []
+    # bot_hour_list = []
+
+    # Hour_list = ["Hour 1", "Hour 2", "Hour 3", "Hour 4", "Hour 5", "Hour 6", "Hour 7"]
+    # for i in range(6):
+    #     tmp = {
+    #         "name": Hour_list[i],
+    #         "human": num_human_users[i],
+    #         "bot": num_bot_users[i],
+    #     }
+    #     human_bot_count.append(tmp)
+
+    # print(human_bot_count)
 
     # unique account participation
     unique_account = df2["username"].nunique()
@@ -1057,6 +1100,7 @@ def analyze():
     try:
         args = request.args
         username = args.get("name")
+        print(username)
         jsonobj = trendQualityAnalysis(username)
         # userDict = user_df.to_dict('records')[0]
         # print(dict.to_json())
