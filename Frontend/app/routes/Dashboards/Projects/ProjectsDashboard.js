@@ -54,7 +54,7 @@ const ProjectsDashboard = () => {
 
   const onsubmit = (e) => {
     axios
-      .get("http://localhost:3001/user/get-user")
+      .get(`${process.env.REACT_APP_API}/user/get-user`)
       .then(function (response) {
         // handle success
         console.log(response.data.username);

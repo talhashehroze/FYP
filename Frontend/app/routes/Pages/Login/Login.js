@@ -46,10 +46,8 @@ const Login = () => {
   const submitLogin = async () => {
     // dispatch(loginStart());
     try {
-      const res = await Axios.post("http://localhost:3001/" + "user/login", {
-        email,
-        password,
-      });
+      
+      const res = await Axios.post(`${process.env.REACT_APP_API}/` + "user/login", { email, password });
       const { user, message } = res.data;
       localStorage.setItem("token", user.token);
       Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;

@@ -58,7 +58,7 @@ const ProfileAnalysis = () => {
   async function handleClick() {
     console.log(Keyword);
     setLoading(true);
-    let data = await axios.get(`http://localhost:3001/user/get-user/`, {
+    let data = await axios.get(`${process.env.REACT_APP_API}/user/get-user/`, {
       params: { name: Keyword },
     });
 
@@ -70,7 +70,7 @@ const ProfileAnalysis = () => {
   // const fun = () => {
   //   console.log("i reached here");
   //   axios
-  //     .get("http://localhost:3001/user/get-user")
+  //     .get("${process.env.REACT_APP_API}/user/get-user")
   //     .then(function (response) {
   //       // handle success
   //       setdata(response.data);
@@ -98,7 +98,7 @@ const ProfileAnalysis = () => {
   const [check, setcheck] = useState("");
   // useEffect(() => {
   //   axios
-  //     .get("http://localhost:3001/user/get-user")
+  //     .get("${process.env.REACT_APP_API}/user/get-user")
   //     .then(function (response) {
   //       // handle succesuseEffect(() => {
   //   setTimeout(() => {

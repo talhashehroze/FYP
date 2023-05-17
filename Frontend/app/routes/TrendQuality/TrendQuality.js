@@ -1378,7 +1378,7 @@ export const TrendQuality = () => {
     console.log(Keyword);
     // setLoading(true);
     let resp = await axios
-      .get(`http://localhost:3001/user/trendQA/`, {
+      .get(`${process.env.REACT_APP_API}/user/trendQA/`, {
         params: { name: Keyword },
       })
       .then((resp) => {

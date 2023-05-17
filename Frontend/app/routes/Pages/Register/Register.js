@@ -39,11 +39,8 @@ const Register = () => {
   const submitSignup = async () => {
     // dispatch(loginStart());
     try {
-      const res = await Axios.post("http://localhost:3001/" + "user/register", {
-        email,
-        password,
-        name: username,
-      });
+      
+      const res = await Axios.post(`${process.env.REACT_APP_API}/` + "user/register", { email, password,name:username });
       const { user, message } = res.data;
       // localStorage.setItem("token", user.token);
       // Axios.defaults.headers.common["Authorization"] = `Bearer ${user.token}`;

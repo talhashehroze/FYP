@@ -20,7 +20,7 @@ var config = {
   // Site Config ====================================================
   siteTitle: "What'sTrending?",
   siteDescription: "Default Dashboard ready for Development",
-  siteCannonicalUrl: "http://localhost:4100",
+  siteCannonicalUrl: process.env.REACT_APP_API,
   siteKeywords: "react dashboard seed bootstrap",
   scssIncludes: [],
 };

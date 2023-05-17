@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const userService = require("../Services/userService");
 const auth = require("../Middlewares/auth");
 
+
  const register = async (req, res) => {
    const { name,  email, password } = req.body;
    console.log(req.body);
@@ -68,16 +69,22 @@ const getUserWithMail = async (req, res) => {
 
 // let user_analysis_data = require("../Data/jsonobj.json");
 const getUser = async (req, res) => {
+  console.log(`${process.env.PYSERVER}/botOrNot`);
   weekLimit = false;
   monthLimit = false;
   monthLimit = false;
   // console.log("fffff");
-  let resp = await axios.get(`http://localhost:5000`, {
+  let resp = await axios.get(`${process.env.PYSERVER}/`, {
     params: req.query,
   }
   );
+  
   // console.log(resp.data);
   const chart_data = resp.data;
+  if (chart_data.StatusCode===400) {
+      return res.status(400).send('The Request feiled');
+
+  }
   var count_tt = Object.keys(chart_data.TweetTimeline).length;
   // console.log(count_tt);
   const counthr = [0, 0, 0, 0];
@@ -313,22 +320,29 @@ const getUser = async (req, res) => {
 };
 
 const predictUser = async (req, res) => {
-  // console.log("fffff");
-  let resp = await axios.get(`http://localhost:5000/botOrNot`, {
+  
+  let resp = await axios.get(`${process.env.PYSERVER}/botOrNot`, {
     params: req.query,
   });
-  // console.log(resp.data);
-  resp.data;
+   if (resp?.data?.StatusCode===400) {
+      return res.status(400).send('The Request feiled');
+
+  }
+  
   return res.status(200).send(resp.data);
 };
 
 const analyzeTrend = async (req, res) => {
   // console.log("fffff");
-  let resp = await axios.get(`http://localhost:5000/trendQA`, {
+  let resp = await axios.get(`${process.env.PYSERVER}/trendQA`, {
     params: req.query,
   });
-  // console.log(resp.data);
-  resp.data;
+  console.log(resp?.data)
+   if (resp?.data?.StatusCode===400) {
+      return res.status(400).send('The Request feiled');
+
+  }
+
   return res.status(200).send(resp.data);
 };
 

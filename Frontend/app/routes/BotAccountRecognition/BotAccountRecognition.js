@@ -38,6 +38,7 @@ import { StackedAreaChart } from "../components/Financial/StackedAreaChart";
 import { TrTableRecentFundings } from "../components/Financial/TrTableRecentFundings";
 import { Typography } from "@mui/material";
 import { result } from "lodash";
+import config from "../../../config";
 
 const COLORS = [
   colors["primary"],
@@ -107,9 +108,10 @@ const [Keyword, setkeyword] = useState("");
   };
   
   async function handleClick() {
-    console.log(Keyword);
+    console.log(process.env.REACT_APP_API);
+    console.log(config.siteCannonicalUrl)
     setLoading(true);
-    let resp = await axios.get(`http://localhost:3001/user/predict-user/`, {
+    let resp = await axios.get(`${process.env.REACT_APP_API}/user/predict-user/`, {
       params: { name: Keyword },
     }).then((resp)=>{
     const Resulti =  resp.data;

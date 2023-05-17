@@ -1,6 +1,6 @@
  export const des = [
     {
-        endpoint: '/user/get-user',
+        endpoint: process.env.REACT_APP_API+'/user/get-user',
         description: "The Statistical Analysis API allows users to request statistical analysis of a specific profile by providing a username. To access this API, users must include an Authorization header in their API call. By making an API call with the desired username and including the Authorization header, users can obtain comprehensive statistical information and insights about the specified profile. The API performs advanced calculations and data processing to generate meaningful statistical metrics and trends specifically tailored to the provided username. Users can integrate this API into their applications, platforms, or systems to automate the statistical analysis process and leverage the obtained insights for various purposes, such as decision-making, research, or data-driven strategies.",
         queryParams: [{ name: "usarname", type: "sting" }],
         response: {
@@ -33,7 +33,7 @@
 
     },
     {
-        endpoint: '/user/predict-user',
+        endpoint: process.env.REACT_APP_API+'/user/predict-user',
         description: "The Bot Account Recognition API leverages machine learning models to enable users to request bot account recognition or allows the system to automatically detect and identify bot accounts during profile analysis for a specific username provided by the user. To access this API, users must include an Authorization header in their API call and provide the username for the profile they wish to analyze. By making an API call with the appropriate Authorization header and username, users can obtain insights into whether the specified account is likely to be a bot or exhibit bot-like behavior, using advanced machine learning algorithms and models. The API utilizes trained models to analyze various features and patterns associated with bot accounts. Users can integrate this API into their applications, platforms, or systems, ensuring the Authorization header and username are included, to perform bot detection, enhance profile analysis, and make informed decisions based on the results obtained from the machine learning-based recognition process.",
         queryParams: [{ name: "usarname", type: "sting" }],
         response: {
@@ -54,7 +54,7 @@
         }
     },
     {
-        endpoint: '/user/trendQA',
+        endpoint: process.env.REACT_APP_API+'/user/trendQA',
         description: `The Profile Analysis API allows users to request statistical analysis of a specific user profile by providing a username. To access this API, users must include an Authorization header in their API call. By making an API call with the desired username and the required Authorization header, users can obtain comprehensive statistical information and insights about the specified profile.
 
 The API applies advanced statistical methods to analyze various attributes and characteristics of the profile, providing valuable insights such as account creation date, default profile status, profile image details, follower count, friend count, tweet count, verification status, and other relevant metrics. The analysis results are returned in a structured format.
@@ -64,7 +64,7 @@ Users can integrate this API into their applications, platforms, or systems to a
         response: `the usr datatr`
     },
      {
-         endpoint: '/user/trend-analysis',
+         endpoint: process.env.REACT_APP_API+'/user/trend-analysis',
          description: `The Trend Quality Prediction API utilizes the keywords provided by the user to predict the quality of a trend, categorizing it as either Authentic, Fabricated, or Intermediate. By making an API call and including the necessary Authorization header, users can obtain predictions about the quality of a trend based on the specified keywords.
 
 The API applies advanced machine learning techniques and statistical models to analyze the provided keywords and assess the trend's authenticity. It takes into account various factors, such as the relevance of keywords, historical data, and patterns, to make an informed prediction regarding the trend's quality.
@@ -98,7 +98,7 @@ Users can integrate this API into their applications, platforms, or systems to a
          },
      },
     {
-        endpoint: '/user',
+        endpoint: process.env.REACT_APP_API+'/user',
         description: `The Trend Quality Prediction API utilizes the keywords provided by the user to predict the quality of a trend, categorizing it as either Authentic, Fabricated, or Intermediate. By making an API call and including the necessary Authorization header, users can obtain predictions about the quality of a trend based on the specified keywords.
 
 The API applies advanced machine learning techniques and statistical models to analyze the provided keywords and assess the trend's authenticity. It takes into account various factors, such as the relevance of keywords, historical data, and patterns, to make an informed prediction regarding the trend's quality.
