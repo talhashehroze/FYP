@@ -431,7 +431,7 @@ def botRecgonation(twitter_username):
 
 def trendQualityAnalysis(hashtag):
     # hashtag = "SupremeCourt"
-    num_tweets = 30
+    num_tweets = 50
 
     # TwitterHashtagScraper
     # scrapper = sntwitter.TwitterSearchScraper(keyword)
@@ -735,16 +735,16 @@ def trendQualityAnalysis(hashtag):
     bot_list
     unique_bots_count = set(bot_list)
 
-    df_bot = pd.DataFrame(bot_list, columns=["username"])
+    df_bot = pd.DataFrame(bot_list, columns=["username", "photos"])
     df_bot.to_csv("ide_bot.csv", index=False)
 
-    df_human = pd.DataFrame(human_list, columns=["username"])
+    df_human = pd.DataFrame(human_list, columns=["username", "photos"])
     df_human.to_csv("ide_human.csv", index=False)
 
-    df_bot_unique = pd.DataFrame(unique_bots_count, columns=["username"])
+    df_bot_unique = pd.DataFrame(unique_bots_count, columns=["username", "photos"])
     df_bot_unique.to_csv("ide_bot_unique.csv", index=False)
 
-    df_human_unique = pd.DataFrame(unique_human_count, columns=["username"])
+    df_human_unique = pd.DataFrame(unique_human_count, columns=["username", "photos"])
     df_human_unique.to_csv("ide_human_unique.csv", index=False)
 
     #
@@ -813,6 +813,43 @@ def trendQualityAnalysis(hashtag):
 
     df2["tweets_by_human"] = counttwh
     print("no of tweet made by human overall", counttwh)
+
+    #######################################################
+    #######################################################
+    #######################################################
+    #######################################################
+    #######################################################
+
+    bot_non_media_tweets = df3["photos"].isnull().sum()
+    bot_media_tweets = num_tweets - non_media_tweets
+
+    human_non_media_tweets = df4["photos"].isnull().sum()
+    human_media_tweets = num_tweets - non_media_tweets
+
+    unq_bot_non_media_tweets = df7["photos"].isnull().sum()
+    unq_bot_media_tweets = num_tweets - non_media_tweets
+
+    tempsum = unq_bot_non_media_tweets + unq_bot_media_tweets
+
+    unq_human_non_media_tweets = df8["photos"].isnull().sum()
+    unq_human_media_tweets = num_tweets - non_media_tweets
+
+    tempsum2 = unq_human_non_media_tweets + unq_human_media_tweets
+
+    data_hum_bot = [
+        {"name": "Media Tweets", "Human": human_media_tweets, "Bot": bot_media_tweets},
+        {
+            "name": "Text Tweets",
+            "Human": human_non_media_tweets,
+            "Bot": bot_non_media_tweets,
+        },
+        {"name": "Unique Tweets", "Human": tempsum2, "Bot": tempsum},
+    ]
+
+    df2["fetched_tweets_by_bots"] = sum(counttwb)
+    df2["fetched_tweets_by_human"] = sum(counttwh)
+
+    df2 = pd.concat([df2, pd.DataFrame(data_hum_bot)])
 
     # filter dataframe by time
     df2["date"] = pd.to_datetime(df2["date"], format="%Y-%m-%d %H:%M:%S%z")
