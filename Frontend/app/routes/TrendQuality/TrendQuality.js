@@ -32,6 +32,8 @@ import { ProfileOverviewCard } from "../components/Profile/ProfileOverviewCard";
 import { StackedAreaChart } from "../components/Financial/StackedAreaChart";
 import { TrTableRecentFundings } from "../components/Financial/TrTableRecentFundings";
 import React, { useEffect, useState } from "react";
+import NetworkGraph from "../components/Financial/NetworkGraph";
+import { SimpleBarChart } from "../Graphs/ReCharts/components/SimpleBarChart";
 export const TrendQuality = () => {
   // const data = [
   //   {
@@ -1342,6 +1344,23 @@ export const TrendQuality = () => {
         {'name': 'Hour 3', 'human': 32, 'bot': 40}, {'name': 'Hour 4', 'human': 16, 'bot': 13}, 
         {'name': 'Hour 5', 'human': 19, 'bot': 61}, {'name': 'Hour 6', 'human': 16, 'bot': 70}]
       },
+      human_bot_MTU_list: {
+        9: 10,
+        7: 10,
+        8: 10,
+        5: 10,
+        6: 10,
+        4: 10,
+        3: 10,
+        2: 10,
+        1: 10,
+        0: [
+          { name: "Media Tweets", Human: 4000, Bot: 2400, },
+          { name: "Text Tweets", Human: 3000, Bot: 1398, },
+          { name: "Unique Tweets", Human: 2000, Bot: 9800,  },
+        ]
+      },
+
     },
   ]);
 
@@ -1647,24 +1666,11 @@ export const TrendQuality = () => {
           <Card className="mb-3">
             <CardBody>
               <CardTitle className="mb-1 d-flex">
-                <h6>Popular ReTweets</h6>
-                <Button color="link" size="sm" className="pt-0 ml-auto">
-                  View All <i className="fa fa-angle-right"></i>
-                </Button>
+                <h6>Human/Bot Tweet type Comparison</h6>
+               
               </CardTitle>
+              <SimpleBarChart data={data[0]?.human_bot_MTU_list["0"]}/>
             </CardBody>
-            <Table responsive striped className="mb-0">
-              <thead>
-                <tr>
-                  <th className="bt-0">User Id</th>
-                  <th className="bt-0">No of time Retweet</th>
-                  <th className="bt-0">Tweet</th>
-                </tr>
-              </thead>
-              <tbody>
-                <TrTableRecentFundings />
-              </tbody>
-            </Table>
           </Card>
         </Col>
       </Row>
